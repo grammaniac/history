@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서양사 연표: 고대에서 현대까지</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --bg-paper: #faf6ed;
+    --ink: #2a2620;
+    --ink-soft: #5c5447;
+    --ink-faint: #8a8170;
+    --rule: #d4cab5;
+    --rule-soft: #e8e0cd;
+
+```
+--c1: #6b4423;  /* Ancient — terracotta brown */
+--c2: #4a5d3a;  /* Medieval — forest green */
+--c3: #8b3a2e;  /* Pre-Modern — burgundy */
+--c4: #1e3a5f;  /* Modern — ink blue */
+
+--c1-soft: #a8825a;
+--c2-soft: #7d9268;
+--c3-soft: #c4715f;
+--c4-soft: #4d6e94;
+```
+
+}
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { color-scheme: light only; }
+
+body {
+font-family: ‘IBM Plex Sans KR’, sans-serif;
+background: var(–bg);
+color: var(–ink);
+line-height: 1.6;
+min-height: 100vh;
+background-image:
+radial-gradient(circle at 20% 10%, rgba(139, 58, 46, 0.04) 0%, transparent 40%),
+radial-gradient(circle at 80% 80%, rgba(30, 58, 95, 0.04) 0%, transparent 40%);
+}
+
+/* === HEADER === */
+.header {
+max-width: 1280px;
+margin: 0 auto;
+padding: 60px 40px 40px;
+border-bottom: 1px solid var(–rule);
+}
+
+.eyebrow {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–ink-faint);
+margin-bottom: 16px;
+}
+
+h1 {
+font-family: ‘Fraunces’, serif;
+font-weight: 600;
+font-size: clamp(32px, 5vw, 56px);
+line-height: 1.05;
+letter-spacing: -0.02em;
+margin-bottom: 18px;
+}
+
+h1 em {
+font-style: italic;
+font-weight: 400;
+color: var(–ink-soft);
+}
+
+.subtitle {
+font-size: 15px;
+color: var(–ink-soft);
+max-width: 620px;
+}
+
+/* === TIMELINE BAR === */
+.timeline-bar {
+max-width: 1280px;
+margin: 50px auto 0;
+padding: 0 40px;
+}
+
+.timeline-track {
+position: relative;
+height: 80px;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+gap: 2px;
+}
+
+.era-segment {
+position: relative;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 8px;
+border-top: 3px solid;
+color: var(–ink-soft);
+}
+
+.era-segment:nth-child(1) { border-color: var(–c1); }
+.era-segment:nth-child(2) { border-color: var(–c2); }
+.era-segment:nth-child(3) { border-color: var(–c3); }
+.era-segment:nth-child(4) { border-color: var(–c4); }
+
+.era-year {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+color: var(–ink-faint);
+margin-top: 6px;
+}
+
+.era-num {
+font-family: ‘Fraunces’, serif;
+font-size: 18px;
+font-weight: 600;
+}
+
+/* === ERA CARDS === */
+.eras {
+max-width: 1280px;
+margin: 60px auto 0;
+padding: 0 40px 80px;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 32px;
+}
+
+.era-card {
+background: var(–bg-paper);
+border: 1px solid var(–rule);
+border-radius: 2px;
+padding: 36px 32px;
+position: relative;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.era-card:hover {
+transform: translateY(-2px);
+box-shadow: 0 12px 32px rgba(42, 38, 32, 0.08);
+}
+
+.era-card::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0;
+width: 4px;
+height: 100%;
+background: var(–era-color);
+}
+
+.era-card[data-era=“1”] { –era-color: var(–c1); –era-soft: var(–c1-soft); }
+.era-card[data-era=“2”] { –era-color: var(–c2); –era-soft: var(–c2-soft); }
+.era-card[data-era=“3”] { –era-color: var(–c3); –era-soft: var(–c3-soft); }
+.era-card[data-era=“4”] { –era-color: var(–c4); –era-soft: var(–c4-soft); }
+
+.card-head {
+display: flex;
+align-items: baseline;
+gap: 16px;
+margin-bottom: 8px;
+padding-bottom: 20px;
+border-bottom: 1px solid var(–rule-soft);
+}
+
+.card-num {
+font-family: ‘Fraunces’, serif;
+font-size: 48px;
+font-weight: 600;
+color: var(–era-color);
+line-height: 1;
+font-feature-settings: “lnum”;
+}
+
+.card-titles {
+flex: 1;
+}
+
+.card-title-en {
+font-family: ‘Fraunces’, serif;
+font-size: 28px;
+font-weight: 600;
+color: var(–ink);
+letter-spacing: -0.01em;
+line-height: 1.1;
+}
+
+.card-period {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 12px;
+color: var(–ink-faint);
+margin-top: 6px;
+letter-spacing: 0.05em;
+}
+
+.card-summary {
+font-size: 14px;
+color: var(–ink-soft);
+margin: 18px 0 8px;
+line-height: 1.65;
+}
+
+/* === EVENTS WITHIN ERA === */
+.events {
+margin-top: 20px;
+display: flex;
+flex-direction: column;
+gap: 14px;
+}
+
+.event {
+display: grid;
+grid-template-columns: 80px 1fr;
+gap: 16px;
+align-items: flex-start;
+padding: 12px 0;
+border-top: 1px dashed var(–rule-soft);
+}
+
+.event:first-child { border-top: none; }
+
+.event-when {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+color: var(–era-color);
+font-weight: 500;
+padding-top: 3px;
+letter-spacing: 0.03em;
+}
+
+.event-body {
+font-size: 14px;
+}
+
+.event-title {
+font-weight: 600;
+color: var(–ink);
+margin-bottom: 3px;
+}
+
+.event-title .en {
+font-family: ‘Fraunces’, serif;
+font-style: italic;
+font-weight: 500;
+color: var(–era-soft);
+margin-left: 6px;
+font-size: 13px;
+}
+
+.event-note {
+color: var(–ink-soft);
+font-size: 13px;
+line-height: 1.55;
+}
+
+/* === FOOTER === */
+.footer {
+max-width: 1280px;
+margin: 0 auto;
+padding: 30px 40px 60px;
+border-top: 1px solid var(–rule);
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+color: var(–ink-faint);
+letter-spacing: 0.05em;
+display: flex;
+justify-content: space-between;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+.header, .timeline-bar, .eras, .footer {
+padding-left: 24px;
+padding-right: 24px;
+}
+.eras {
+grid-template-columns: 1fr;
+gap: 24px;
+}
+.timeline-track {
+height: 70px;
+}
+.era-segment {
+padding: 6px 4px;
+}
+.era-segment span:first-child {
+font-size: 14px;
+}
+.card-num { font-size: 38px; }
+.card-title-en { font-size: 22px; }
+}
+
+@media (max-width: 520px) {
+.header { padding-top: 40px; padding-bottom: 28px; }
+.event {
+grid-template-columns: 60px 1fr;
+gap: 12px;
+}
+}
+
+/* Subtle fade-in */
+.era-card {
+animation: fadeUp 0.6s ease forwards;
+opacity: 0;
+}
+.era-card[data-era=“1”] { animation-delay: 0.1s; }
+.era-card[data-era=“2”] { animation-delay: 0.2s; }
+.era-card[data-era=“3”] { animation-delay: 0.3s; }
+.era-card[data-era=“4”] { animation-delay: 0.4s; }
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(12px); }
+to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+</head>
+<body>
+
+<header class="header">
+  <div class="eyebrow">A Timeline · 西洋史</div>
+  <h1>서양사 연표<br><em>고대에서 현대까지</em></h1>
+  <p class="subtitle">서양 문명의 흐름을 네 시대로 나누어 살펴봅니다 — 고대(Ancient), 중세(Medieval), 근세(Pre-Modern), 그리고 근현대(Modern). 각 시대를 가른 결정적 사건과 사상의 변화를 한눈에 정리했습니다.</p>
+</header>
+
+<section class="timeline-bar" aria-label="시대 구분 막대">
+  <div class="timeline-track">
+    <div class="era-segment">
+      <span class="era-num">1</span>
+      <span class="era-year">BCE-500 → 500</span>
+    </div>
+    <div class="era-segment">
+      <span class="era-num">2</span>
+      <span class="era-year">500 → 1500</span>
+    </div>
+    <div class="era-segment">
+      <span class="era-num">3</span>
+      <span class="era-year">1500 → 1850</span>
+    </div>
+    <div class="era-segment">
+      <span class="era-num">4</span>
+      <span class="era-year">1850 → Present</span>
+    </div>
+  </div>
+</section>
+
+<main class="eras">
+
+  <!-- ERA 1: ANCIENT -->
+
+  <article class="era-card" data-era="1">
+    <div class="card-head">
+      <div class="card-num">01</div>
+      <div class="card-titles">
+        <div class="card-title-en">Ancient</div>
+        <div class="card-period">5세기까지 · until 5C</div>
+      </div>
+    </div>
+    <p class="card-summary">그리스·로마 문명을 중심으로 한 고전 고대. 서양 사상과 정치 제도의 원형이 이 시기에 형성되었습니다.</p>
+    <div class="events">
+      <div class="event">
+        <div class="event-when">~5C</div>
+        <div class="event-body">
+          <div class="event-title">고대 그리스·로마 <span class="en">Classical Antiquity</span></div>
+          <div class="event-note">철학·민주정·공화정·제국이라는 서양사의 토대 개념이 자리잡은 시기.</div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ERA 2: MEDIEVAL -->
+
+  <article class="era-card" data-era="2">
+    <div class="card-head">
+      <div class="card-num">02</div>
+      <div class="card-titles">
+        <div class="card-title-en">Middle Age, Medieval</div>
+        <div class="card-period">5C 이후 · 5C onward</div>
+      </div>
+    </div>
+    <p class="card-summary">로마 멸망 이후 약 천 년에 걸친 중세. 기독교 세계관과 봉건 질서가 지배했으며, 후반부에 큰 전쟁과 흑사병이 사회를 뒤흔들었습니다.</p>
+    <div class="events">
+      <div class="event">
+        <div class="event-when">10-13C</div>
+        <div class="event-body">
+          <div class="event-title">중세의 전성기 <span class="en">High Middle Ages</span></div>
+          <div class="event-note">봉건제의 안정, 대성당 건축, 대학의 탄생. 기독교 문명이 절정에 이른 시기.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-when">14-15C</div>
+        <div class="event-body">
+          <div class="event-title">Pest 창궐 <span class="en">The Black Death</span></div>
+          <div class="event-note">유럽 인구의 약 1/3이 사망. 중세적 세계관과 봉건 질서가 흔들리며 근세로 가는 문이 열림.</div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ERA 3: PRE-MODERN -->
+
+  <article class="era-card" data-era="3">
+    <div class="card-head">
+      <div class="card-num">03</div>
+      <div class="card-titles">
+        <div class="card-title-en">Pre-Modern / Early-Modern</div>
+        <div class="card-period">16C - 18C 중반 · 1500-1850</div>
+      </div>
+    </div>
+    <p class="card-summary">신 중심에서 인간 중심으로. 르네상스 인본주의와 과학혁명, 그리고 시민혁명을 거치며 '근대'의 사상적 기반이 마련된 격동의 시기.</p>
+    <div class="events">
+      <div class="event">
+        <div class="event-when">16C</div>
+        <div class="event-body">
+          <div class="event-title">Renaissance <span class="en">Humanitarianism</span></div>
+          <div class="event-note">신학 중심에서 인간 중심으로. 고전 부흥과 함께 사상·예술 전반의 부활이 일어남.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-when">17C</div>
+        <div class="event-body">
+          <div class="event-title">Empiricism <span class="en">자연과학의 시작</span></div>
+          <div class="event-note">경험·관찰·실험을 지식의 근거로 삼는 사고가 자리잡으며 근대 과학이 출발.<br><span style="display:inline-block; margin-top:6px; color:var(--ink);"><strong>경험주의(empiricism)</strong>: 반복적 실험(replication)을 통해 검증된 것만 과학적 사실로 인정.</span></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ERA 4: MODERN -->
+
+  <article class="era-card" data-era="4">
+    <div class="card-head">
+      <div class="card-num">04</div>
+      <div class="card-titles">
+        <div class="card-title-en">Modern</div>
+        <div class="card-period">18C 말 - 20C 초 · 1850-Present</div>
+      </div>
+    </div>
+    <p class="card-summary">자본주의·산업화의 성숙, 사실주의에서 모더니즘으로 이어지는 미학의 격변. 인간과 세계를 보는 시선이 근본적으로 재편된 시기.</p>
+    <div class="events">
+      <div class="event">
+        <div class="event-when">18C 말 산업혁명, 시민혁명</div>
+        <div class="event-body">
+          <div class="event-title">소설(Novel)의 탄생 / 산업혁명 <span class="en">Civil Revolution</span></div>
+          <div class="event-note">평범한 사람들(ordinary people)의 일상(real life)을 산문(prose)으로 그리는 소설이 등장. 시민혁명과 함께 '보통 사람'이 역사의 주체로.<br><span style="display:inline-block; margin-top:6px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--era-soft);">American Revolution (1775-1783), French Revolution (1789-1799)</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-when">19C</div>
+        <div class="event-body">
+          <div class="event-title">자본주의 발달 <span class="en">Realism</span></div>
+          <div class="event-note">산업화와 도시화 속에서 현실을 있는 그대로 그리려는 사실주의(리얼리즘)가 문학·예술의 주류로.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-when">20C 초</div>
+        <div class="event-body">
+          <div class="event-title">Modernism <span class="en">건축·미술·문학</span></div>
+          <div class="event-note">기성 형식의 해체와 실험. 추상미술, 의식의 흐름, 기능주의 건축 등 전 장르에서 모더니즘이 폭발.<br><span style="display:inline-block; margin-top:6px; color:var(--ink);"><strong>실용주의</strong>: 돈, 효율, 기능, 사회, real world의 가치 중시.<br><span style="font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--era-soft);">practical, utilitarian, pragmatic &nbsp;↔&nbsp; aesthetic, theoretical</span></span></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<footer class="footer">
+  <span>Western History · A Visual Timeline</span>
+  <span>BCE 500 — Present</span>
+</footer>
+
+</body>
+</html>
