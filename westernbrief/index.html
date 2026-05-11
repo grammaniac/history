@@ -34,14 +34,33 @@
 
 - { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { color-scheme: light only; }
+html {
+color-scheme: light only;
+background: #f5f1e8;
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+–bg: #f5f1e8 !important;
+–bg-paper: #faf6ed !important;
+–ink: #2a2620 !important;
+–ink-soft: #5c5447 !important;
+–ink-faint: #8a8170 !important;
+–rule: #d4cab5 !important;
+–rule-soft: #e8e0cd !important;
+}
+html, body { background: #f5f1e8 !important; color: #2a2620 !important; }
+}
 
 body {
 font-family: ‘IBM Plex Sans KR’, sans-serif;
-background: var(–bg);
+background: #f5f1e8;
+background-color: var(–bg);
 color: var(–ink);
-line-height: 1.6;
+font-size: 17px;
+line-height: 1.65;
 min-height: 100vh;
+-webkit-text-size-adjust: 100%;
 background-image:
 radial-gradient(circle at 20% 10%, rgba(139, 58, 46, 0.04) 0%, transparent 40%),
 radial-gradient(circle at 80% 80%, rgba(30, 58, 95, 0.04) 0%, transparent 40%);
@@ -80,9 +99,10 @@ color: var(–ink-soft);
 }
 
 .subtitle {
-font-size: 15px;
+font-size: 17px;
 color: var(–ink-soft);
-max-width: 620px;
+max-width: 680px;
+line-height: 1.7;
 }
 
 /* === TIMELINE BAR === */
@@ -118,14 +138,14 @@ color: var(–ink-soft);
 
 .era-year {
 font-family: ‘JetBrains Mono’, monospace;
-font-size: 11px;
+font-size: 12px;
 color: var(–ink-faint);
 margin-top: 6px;
 }
 
 .era-num {
 font-family: ‘Fraunces’, serif;
-font-size: 18px;
+font-size: 20px;
 font-weight: 600;
 }
 
@@ -178,7 +198,7 @@ border-bottom: 1px solid var(–rule-soft);
 
 .card-num {
 font-family: ‘Fraunces’, serif;
-font-size: 48px;
+font-size: 54px;
 font-weight: 600;
 color: var(–era-color);
 line-height: 1;
@@ -191,26 +211,26 @@ flex: 1;
 
 .card-title-en {
 font-family: ‘Fraunces’, serif;
-font-size: 28px;
+font-size: 30px;
 font-weight: 600;
 color: var(–ink);
 letter-spacing: -0.01em;
-line-height: 1.1;
+line-height: 1.15;
 }
 
 .card-period {
 font-family: ‘JetBrains Mono’, monospace;
-font-size: 12px;
+font-size: 13px;
 color: var(–ink-faint);
-margin-top: 6px;
+margin-top: 8px;
 letter-spacing: 0.05em;
 }
 
 .card-summary {
-font-size: 14px;
+font-size: 16px;
 color: var(–ink-soft);
-margin: 18px 0 8px;
-line-height: 1.65;
+margin: 20px 0 8px;
+line-height: 1.7;
 }
 
 /* === EVENTS WITHIN ERA === */
@@ -461,8 +481,8 @@ to { opacity: 1; transform: translateY(0); }
       <div class="event">
         <div class="event-when">19C</div>
         <div class="event-body">
-          <div class="event-title">자본주의 발달 <span class="en">Realism</span></div>
-          <div class="event-note">산업화와 도시화 속에서 현실을 있는 그대로 그리려는 사실주의(리얼리즘)가 문학·예술의 주류로.</div>
+          <div class="event-title">자본주의 발달</div>
+          <div class="event-note">산업화와 도시화 속에서 현실을 있는 그대로 그리려는 사실주의(리얼리즘)가 문학·예술의 주류로.<br><span style="display:inline-block; margin-top:6px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--era-soft);">소설의 발달 · Realism</span></div>
         </div>
       </div>
       <div class="event">
