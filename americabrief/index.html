@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>간략한 미국 역사</title>
-<meta name="description" content="1607년 제임스타운에서 1945년 초강대국의 등장까지 — 세 개의 장, 열 개의 이정표로 읽는 미국사.">
+<meta name="description" content="1607년 제임스타운에서 1945년 초강대국의 등장까지 — 세 개의 장, 열한 개의 이정표로 읽는 미국사.">
 <script>
   (function () {
     var d = document.documentElement;
@@ -487,6 +487,15 @@
   .stat-num { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 2.8vw, 38px); line-height: 1; color: var(--e); font-variant-numeric: tabular-nums lining-nums; }
   .stat-cap { font-size: 12.5px; color: var(--ink-3); }
   .stats .arrow { font-family: var(--serif); font-size: 26px; color: var(--ink-3); }
+  .states { flex-basis: 100%; padding-top: 14px; border-top: 1px solid var(--line); }
+  .states-h { font-size: 12.5px; color: var(--ink-3); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chips span {
+    padding: 3px 11px; border-radius: 999px;
+    background: var(--card); border: 1px solid color-mix(in srgb, var(--e) 40%, var(--line));
+    font-size: 13px; font-weight: 600; color: var(--ink);
+  }
+  .chips span.part { font-weight: 400; color: var(--ink-2); border-style: dashed; background: transparent; }
 
   .ledger-h {
     margin-top: 26px; padding-bottom: 8px;
@@ -618,10 +627,10 @@
     <p class="hero-en"><span class="line"><span style="--d:.5s">From Colonization to Superpower</span></span></p>
 
     <div class="hero-row">
-      <p class="hero-lede reveal" style="--d:.6s">영국인의 첫 정착에서 2차 세계대전 이후 초강대국의 등장까지. 미국사 340여 년을 세 개의 장(章)과 열 개의 이정표로 압축했습니다. 각 이정표에는 핵심 연표와 함께, 흔히 틀리기 쉬운 지점을 <b>NOTE</b>로 짚어 두었습니다.</p>
+      <p class="hero-lede reveal" style="--d:.6s">영국인의 첫 정착에서 2차 세계대전 이후 초강대국의 등장까지. 미국사 340여 년을 세 개의 장(章)과 열한 개의 이정표로 압축했습니다. 각 이정표에는 핵심 연표와 함께, 흔히 틀리기 쉬운 지점을 <b>NOTE</b>로 짚어 두었습니다.</p>
       <dl class="hero-stats reveal" style="--d:.7s">
         <div><dt>Chapters</dt><dd><span class="count" data-to="3">3</span></dd></div>
-        <div><dt>Milestones</dt><dd><span class="count" data-to="10">10</span></dd></div>
+        <div><dt>Milestones</dt><dd><span class="count" data-to="11">11</span></dd></div>
         <div><dt>Years</dt><dd><span class="count" data-to="338">338</span></dd></div>
       </dl>
     </div>
@@ -778,7 +787,7 @@
         <h2 class="ch-title reveal" style="--d:.08s">분열과 산업화</h2>
         <p class="ch-en reveal" style="--d:.16s">Division &amp; Industry</p>
         <p class="ch-summary reveal" style="--d:.24s">영토는 대륙 끝까지 넓어지고, 북부의 공장과 남부의 플랜테이션은 서로 다른 두 개의 미국을 만들어 낸다. 그 균열은 내전으로 터졌고, 전쟁 뒤의 미국은 세계 최대의 공업국을 향해 질주한다.</p>
-        <div class="ch-meta reveal" style="--d:.32s"><span>1800 — 1900</span><span>03 Milestones</span><span>Mill Towns → Gilded Age</span></div>
+        <div class="ch-meta reveal" style="--d:.32s"><span>1800 — 1900</span><span>04 Milestones</span><span>Mill Towns → Gilded Age</span></div>
       </div>
     </div>
 
@@ -812,6 +821,45 @@
                 <div><dt>1830</dt><dd>인디언 이주법 → 1838 ‘눈물의 길’</dd></div>
               </dl>
               <p class="note"><b>NOTE</b><i>Antebellum</i>(라틴어 ‘전쟁 이전’)은 대략 1815–1861년, 잭슨 시대(Jacksonian Era)는 1820년대 말–1840년대를 가리킨다.</p>
+            </article>
+          </li>
+
+          <li class="event" data-year="1846" data-label="1846">
+            <div class="when reveal">
+              <div class="when-year">1846</div>
+              <div class="when-range">1836 — 1853</div>
+              <span class="when-tag">남서부 편입</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">멕시코 전쟁과 남서부 편입</h3>
+              <p class="card-en">Mexican–American War · Manifest Destiny</p>
+              <ul class="points">
+                <li>‘<span class="kw">명백한 운명</span>’ <span class="en">Manifest Destiny</span> — 대륙 끝까지 팽창하는 것이 미국의 사명이라는 믿음</li>
+                <li><span class="kw">1845</span> 텍사스 병합 — 1836년 멕시코에서 독립한 텍사스 공화국</li>
+                <li><span class="kw">1846–48</span> 미국-멕시코 전쟁 → 과달루페 이달고 조약</li>
+                <li class="sub">멕시코는 캘리포니아 · 뉴멕시코 등 영토의 약 절반을 상실</li>
+                <li>새 영토에 노예제를 허용할 것인가 — 남북 갈등이 다시 불붙음</li>
+              </ul>
+              <div class="stats">
+                <div class="stat"><span class="stat-num">약 <span class="count" data-to="55">55</span>%</span><span class="stat-cap">멕시코가 잃은 영토 — 텍사스 포함</span></div>
+                <div class="states">
+                  <p class="states-h">멕시코 땅에서 미국 영토가 된 지역 — 오늘날의 주</p>
+                  <div class="chips"><span>텍사스</span><span>캘리포니아</span><span>네바다</span><span>유타</span><span>애리조나</span><span>뉴멕시코</span><span class="part">콜로라도 일부</span><span class="part">와이오밍 일부</span><span class="part">캔자스 일부</span><span class="part">오클라호마 일부</span></div>
+                </div>
+              </div>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1821</dt><dd>멕시코, 스페인에서 독립 — 텍사스 · 캘리포니아는 멕시코 영토</dd></div>
+                <div><dt>1836</dt><dd>텍사스 혁명(알라모 전투) → 텍사스 공화국 독립</dd></div>
+                <div><dt>1845</dt><dd>텍사스, 미국의 28번째 주로 병합 · ‘명백한 운명’이라는 말의 등장</dd></div>
+                <div><dt>1846–48</dt><dd>미국-멕시코 전쟁</dd></div>
+                <div><dt>1848</dt><dd>과달루페 이달고 조약 — ‘멕시코 할양지’ 획득, 리오그란데강을 국경으로 (미국은 1,500만 달러 지급)</dd></div>
+                <div><dt>1848–49</dt><dd>캘리포니아 골드러시 → 1850 캘리포니아 주 승격</dd></div>
+                <div><dt>1853</dt><dd>개즈던 매입 — 애리조나 · 뉴멕시코 남부 (1,000만 달러)</dd></div>
+                <div><dt>1912</dt><dd>뉴멕시코 · 애리조나 주 승격 — 본토 48개 주 완성</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b>이 전쟁은 당시에도 논쟁적이었다. 하원의원 링컨은 개전의 명분을 따져 물었고, 소로는 전쟁과 노예제에 항의해 세금 납부를 거부하다 투옥된 경험을 바탕으로 「시민 불복종」을 썼다.</p>
             </article>
           </li>
 
