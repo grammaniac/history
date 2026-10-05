@@ -50,6 +50,8 @@
     --x: #b8261b; --x-bg: #a8221a;
     --dino: #b9561a;
     --ok: #2b7a4b;
+    /* Epochs: ice-age cold · Holocene */
+    --ice: #2f6f9e; --holo: #4c7a2a;
 
     --accent: var(--ink);
     --serif: 'Fraunces', 'Noto Serif KR', Georgia, serif;
@@ -77,6 +79,7 @@
       --x: #ff7a6b; --x-bg: #8a1d14;
       --dino: #f0a066;
       --ok: #7fd3a0;
+      --ice: #8cc4ec; --holo: #9fd07c;
     }
   }
   :root[data-theme="dark"] {
@@ -94,6 +97,7 @@
     --x: #ff7a6b; --x-bg: #8a1d14;
     --dino: #f0a066;
     --ok: #7fd3a0;
+    --ice: #8cc4ec; --holo: #9fd07c;
   }
 
   :root[data-active="1"] { --accent: var(--c1); }
@@ -948,6 +952,89 @@
   .q-result { margin: 20px 0 8px; font-family: var(--serif); font-weight: 600; font-size: 64px; line-height: 1; }
   .q-result small { font-size: .4em; color: var(--ink-3); }
 
+  /* Epochs (세) */
+  .epochs { max-width: 1180px; margin: clamp(90px, 15vh, 160px) auto 0; }
+  .epochs .sec-title { font-size: clamp(32px, 4.6vw, 60px); }
+  .zoomer { margin-top: 32px; padding: clamp(18px, 2.4vw, 28px); background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); }
+  .zl-cap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; margin-bottom: 8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; color: var(--ink-3); }
+  .zl-cap b { font-family: var(--sans); font-size: 13.5px; letter-spacing: 0; color: var(--ink); }
+  .zl-per, .zl-row, .zl-clim, .zl-mk { position: relative; }
+  .zl-per { height: 18px; margin-bottom: 3px; }
+  .zl-row { height: 32px; }
+  .zl-clim { height: 24px; margin-top: 4px; }
+  .zl-mk { height: 42px; }
+  .zl-axis { position: relative; height: 24px; border-top: 1px solid var(--line); }
+  .zb {
+    position: absolute; top: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; white-space: nowrap; text-decoration: none; padding: 0 4px;
+    background: var(--zc); color: var(--paper);
+    font-size: 12.5px; font-weight: 700;
+    border-right: 1px solid var(--card);
+  }
+  .zb.lt { color: var(--ink); }
+  .zl-per .zb { font-size: 10.5px; font-weight: 600; }
+  .zl-clim .zb { border-radius: 3px; font-size: 11.5px; }
+  .zb .s { display: none; }
+  .zb.tight .f { display: none; }
+  .zb.tight .s { display: inline; }
+  .zb.tiny .s { display: none; }
+  .zmk { position: absolute; top: 0; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 11.5px; line-height: 1.3; color: var(--ink-2); white-space: nowrap; text-decoration: none; }
+  .zmk::before { content: ""; width: 1px; height: 7px; background: var(--ink-3); }
+  .zmk.lo { top: 19px; }
+  .zmk.l { transform: none; align-items: flex-start; }
+  .zmk.r { transform: translateX(-100%); align-items: flex-end; }
+  .zmk.key { color: var(--ice); font-weight: 800; }
+  .zmk.key::before { background: var(--ice); width: 2px; }
+  .wave { display: block; width: 100%; height: 56px; margin-bottom: 4px; }
+  .wave polyline { fill: none; stroke: var(--ice); stroke-width: 1.4; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  .zz { height: 26px; }
+  .ep-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+  .ep-card { padding: 18px 18px 16px; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--epc); border-radius: 8px; box-shadow: var(--shadow); }
+  .ep-p { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--ink-3); }
+  .ep-card h4 { margin-top: 6px; font-family: var(--serif-ko); font-size: 20px; font-weight: 800; line-height: 1.3; }
+  .ep-card h4 .en { display: block; font-size: 16px; }
+  .ep-ma { margin-top: 6px; font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--epc); }
+  .ep-card > p.ep-txt { margin-top: 10px; font-size: 14px; line-height: 1.65; color: var(--ink-2); }
+  .ep-root { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--ink-2); }
+  .ep-root b { margin-right: 4px; font-family: var(--serif); font-style: italic; color: var(--epc); }
+  .ep-big { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-top: 16px; }
+  .ep-card.big { --e: var(--epc); padding: clamp(22px, 2.6vw, 32px); border-top-width: 6px; }
+  .ep-card.big h4 { font-size: clamp(26px, 2.6vw, 34px); }
+  .ep-card.big h4 .en { font-size: 20px; }
+  .ep-card.big .ep-ma { font-size: 13px; }
+  .ep-card .ledger > div { grid-template-columns: 112px minmax(0, 1fr); }
+  .ep-yd {
+    position: relative; overflow: hidden; isolation: isolate;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(20px, 3vw, 44px); align-items: center;
+    margin-top: 16px; padding: clamp(24px, 3vw, 44px); border-radius: 10px;
+    background: #0b1721; color: #e8f1f7; box-shadow: var(--shadow);
+  }
+  .ep-yd::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(60% 80% at 80% 40%, rgba(120, 190, 255, .16), transparent 70%); }
+  .ep-yd .ext-kicker { color: #8fd0ff; }
+  .ep-yd h4 { margin-top: 10px; font-family: var(--serif-ko); font-size: clamp(30px, 3.6vw, 48px); font-weight: 900; line-height: 1.15; }
+  .yd-en { margin-top: 4px; font-family: var(--serif); font-style: italic; font-size: 18px; opacity: .8; }
+  .yd-body { margin-top: 16px; font-size: 15.5px; line-height: 1.8; opacity: .93; }
+  .yd-list { list-style: none; display: grid; gap: 10px; margin-top: 18px; font-size: 14.5px; line-height: 1.7; opacity: .9; }
+  .yd-list b { display: inline-block; margin-right: 8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; color: #8fd0ff; }
+  .yd-chart svg { display: block; width: 100%; height: auto; }
+  .yd-chart figcaption { margin-top: 6px; font-size: 12px; text-align: right; opacity: .6; }
+  .yd-chart text { font-family: var(--sans); font-size: 12px; fill: #cfe3f1; }
+  .yd-chart .zt { font-size: 13px; font-weight: 700; }
+  .yd-chart .ax { stroke: rgba(232, 241, 247, .3); }
+  .yd-chart .ln { fill: none; stroke: #eef6fc; stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; }
+  .js .yd-chart .ln { stroke-dasharray: 1400; stroke-dashoffset: 1400; transition: stroke-dashoffset 2.6s var(--ease) .4s; }
+  .js .ep-yd.in .yd-chart .ln { stroke-dashoffset: 0; }
+  .more { display: inline-block; margin-top: 16px; font-size: 14px; font-weight: 700; color: var(--e); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .ch-note a { color: inherit; }
+  .s-ep { grid-column: 2 / -1; margin-top: -6px; padding-right: 120px; font-size: 12px; color: var(--ink-3); }
+  .s-ep i { font-family: var(--serif); }
+  .strata.mask-ko .s-ep b, .strata.mask-en .s-ep i { filter: blur(5px); }
+  .g4b { --ge: color-mix(in srgb, var(--c4) 62%, var(--ink)); } .gq { --ge: var(--ice); }
+  .g-modes { display: inline-flex; gap: 4px; }
+  .pill-btn.sm { padding: 5px 11px; font-size: 12.5px; }
+  .g-slots { grid-template-columns: repeat(var(--cols, 6), minmax(0, 1fr)); }
+
   /* ───────── Responsive ───────── */
   @media (max-width: 980px) {
     .brand-text { display: none; }
@@ -999,7 +1086,8 @@
 
   /* ───────── Geologic page · responsive ───────── */
   @media (max-width: 980px) {
-    .ov-grid, .studio-grid, .ext-inner { grid-template-columns: minmax(0, 1fr); }
+    .ov-grid, .studio-grid, .ext-inner, .ep-yd { grid-template-columns: minmax(0, 1fr); }
+    .ep-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
   @media (max-width: 860px) {
     .dino-rail { left: 29px; width: 4px; top: 22px; }
@@ -1029,6 +1117,10 @@
     .s-x b { right: 34px; }
     .s-pre { padding: 14px; }
     .g-slots { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .ep-grid, .ep-big { grid-template-columns: minmax(0, 1fr); }
+    .zmk { font-size: 10.5px; }
+    .ep-card .ledger > div { grid-template-columns: 92px minmax(0, 1fr); }
+    .s-ep { padding-right: 84px; font-size: 11px; }
     .q-opts { grid-template-columns: minmax(0, 1fr); }
     .chant i { font-size: 22px; padding: 7px 6px; }
     .m-big { font-size: 48px; }
@@ -1134,9 +1226,9 @@
             <div class="s-era" style="grid-row: 4 / span 3; --eb: var(--c3-band)"><b>중생대</b><span>Mesozoic</span><small>252 – 66 Ma</small></div>
             <div class="s-era" style="grid-row: 7 / span 6; --eb: var(--c2-band)"><b>고생대</b><span>Paleozoic</span><small>539 – 252 Ma</small></div>
 
-            <div class="s-row edge" style="grid-row: 1; --e: var(--c4)"><span class="s-num">12</span><span class="s-ko"><button class="p-ko" type="button">제4기</button><span class="s-tag">끝 · 현재</span></span><button class="p-en" type="button">Quaternary</button><button class="p-ma" type="button">2.6</button></div>
-            <div class="s-row" style="grid-row: 2; --e: var(--c4)"><span class="s-num">11</span><span class="s-ko"><button class="p-ko" type="button">네오기</button></span><button class="p-en" type="button">Neogene</button><button class="p-ma" type="button">23</button></div>
-            <div class="s-row edge" style="grid-row: 3; --e: var(--c4)"><span class="s-num">10</span><span class="s-ko"><button class="p-ko" type="button">팔레오기</button><span class="s-tag">시작</span></span><button class="p-en" type="button">Paleogene</button><button class="p-ma" type="button">66</button></div>
+            <div class="s-row edge" style="grid-row: 1; --e: var(--c4)"><span class="s-num">12</span><span class="s-ko"><button class="p-ko" type="button">제4기</button><span class="s-tag">끝 · 현재</span></span><button class="p-en" type="button">Quaternary</button><button class="p-ma" type="button">2.6</button><span class="s-ep">세: <b>홀로세</b> <i>Holocene</i> · <b>플라이스토세</b> <i>Pleistocene</i></span></div>
+            <div class="s-row" style="grid-row: 2; --e: var(--c4)"><span class="s-num">11</span><span class="s-ko"><button class="p-ko" type="button">네오기</button></span><button class="p-en" type="button">Neogene</button><button class="p-ma" type="button">23</button><span class="s-ep">세: <b>플라이오세</b> <i>Pliocene</i> · <b>마이오세</b> <i>Miocene</i></span></div>
+            <div class="s-row edge" style="grid-row: 3; --e: var(--c4)"><span class="s-num">10</span><span class="s-ko"><button class="p-ko" type="button">팔레오기</button><span class="s-tag">시작</span></span><button class="p-en" type="button">Paleogene</button><button class="p-ma" type="button">66</button><span class="s-ep">세: <b>올리고세</b> <i>Oligocene</i> · <b>에오세</b> <i>Eocene</i> · <b>팔레오세</b> <i>Paleocene</i></span></div>
             <div class="s-row edge" style="grid-row: 4; --e: var(--c3)"><span class="s-num">09</span><span class="s-ko"><button class="p-ko" type="button">백악기</button><span class="s-tag">끝</span></span><button class="p-en" type="button">Cretaceous</button><button class="p-ma" type="button">145</button></div>
             <div class="s-row" style="grid-row: 5; --e: var(--c3)"><span class="s-num">08</span><span class="s-ko"><button class="p-ko" type="button">쥐라기</button></span><button class="p-en" type="button">Jurassic</button><button class="p-ma" type="button">201</button></div>
             <div class="s-row edge" style="grid-row: 6; --e: var(--c3)"><span class="s-num">07</span><span class="s-ko"><button class="p-ko" type="button">트라이아스기</button><span class="s-tag">시작</span></span><button class="p-en" type="button">Triassic</button><button class="p-ma" type="button">252</button></div>
@@ -1166,7 +1258,7 @@
             <div class="s-x" style="grid-row: 9"><b>2</b></div>
             <div class="s-x" style="grid-row: 11"><b>1</b></div>
           </div>
-          <p class="ov-note">숫자는 각 기가 시작된 때(백만 년 전, Ma). 빨간 선은 대멸종 — 그 아래 기의 끝(2차는 데본기 후기)에 일어났습니다.</p>
+          <p class="ov-note">숫자는 각 기가 시작된 때(백만 년 전, Ma). 빨간 선은 대멸종 — 그 아래 기의 끝(2차는 데본기 후기)에 일어났습니다. 신생대의 기는 다시 세(世)로 나뉩니다 — <a href="#epochs">세(世) 자세히</a>.</p>
         </div>
 
         <aside class="mnemo">
@@ -1177,14 +1269,14 @@
           </div>
           <div class="m-card reveal" style="--d:.08s">
             <p class="m-k">CHANT · 첫 글자로 외우기</p>
-            <p class="chant" aria-label="캄 오 실 데 석 페, 트 쥐 백, 팔 네 제4">
+            <p class="chant" id="chant-periods" data-say="캄, 오, 실, 데, 석, 페. 트, 쥐, 백. 팔, 네, 제사." aria-label="캄 오 실 데 석 페, 트 쥐 백, 팔 네 제4">
               <span class="g g2"><i>캄</i><i>오</i><i>실</i><i>데</i><i>석</i><i>페</i></span>
               <span class="g g3"><i>트</i><i>쥐</i><i>백</i></span>
               <span class="g g4"><i>팔</i><i>네</i><i>제4</i></span>
             </p>
             <div class="m-btns">
-              <button class="pill-btn play-chant" type="button">▶ 리듬으로 읽기</button>
-              <button class="pill-btn speak-chant" type="button">소리로 듣기</button>
+              <button class="pill-btn play-chant" type="button" data-chant="periods">▶ 리듬으로 읽기</button>
+              <button class="pill-btn speak-chant" type="button" data-chant="periods">소리로 듣기</button>
             </div>
           </div>
           <div class="m-card reveal" style="--d:.16s">
@@ -1199,6 +1291,20 @@
               <li class="g3"><b>Meso</b>-zoic — 중간의 + 생명 → 중생대</li>
               <li class="g4"><b>Ceno</b>-zoic — 새로운 + 생명 → 신생대</li>
             </ul>
+          </div>
+          <div class="m-card reveal" style="--d:.32s">
+            <p class="m-k">EPOCHS · 신생대의 7개 세(世)</p>
+            <p class="chant" id="chant-epochs" data-say="팔, 에, 올. 마, 플. 플, 홀." aria-label="팔 에 올, 마 플, 플 홀">
+              <span class="g g4"><i>팔</i><i>에</i><i>올</i></span>
+              <span class="g g4b"><i>마</i><i>플</i></span>
+              <span class="g gq"><i>플</i><i>홀</i></span>
+            </p>
+            <div class="m-btns">
+              <button class="pill-btn play-chant" type="button" data-chant="epochs">▶ 리듬으로 읽기</button>
+              <button class="pill-btn speak-chant" type="button" data-chant="epochs">소리로 듣기</button>
+            </div>
+            <p class="en-mnemo"><span class="g4"><b>P</b>ut <b>E</b>ggs <b>O</b>n</span> <span class="g4b"><b>M</b>y <b>P</b>late,</span> <span class="gq"><b>P</b>lease <b>H</b>oney</span></p>
+            <p>팔레오세 · 에오세 · 올리고세(팔레오기) | 마이오세 · 플라이오세(네오기) | 플라이스토세 · 홀로세(제4기). 끝의 <i>-cene</i>은 그리스어 <i>kainos</i>(새로운).</p>
           </div>
         </aside>
       </div>
@@ -1592,6 +1698,7 @@
         <h2 class="ch-title reveal" style="--d:.08s">신생대</h2>
         <p class="ch-en reveal" style="--d:.16s">Cenozoic <span class="ch-alias">·</span> ‘포유류의 시대’</p>
         <p class="ch-summary reveal" style="--d:.24s">공룡이 사라진 자리를 포유류가 채웠다. 대륙은 오늘날의 위치로 이동하고, 초원이 넓어지고, 빙하기가 거듭되는 가운데 인류가 등장했다.</p>
+        <p class="ch-note reveal" style="--d:.28s"><b>EPOCHS · 세(世)</b>신생대의 기는 다시 7개의 세로 나뉜다. 지문에 자주 나오는 플라이스토세(<i>Pleistocene</i>) · 홀로세(<i>Holocene</i>) · 영거 드라이아스(<i>Younger Dryas</i>)는 이 장 끝 <a href="#epochs">‘세(世)’ 섹션</a>에서 자세히 다룬다.</p>
         <div class="ch-meta reveal" style="--d:.32s"><span>66 — 0 Ma</span><span>03 Periods</span><span>팔 · 네 · 제4</span></div>
       </div>
     </div>
@@ -1617,6 +1724,7 @@
                 <li>초기 영장류 · 말의 조상(에오히푸스)</li>
               </ul>
               <p class="origin"><b>NAME</b>그리스어 <i>palaios</i>(오래된) + <i>genos</i>(태어남) — ‘오래전에 태어난’</p>
+              <p class="origin"><b>EPOCHS</b>팔레오세 · 에오세 · 올리고세</p>
               <p class="ledger-h">Key Dates</p>
               <dl class="ledger">
                 <div><dt>c. 56 Ma</dt><dd>팔레오세–에오세 극열기(PETM) — 급격한 지구 온난화</dd></div>
@@ -1642,6 +1750,7 @@
                 <li>오스트랄로피테쿠스 — ‘루시’(약 320만 년 전)</li>
               </ul>
               <p class="origin"><b>NAME</b>그리스어 <i>neos</i>(새로운) + <i>genos</i>(태어남) — ‘새로 태어난’</p>
+              <p class="origin"><b>EPOCHS</b>마이오세 · 플라이오세</p>
             </article>
           </li>
 
@@ -1657,22 +1766,181 @@
               <h3 class="card-title"><span class="pnum">12</span>제4기</h3>
               <p class="card-en">Quaternary</p>
               <ul class="points">
-                <li>거듭되는 <span class="kw">빙하기</span>와 간빙기</li>
+                <li>거듭되는 <span class="kw">빙하기</span>와 간빙기 — <span class="kw">플라이스토세</span>(빙하기) → <span class="kw">홀로세</span>(지금)</li>
                 <li>사람속(<i>Homo</i>)의 진화 — 약 30만 년 전 <span class="kw">호모 사피엔스</span> 등장</li>
                 <li>매머드 등 거대 동물의 멸종 · 1만 1,700년 전부터 홀로세 — 지금 우리가 사는 시대</li>
               </ul>
               <p class="origin"><b>NAME</b>18–19세기 지층 분류(제1기 ~ 제4기)의 마지막 이름 — 지금은 제4기만 공식 명칭으로 남음</p>
+              <p class="origin"><b>EPOCHS</b>플라이스토세 · 홀로세</p>
               <p class="ledger-h">Key Dates</p>
               <dl class="ledger">
                 <div><dt>2.58 Ma</dt><dd>제4기 시작</dd></div>
                 <div><dt>c. 0.3 Ma</dt><dd>호모 사피엔스 (모로코 제벨 이르후드 화석)</dd></div>
-                <div><dt>11,700년 전</dt><dd>홀로세 시작 — 마지막 빙기의 끝</dd></div>
+                <div><dt>12,900년 전</dt><dd>영거 드라이아스 — 약 1,200년간의 마지막 급격한 한랭기</dd></div>
+                <div><dt>11,700년 전</dt><dd>홀로세 시작 — 플라이스토세(빙하기)의 끝</dd></div>
               </dl>
               <p class="note"><b>NOTE</b>인류세(<i>Anthropocene</i>): 인간 활동이 지층에 남긴 흔적으로 새 시대를 정하자는 제안. 2024년 국제지질과학연맹(IUGS)은 이를 공식 지질시대로 채택하지 않았다.</p>
+              <a class="more" href="#epochs">세(世) · 영거 드라이아스 자세히 ↓</a>
             </article>
           </li>
 
         </ol>
+      </div>
+
+      <!-- ═════════ EPOCHS · 세(世) ═════════ -->
+      <div class="epochs" id="epochs">
+        <header class="ep-head reveal">
+          <p class="sec-kicker">Epochs · 세(世)</p>
+          <h3 class="sec-title">신생대를 더 잘게 — 7개의 세</h3>
+          <p class="sec-en">Paleocene → Holocene</p>
+          <p class="sec-desc">신생대의 기(紀)는 다시 세(世)로 나뉩니다. 지문에는 기보다 <b>Pleistocene</b>, <b>Holocene</b> 같은 세 이름이 자주 등장합니다. 이름 끝의 <i>-cene</i>은 그리스어 <i>kainos</i>(새로운). 라이엘은 지층 속 현생 조개류의 비율로 세를 나눴습니다 — 새벽(에오) → 더 적게(마이오) → 더 많이(플라이오) → 가장 많이(플라이스토).</p>
+        </header>
+
+        <figure class="zoomer reveal">
+          <div class="zl" id="zl1">
+            <p class="zl-cap"><b>신생대 · 6,600만 년</b><span>66 Ma → 현재</span></p>
+            <div class="zl-per"></div>
+            <div class="zl-row"></div>
+            <div class="zl-axis"></div>
+          </div>
+          <svg class="zoom zz" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M96.09 0 L100 0 L100 10 L0 10 Z"/><line x1="96.09" y1="0" x2="0" y2="10"/><line x1="100" y1="0" x2="100" y2="10"/></svg>
+          <div class="zl" id="zl2">
+            <p class="zl-cap"><b>제4기 · 258만 년</b><span>빙기와 간빙기의 반복 (도식) · 위 = 따뜻함</span></p>
+            <svg class="wave" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points=""/></svg>
+            <div class="zl-row"></div>
+            <div class="zl-mk"></div>
+            <div class="zl-axis"></div>
+          </div>
+          <svg class="zoom zz" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M98.84 0 L100 0 L100 10 L0 10 Z"/><line x1="98.84" y1="0" x2="0" y2="10"/><line x1="100" y1="0" x2="100" y2="10"/></svg>
+          <div class="zl" id="zl3">
+            <p class="zl-cap"><b>최근 3만 년</b><span>빙하기의 끝과 홀로세 · 년 전</span></p>
+            <div class="zl-row"></div>
+            <div class="zl-clim"></div>
+            <div class="zl-mk"></div>
+            <div class="zl-axis"></div>
+          </div>
+          <ul class="ruler-legend">
+            <li style="--b: var(--ice)"><i></i>플라이스토세 · 한랭기</li>
+            <li style="--b: color-mix(in srgb, var(--c4) 45%, var(--card))"><i></i>온난기</li>
+            <li style="--b: var(--holo)"><i></i>홀로세 · 지금의 간빙기</li>
+          </ul>
+        </figure>
+
+        <div class="ep-grid">
+          <article class="ep-card reveal" style="--epc: var(--c4)">
+            <p class="ep-p">팔레오기 · PALEOGENE</p>
+            <h4>팔레오세 <span class="en">Paleocene</span></h4>
+            <p class="ep-ma">66 — 56 Ma</p>
+            <p class="ep-txt">공룡이 사라진 직후 — 포유류가 빠르게 다양해지기 시작</p>
+            <p class="ep-root"><b>palaios</b>오래된 → ‘오래된 새 시대’</p>
+          </article>
+          <article class="ep-card reveal" style="--epc: var(--c4); --d:.05s">
+            <p class="ep-p">팔레오기 · PALEOGENE</p>
+            <h4>에오세 <span class="en">Eocene</span></h4>
+            <p class="ep-ma">56 — 34 Ma</p>
+            <p class="ep-txt">극열기(PETM)로 시작한 온난기 — 고래 · 말 · 영장류의 초기 진화</p>
+            <p class="ep-root"><b>ēōs</b>새벽 → ‘새 시대의 새벽’</p>
+          </article>
+          <article class="ep-card reveal" style="--epc: var(--c4); --d:.1s">
+            <p class="ep-p">팔레오기 · PALEOGENE</p>
+            <h4>올리고세 <span class="en">Oligocene</span></h4>
+            <p class="ep-ma">34 — 23 Ma</p>
+            <p class="ep-txt">남극 빙상이 생기며 지구가 식어 감 — 초원이 넓어지기 시작</p>
+            <p class="ep-root"><b>oligos</b>적은 → ‘새로운 것이 적은’</p>
+          </article>
+          <article class="ep-card reveal" style="--epc: color-mix(in srgb, var(--c4) 62%, var(--ink)); --d:.15s">
+            <p class="ep-p">네오기 · NEOGENE</p>
+            <h4>마이오세 <span class="en">Miocene</span></h4>
+            <p class="ep-ma">23 — 5.3 Ma</p>
+            <p class="ep-txt">초원의 확산, 유인원의 번성 — 인류 계통이 갈라짐 (약 700만 년 전)</p>
+            <p class="ep-root"><b>meiōn</b>더 적은 → ‘덜 새로운’</p>
+          </article>
+          <article class="ep-card reveal" style="--epc: color-mix(in srgb, var(--c4) 62%, var(--ink)); --d:.2s">
+            <p class="ep-p">네오기 · NEOGENE</p>
+            <h4>플라이오세 <span class="en">Pliocene</span></h4>
+            <p class="ep-ma">5.3 — 2.6 Ma</p>
+            <p class="ep-txt">오스트랄로피테쿠스 ‘루시’ — 파나마 지협이 남북아메리카를 연결</p>
+            <p class="ep-root"><b>pleiōn</b>더 많은 → ‘더 새로운’</p>
+          </article>
+        </div>
+
+        <div class="ep-big">
+          <article class="ep-card big reveal" id="ep-pleistocene" style="--epc: var(--ice)">
+            <p class="ep-p">제4기 · QUATERNARY</p>
+            <h4>플라이스토세 <span class="en">Pleistocene</span></h4>
+            <p class="ep-ma">258만 — 1만 1,700년 전 · 옛 이름 홍적세(洪積世)</p>
+            <ul class="points">
+              <li>흔히 말하는 ‘<span class="kw">빙하기</span>’ <span class="en">the Ice Age</span> — 빙기와 간빙기의 반복</li>
+              <li>매머드 · 검치호 · 땅늘보 같은 <span class="kw">거대 동물</span> — 말기에 대부분 멸종</li>
+              <li>호모 사피엔스의 등장과 확산 — 해수면이 낮아진 베링 육교를 건너 아메리카로</li>
+            </ul>
+            <p class="ep-root"><b>pleistos</b>가장 많은 → ‘가장 새로운’</p>
+            <p class="ledger-h">Key Dates</p>
+            <dl class="ledger">
+              <div><dt>2.58 Ma</dt><dd>플라이스토세 시작 = 제4기 시작</dd></div>
+              <div><dt>c. 1 Ma</dt><dd>빙기 주기가 약 4만 년 → 약 10만 년으로 길어짐</dd></div>
+              <div><dt>c. 30만 년 전</dt><dd>호모 사피엔스 등장</dd></div>
+              <div><dt>26,500–19,000</dt><dd>최종 빙기 최성기(년 전) — 해수면이 지금보다 약 120m 낮음</dd></div>
+              <div><dt>12,900–11,700</dt><dd>영거 드라이아스(년 전) — 플라이스토세의 마지막 한랭기</dd></div>
+            </dl>
+          </article>
+          <article class="ep-card big reveal" id="ep-holocene" style="--epc: var(--holo); --d:.08s">
+            <p class="ep-p">제4기 · QUATERNARY</p>
+            <h4>홀로세 <span class="en">Holocene</span></h4>
+            <p class="ep-ma">1만 1,700년 전 — 현재 · 옛 이름 충적세(沖積世) · 현세</p>
+            <ul class="points">
+              <li>마지막 빙기가 끝난 뒤의 <span class="kw">간빙기</span> — 비교적 안정된 기후</li>
+              <li><span class="kw">농경</span>과 정착 생활, 도시와 문자 — 인류 문명 전체가 이 안에</li>
+              <li>빙하가 녹아 해수면이 오르며 오늘날의 해안선이 만들어짐</li>
+            </ul>
+            <p class="ep-root"><b>holos</b>전체의 → ‘완전히 새로운’</p>
+            <p class="ledger-h">Key Dates · 년 전</p>
+            <dl class="ledger">
+              <div><dt>11,700</dt><dd>홀로세 시작 — 영거 드라이아스의 끝</dd></div>
+              <div><dt>c. 11,500</dt><dd>비옥한 초승달 지대에서 농경 시작</dd></div>
+              <div><dt>8,200</dt><dd>‘8.2ka 사건’ — 짧고 급격한 한랭기</dd></div>
+              <div><dt>c. 5,200</dt><dd>메소포타미아의 쐐기문자</dd></div>
+              <div><dt>4,200</dt><dd>‘4.2ka 사건’ — 대가뭄, 홀로세의 마지막 구간(메갈라야절) 시작</dd></div>
+            </dl>
+          </article>
+        </div>
+
+        <article class="ep-yd reveal" id="ep-yd">
+          <div class="yd-text">
+            <p class="ext-kicker">YOUNGER DRYAS · 영거 드라이아스</p>
+            <h4>빙하기의 마지막 반전</h4>
+            <p class="yd-en">12,900 — 11,700 years ago</p>
+            <p class="yd-body">빙하기가 끝나 가며 따뜻해지던 지구가 약 1만 2,900년 전 갑자기 빙하기에 가까운 추위로 되돌아가 약 1,200년 동안 이어진 사건. 시작도 끝도 수십 년 만에 일어났고, 끝날 때 그린란드의 기온은 수십 년 사이에 5–10°C 가까이 치솟았다. 이 사건이 끝난 때가 곧 홀로세의 시작이다.</p>
+            <ul class="yd-list">
+              <li><b>원인</b>녹은 빙하의 물이 북대서양으로 쏟아져 해양 순환(AMOC · 열염순환)을 약화시켰다는 설명이 유력하다. 소행성 충돌설은 논쟁 중.</li>
+              <li><b>관련 논의</b>북미 클로비스 문화의 쇠퇴, 매머드 등 대형 동물이 멸종한 시기와 겹쳐 그 관계가 계속 논의된다.</li>
+              <li><b>이름</b>추운 툰드라에 피는 담자리꽃나무(<i>Dryas octopetala</i>)의 꽃가루가 이 시기 지층에 많아서. 앞선 한랭기인 Oldest · Older Dryas보다 ‘더 젊은(younger)’ 것.</li>
+            </ul>
+          </div>
+          <figure class="yd-chart">
+            <svg viewBox="0 0 600 270" role="img" aria-label="1만 6천 년 전부터 1만 년 전까지의 그린란드 기온 변화 도식: 1만 4,700년 전 급격히 따뜻해졌다가 1만 2,900년 전 급격히 추워지고, 1만 1,700년 전 다시 급격히 따뜻해짐">
+              <rect x="157" y="40" width="162" height="180" fill="rgba(255, 170, 90, .14)"/>
+              <rect x="319" y="40" width="108" height="180" fill="rgba(120, 190, 255, .28)"/>
+              <rect x="427" y="40" width="153" height="180" fill="rgba(140, 210, 120, .14)"/>
+              <text class="zt" x="238" y="30" text-anchor="middle">뵐링–알레뢰드 온난기</text>
+              <text class="zt" x="373" y="30" text-anchor="middle" style="fill:#9fd6ff">영거 드라이아스</text>
+              <text class="zt" x="503" y="30" text-anchor="middle" style="fill:#b9e3a3">홀로세</text>
+              <line class="ax" x1="40" y1="230" x2="580" y2="230"/>
+              <line class="ax" x1="319" y1="40" x2="319" y2="230" stroke-dasharray="3 4"/>
+              <line class="ax" x1="427" y1="40" x2="427" y2="230" stroke-dasharray="3 4"/>
+              <polyline class="ln" points="40,200 80,204 120,198 155,202 160,84 200,92 240,98 280,106 316,112 322,196 350,192 380,197 410,193 424,195 430,64 470,60 520,58 580,57"/>
+              <text x="40" y="250" text-anchor="middle">16,000</text>
+              <text x="220" y="250" text-anchor="middle">14,000</text>
+              <text x="400" y="250" text-anchor="middle">12,000</text>
+              <text x="580" y="250" text-anchor="end">10,000 년 전</text>
+              <text x="319" y="266" text-anchor="middle" style="font-size:11px;opacity:.75">12,900</text>
+              <text x="427" y="266" text-anchor="middle" style="font-size:11px;opacity:.75">11,700</text>
+              <text x="4" y="58" style="font-size:11px">따뜻</text>
+              <text x="4" y="206" style="font-size:11px">추움</text>
+            </svg>
+            <figcaption>그린란드 기온 변화 (도식)</figcaption>
+          </figure>
+        </article>
       </div>
     </div>
   </section>
@@ -1683,14 +1951,15 @@
       <header class="reveal">
         <p class="sec-kicker">Memorize · 암기 스튜디오</p>
         <h2 class="sec-title">외워서 확인하기</h2>
-        <p class="sec-desc">순서 맞히기로 12개 기의 차례를 손에 익히고, 퀴즈로 이름 · 영어 이름 · 대표 사건을 연결해 보세요.</p>
+        <p class="sec-desc">순서 맞히기로 12개 기(또는 신생대의 7개 세)의 차례를 손에 익히고, 퀴즈로 이름 · 영어 이름 · 대표 사건을 연결해 보세요.</p>
       </header>
       <div class="studio-grid">
         <article class="game reveal" id="order-game">
           <h3>순서 맞히기</h3>
-          <p class="game-sub">가장 오래된 기부터 차례로 누르세요.</p>
+          <p class="game-sub g-sub">가장 오래된 기부터 차례로 누르세요.</p>
           <div class="g-bar">
             <span class="g-time">0.0초</span><span class="g-miss">실수 0</span><span class="g-best">최고 기록 —</span>
+            <span class="g-modes" role="group" aria-label="모드"><button class="pill-btn sm" type="button" data-mode="p" aria-pressed="true">기 12</button><button class="pill-btn sm" type="button" data-mode="e" aria-pressed="false">세 7</button></span>
             <label><input type="checkbox" class="g-en"> English</label>
             <button class="pill-btn g-reset" type="button">다시</button>
           </div>
@@ -1700,7 +1969,7 @@
         </article>
         <article class="quiz reveal" id="quiz" style="--d:.1s">
           <h3>퀴즈 10문항</h3>
-          <p class="game-sub">순서 · 소속 대 · 영어 이름 · 대표 사건 · 대멸종</p>
+          <p class="game-sub">순서 · 소속 대 · 영어 이름 · 대표 사건 · 대멸종 · 세(世)</p>
           <div class="q-body"></div>
         </article>
       </div>
@@ -1763,14 +2032,26 @@
     { n: 5, ma: 66,  p: 8, what: '백악기 말 (K–Pg)', loss: '종의 약 75%', major: 1, href: '#ext5' },
   ];
   const DINO = { start: 230, end: 66 };
+  const E = [
+    { ko: '팔레오세',     en: 'Paleocene',   s: '팔', p: 9,  start: 66,     end: 56,     when: '66–56 Ma',              root: 'palaios(오래된)',  c: 'var(--c4)' },
+    { ko: '에오세',       en: 'Eocene',      s: '에', p: 9,  start: 56,     end: 33.9,   when: '56–34 Ma',              root: 'ēōs(새벽)',        c: 'color-mix(in srgb, var(--c4) 52%, var(--card))', lt: 1 },
+    { ko: '올리고세',     en: 'Oligocene',   s: '올', p: 9,  start: 33.9,   end: 23,     when: '34–23 Ma',              root: 'oligos(적은)',     c: 'var(--c4)' },
+    { ko: '마이오세',     en: 'Miocene',     s: '마', p: 10, start: 23,     end: 5.33,   when: '23–5.3 Ma',             root: 'meiōn(더 적은)',   c: 'color-mix(in srgb, var(--c4) 52%, var(--card))', lt: 1 },
+    { ko: '플라이오세',   en: 'Pliocene',    s: '플', p: 10, start: 5.33,   end: 2.58,   when: '5.3–2.6 Ma',            root: 'pleiōn(더 많은)',  c: 'var(--c4)' },
+    { ko: '플라이스토세', en: 'Pleistocene', s: '플', p: 11, start: 2.58,   end: 0.0117, when: '258만–1만 1,700년 전', root: 'pleistos(가장 많은)', c: 'var(--ice)' },
+    { ko: '홀로세',       en: 'Holocene',    s: '홀', p: 11, start: 0.0117, end: 0,      when: '1만 1,700년 전–현재',  root: 'holos(전체의)',    c: 'var(--holo)' },
+  ];
 
   const chapters = $$('.chapter');
   const events = $$('.event');
-  const anchors = $$('.event, .extinction');
+  const anchors = $$('.event, .extinction, .epochs, .ep-big, .ep-yd');
+  const yearAnchors = anchors.filter(a => a.dataset.year);
   const exts = $$('.extinction');
 
   const goTo = el => {
-    const top = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.26;
+    let shift = 0;                                   // ignore a pending reveal offset
+    try { shift = new DOMMatrixReadOnly(getComputedStyle(el).transform).m42 || 0; } catch (e) {}
+    const top = el.getBoundingClientRect().top - shift + window.scrollY - window.innerHeight * 0.26;
     window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
   };
   const goHash = (e, hash) => { const t = $(hash); if (t) { e.preventDefault(); goTo(t); } };
@@ -1851,6 +2132,82 @@
     });
   }
   $$('.deep-track a').forEach(a => a.addEventListener('click', e => goHash(e, a.getAttribute('href'))));
+
+  /* ── Epoch zoom: Cenozoic → Quaternary → last 30,000 years ── */
+  const zoomBand = (row, oldest, newest, a, b, html, color, cls, href) => {
+    const pc = v => ((oldest - v) / (oldest - newest)) * 100;
+    const el = document.createElement(href ? 'a' : 'div');
+    el.className = 'zb' + (cls ? ' ' + cls : '');
+    if (href) el.href = href;
+    el.style.cssText = `left:${pc(a)}%;width:${pc(b) - pc(a)}%;--zc:${color}`;
+    el.innerHTML = html;
+    row.appendChild(el);
+    return el;
+  };
+  const zoomTicks = (axis, oldest, newest, list) => list.forEach(([v, label]) => {
+    const t = document.createElement('span');
+    t.className = 'tick';
+    t.style.left = ((oldest - v) / (oldest - newest)) * 100 + '%';
+    t.innerHTML = `<span>${label}</span>`;
+    axis.appendChild(t);
+  });
+  const zoomMark = (row, oldest, newest, v, html, cls, href) => {
+    const m = document.createElement(href ? 'a' : 'span');
+    m.className = 'zmk' + (cls ? ' ' + cls : '');
+    if (href) m.href = href;
+    m.style.left = ((oldest - v) / (oldest - newest)) * 100 + '%';
+    m.innerHTML = html;
+    row.appendChild(m);
+  };
+  const z1 = $('#zl1'), z2 = $('#zl2'), z3 = $('#zl3');
+  if (z1 && z2 && z3) {
+    const softC4 = 'color-mix(in srgb, var(--c4) 22%, var(--card))', softIce = 'color-mix(in srgb, var(--ice) 26%, var(--card))';
+    zoomBand($('.zl-per', z1), 66, 0, 66, 23, '<span class="f">팔레오기</span><span class="s">팔</span>', softC4, 'lt');
+    zoomBand($('.zl-per', z1), 66, 0, 23, 2.58, '<span class="f">네오기</span><span class="s">네</span>', softC4, 'lt');
+    zoomBand($('.zl-per', z1), 66, 0, 2.58, 0, '<span class="f">제4기</span><span class="s">4</span>', softIce, 'lt');
+    E.forEach((e, i) => zoomBand($('.zl-row', z1), 66, 0, e.start, e.end,
+      `<span class="f">${e.ko}</span><span class="s">${e.s}</span>`, e.c, e.lt ? 'lt' : '', i >= 5 ? '#ep-' + e.en.toLowerCase() : null));
+    zoomTicks($('.zl-axis', z1), 66, 0, [[60, '60'], [50, '50'], [40, '40'], [30, '30'], [20, '20'], [10, '10'], [0, '0 Ma']]);
+
+    zoomBand($('.zl-row', z2), 2.58, 0, 2.58, 0.0117, '<span class="f">플라이스토세 Pleistocene · 빙하기</span><span class="s">플라이스토세</span>', 'var(--ice)', '', '#ep-pleistocene');
+    zoomBand($('.zl-row', z2), 2.58, 0, 0.0117, 0, '<span class="f">홀로세</span>', 'var(--holo)', '', '#ep-holocene');
+    zoomMark($('.zl-mk', z2), 2.58, 0, 1.0, '주기 4만 년 → 10만 년');
+    zoomMark($('.zl-mk', z2), 2.58, 0, 0.3, '호모 사피엔스 (30만 년 전)', 'lo r');
+    zoomTicks($('.zl-axis', z2), 2.58, 0, [[2.5, '250만'], [2, '200만'], [1.5, '150만'], [1, '100만'], [0.5, '50만'], [0, '현재']]);
+    const wave = $('.wave polyline', z2);
+    const pts = [];
+    for (let a = 2.58; a >= 0; a -= 0.002) {
+      let t;
+      if (a > 1) t = 0.15 + 0.42 * Math.sin((2 * Math.PI * a) / 0.041);
+      else {
+        const f = ((((a - 0.0117) % 0.1) + 0.1) % 0.1) / 0.1;      // 100-kyr sawtooth; warm at 11.7 ka
+        t = f >= 0.1 ? -1 + (2 * (f - 0.1)) / 0.9 : 1 - 2 * (f / 0.1);
+      }
+      pts.push(`${(((2.58 - a) / 2.58) * 100).toFixed(2)},${(50 - t * 40).toFixed(1)}`);
+    }
+    wave.setAttribute('points', pts.join(' '));
+
+    zoomBand($('.zl-row', z3), 30000, 0, 30000, 11700, '<span class="f">플라이스토세 (빙하기)</span><span class="s">플라이스토세</span>', 'var(--ice)', '', '#ep-pleistocene');
+    zoomBand($('.zl-row', z3), 30000, 0, 11700, 0, '<span class="f">홀로세 Holocene</span><span class="s">홀로세</span>', 'var(--holo)', '', '#ep-holocene');
+    zoomBand($('.zl-clim', z3), 30000, 0, 26500, 19000, '<span class="f">최종 빙기 최성기</span><span class="s">LGM</span>', softIce, 'lt');
+    zoomBand($('.zl-clim', z3), 30000, 0, 14700, 12900, '<span class="f">온난기</span><span class="s">온난</span>', 'color-mix(in srgb, var(--c4) 45%, var(--card))', 'lt');
+    zoomBand($('.zl-clim', z3), 30000, 0, 12900, 11700, '<span class="f">YD</span>', 'var(--ice)', '', '#ep-yd');
+    zoomMark($('.zl-mk', z3), 30000, 0, 12300, '영거 드라이아스', 'key', '#ep-yd');
+    zoomMark($('.zl-mk', z3), 30000, 0, 11500, '농경 시작', 'lo l');
+    zoomMark($('.zl-mk', z3), 30000, 0, 5200, '문자', 'lo');
+    zoomTicks($('.zl-axis', z3), 30000, 0, [[30000, '3만'], [25000, '2만 5천'], [20000, '2만'], [15000, '1만 5천'], [10000, '1만'], [5000, '5천'], [0, '현재']]);
+
+    $$('.zoomer a').forEach(a => a.addEventListener('click', e => goHash(e, a.getAttribute('href'))));
+    const fit = () => $$('.zoomer .zb').forEach(b => {
+      b.classList.remove('tight', 'tiny');
+      if (b.scrollWidth > b.clientWidth) b.classList.add('tight');
+      if (b.scrollWidth > b.clientWidth) b.classList.add('tiny');
+    });
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    let fitRaf = 0;
+    window.addEventListener('resize', () => { cancelAnimationFrame(fitRaf); fitRaf = requestAnimationFrame(fit); });
+  }
 
   /* ── Extinction dots ── */
   $$('.dots').forEach(box => {
@@ -1961,7 +2318,7 @@
     doc.dataset.active = active;
 
     let current = null;
-    anchors.forEach(a => { if (a.getBoundingClientRect().top < mid) current = a; });
+    yearAnchors.forEach(a => { if (a.getBoundingClientRect().top < mid) current = a; });
     events.forEach(ev => {
       ev.classList.toggle('active', ev.getBoundingClientRect().top < mid);
       ev.classList.toggle('current', ev === current);
@@ -2005,52 +2362,62 @@
     if (strata.classList.contains('mask-' + kind)) b.classList.toggle('peek');
   });
 
-  /* ── Chant ── */
-  const playBtn = $('.play-chant'), speakBtn = $('.speak-chant');
-  const syl = $$('.chant i');
+  /* ── Chants (periods · epochs) ── */
   const wait = ms => new Promise(r => setTimeout(r, ms));
-  playBtn.addEventListener('click', async () => {
-    playBtn.disabled = true;
-    for (let i = 0; i < syl.length; i++) {
-      syl.forEach(s => s.classList.remove('lit'));
-      syl[i].classList.add('lit');
-      await wait(i === 5 || i === 8 ? 760 : 420);
+  $$('.play-chant').forEach(btn => btn.addEventListener('click', async () => {
+    const box = $('#chant-' + btn.dataset.chant);
+    const syl = $$('i', box);
+    const ends = new Set($$('.g', box).map(g => g.lastElementChild));
+    btn.disabled = true;
+    for (const sy of syl) {
+      syl.forEach(x => x.classList.remove('lit'));
+      sy.classList.add('lit');
+      await wait(ends.has(sy) ? 760 : 420);
     }
-    syl.forEach(s => s.classList.remove('lit'));
+    syl.forEach(x => x.classList.remove('lit'));
     await wait(120);
-    syl.forEach(s => s.classList.add('lit'));
+    syl.forEach(x => x.classList.add('lit'));
     await wait(900);
-    syl.forEach(s => s.classList.remove('lit'));
-    playBtn.disabled = false;
-  });
-  if (!('speechSynthesis' in window)) speakBtn.hidden = true;
-  else speakBtn.addEventListener('click', () => {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance('캄, 오, 실, 데, 석, 페. 트, 쥐, 백. 팔, 네, 제사.');
-    u.lang = 'ko-KR';
-    u.rate = 0.85;
-    window.speechSynthesis.speak(u);
+    syl.forEach(x => x.classList.remove('lit'));
+    btn.disabled = false;
+  }));
+  $$('.speak-chant').forEach(btn => {
+    if (!('speechSynthesis' in window)) { btn.hidden = true; return; }
+    btn.addEventListener('click', () => {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance($('#chant-' + btn.dataset.chant).dataset.say);
+      u.lang = 'ko-KR';
+      u.rate = 0.85;
+      window.speechSynthesis.speak(u);
+    });
   });
 
-  /* ── Order game ── */
+  /* ── Order game (12 periods or 7 epochs) ── */
   const game = $('#order-game');
   if (game) {
-    const slots = $('.g-slots', game), tiles = $('.g-tiles', game), msg = $('.g-msg', game);
+    const slots = $('.g-slots', game), tiles = $('.g-tiles', game), msg = $('.g-msg', game), sub = $('.g-sub', game);
     const tTime = $('.g-time', game), tMiss = $('.g-miss', game), tBest = $('.g-best', game), enBox = $('.g-en', game);
-    const BEST = 'geo-order-best';
+    const modeBtns = $$('[data-mode]', game);
+    let mode = 'p', L = P, unit = '기';
     let next = 0, miss = 0, t0 = 0, timer = 0, done = false;
-    const name = p => (enBox.checked ? p.en : p.ko);
-    const showBest = () => { const b = store.get(BEST); tBest.textContent = b ? `최고 기록 ${b}초` : '최고 기록 —'; };
+    const bestKey = () => (mode === 'p' ? 'geo-order-best' : 'geo-order-best-e');
+    const color = (x, i) => (mode === 'p' ? `var(--c${x.era})` : E[i].lt ? 'color-mix(in srgb, var(--c4) 62%, var(--ink))' : E[i].c);
+    const name = x => (enBox.checked ? x.en : x.ko);
+    const showBest = () => { const b = store.get(bestKey()); tBest.textContent = b ? `최고 기록 ${b}초` : '최고 기록 —'; };
     const build = () => {
+      L = mode === 'p' ? P : E;
+      unit = mode === 'p' ? '기' : '세';
       next = 0; miss = 0; t0 = 0; done = false; clearInterval(timer);
       tTime.textContent = '0.0초'; tMiss.textContent = '실수 0';
-      msg.textContent = '가장 오래된 기는 무엇일까요?';
+      sub.textContent = mode === 'p' ? '가장 오래된 기부터 차례로 누르세요.' : '신생대의 세(世)를 가장 오래된 것부터 차례로 누르세요.';
+      msg.textContent = `가장 오래된 ${unit}는 무엇일까요?`;
       slots.classList.remove('complete');
-      slots.innerHTML = P.map((p, i) => `<li style="--e:var(--c${p.era})"><span>${String(i + 1).padStart(2, '0')}</span></li>`).join('');
+      slots.style.setProperty('--cols', L.length === 7 ? 7 : 6);
+      slots.innerHTML = L.map((x, i) => `<li style="--e:${color(x, i)}"><span>${String(i + 1).padStart(2, '0')}</span></li>`).join('');
       tiles.innerHTML = '';
-      shuffle(P.map((_, i) => i)).forEach(i => {
+      shuffle(L.map((_, i) => i)).forEach(i => {
         const b = document.createElement('button');
-        b.type = 'button'; b.className = 'tile'; b.dataset.i = i; b.textContent = name(P[i]);
+        b.type = 'button'; b.className = 'tile'; b.dataset.i = i; b.textContent = name(L[i]);
         tiles.appendChild(b);
       });
       showBest();
@@ -2067,27 +2434,34 @@
         b.disabled = true; b.classList.add('ok');
         const li = slots.children[i];
         li.classList.add('filled');
-        li.innerHTML = `<span>${String(i + 1).padStart(2, '0')}</span>${name(P[i])}`;
+        li.innerHTML = `<span>${String(i + 1).padStart(2, '0')}</span>${name(L[i])}`;
         next++;
-        if (next === P.length) {
+        if (next === L.length) {
           done = true; clearInterval(timer);
           const sec = ((performance.now() - t0) / 1000).toFixed(1);
           tTime.textContent = sec + '초';
-          const best = parseFloat(store.get(BEST));
-          if (!best || +sec < best) store.set(BEST, sec);
+          const best = parseFloat(store.get(bestKey()));
+          if (!best || +sec < best) store.set(bestKey(), sec);
           showBest();
           slots.classList.add('complete');
           msg.textContent = miss === 0 ? `완벽해요! ${sec}초, 실수 없이 완성했습니다.` : `완성! ${sec}초 · 실수 ${miss}회 — 한 번 더 도전해 보세요.`;
         } else {
-          msg.textContent = `${P[i].ko} 다음은?`;
+          msg.textContent = `${L[i].ko} 다음은?`;
         }
       } else {
         miss++;
         tMiss.textContent = `실수 ${miss}`;
         b.classList.remove('bad'); void b.offsetWidth; b.classList.add('bad');
-        msg.textContent = next === 0 ? '가장 오래된 기부터 — 고생대의 첫 번째 기는?' : `${P[next - 1].ko} 바로 다음 기를 찾아보세요.`;
+        msg.textContent = next === 0
+          ? (mode === 'p' ? '가장 오래된 기부터 — 고생대의 첫 번째 기는?' : '가장 오래된 세부터 — 공룡이 사라진 직후의 세는?')
+          : `${L[next - 1].ko} 바로 다음 ${unit}를 찾아보세요.`;
       }
     });
+    modeBtns.forEach(btn => btn.addEventListener('click', () => {
+      mode = btn.dataset.mode;
+      modeBtns.forEach(x => x.setAttribute('aria-pressed', String(x === btn)));
+      build();
+    }));
     $('.g-reset', game).addEventListener('click', build);
     enBox.addEventListener('change', build);
     build();
@@ -2139,7 +2513,37 @@
         return { q: `${er.ko}의 ${first ? '첫 번째' : '마지막'} 기는?`, ans: P[i].ko, opts: optsNear(i, 'ko'), why: `${er.ko}: ${list.map(k => P[k].ko).join(' → ')}` };
       },
     };
-    const TYPES = ['next', 'prev', 'era', 'en', 'ko', 'fact', 'fact', 'ext', 'edge'];
+    const EFACTS = [
+      ['공룡이 사라진 직후 포유류가 다양해지기 시작한, 신생대 첫 번째 세', 0],
+      ['극열기(PETM)로 시작한 ‘새벽’이라는 이름의 세', 1],
+      ['남극 빙상이 형성되며 지구가 식어 가기 시작한 세', 2],
+      ['초원이 넓어지고 인류 계통이 침팬지 계통에서 갈라진 세', 3],
+      ['오스트랄로피테쿠스 ‘루시’가 살았던 세', 4],
+      ['매머드와 검치호가 살던, 흔히 말하는 ‘빙하기(the Ice Age)’', 5],
+      ['농경과 문명이 시작된, 지금 우리가 사는 세', 6],
+      ['‘가장 새로운(pleistos)’이라는 뜻의 이름을 가진 세', 5],
+      ['‘완전히 새로운(holos)’이라는 뜻의 이름을 가진 세', 6],
+    ];
+    const epOpts = (ans, skip, field = 'ko') => {
+      const pool = shuffle(E.map((_, k) => k).filter(k => k !== ans && k !== skip)).sort((a, b) => Math.abs(a - ans) - Math.abs(b - ans));
+      return shuffle([ans, ...shuffle(pool.slice(0, 4)).slice(0, 3)]).map(k => E[k][field]);
+    };
+    const epWhy = i => `${E[i].ko}(${E[i].en}) · ${P[E[i].p].ko} · ${E[i].when} · ${E[i].root}`;
+    const YDQ = [
+      { q: '빙하기가 끝나 가던 약 1만 2,900년 전, 갑자기 다시 추워져 약 1,200년간 이어진 사건은?', ans: '영거 드라이아스', opts: ['영거 드라이아스', '최종 빙기 최성기', '뵐링–알레뢰드 온난기', '8.2ka 사건'], why: 'Younger Dryas · 12,900–11,700년 전 — 이 사건이 끝난 때가 홀로세의 시작' },
+      { q: '홀로세(Holocene)가 시작된 때는?', ans: '약 1만 1,700년 전', opts: ['약 1만 1,700년 전', '약 2만 년 전', '약 258만 년 전', '약 6,600만 년 전'], why: '영거 드라이아스가 끝나며 홀로세 시작 — 플라이스토세(빙하기)의 끝' },
+      { q: '영거 드라이아스(Younger Dryas)의 원인으로 가장 유력한 설명은?', ans: '녹은 빙하의 물이 북대서양 해양 순환을 약화', opts: ['녹은 빙하의 물이 북대서양 해양 순환을 약화', '시베리아 트랩의 화산 분출', '칙술루브 소행성 충돌', '판게아의 분열'], why: 'AMOC(대서양 자오면 순환) 약화설이 유력 · 소행성 충돌설은 논쟁 중' },
+      { q: '플라이스토세(Pleistocene)의 옛 우리말 이름은?', ans: '홍적세', opts: ['홍적세', '충적세', '고제3기', '신제3기'], why: '홍적세(洪積世) = 플라이스토세, 충적세(沖積世) = 홀로세' },
+    ];
+    Object.assign(GEN, {
+      epNext() { const i = Math.floor(Math.random() * 6); return { q: `‘${E[i].ko}’ 바로 다음에 오는 세(世)는?`, ans: E[i + 1].ko, opts: epOpts(i + 1, i), why: `${E[i].ko} → ${E[i + 1].ko} (${E[i + 1].en})` }; },
+      epPeriod() { const i = Math.floor(Math.random() * 7); return { q: `‘${E[i].ko}’(${E[i].en})는 어느 기(紀)에 속할까?`, ans: P[E[i].p].ko, opts: ['팔레오기', '네오기', '제4기', '백악기'], why: `${P[E[i].p].ko}: ${E.filter(e => e.p === E[i].p).map(e => e.ko).join(' → ')}` }; },
+      epEn() { const i = Math.floor(Math.random() * 7); return { q: `‘${E[i].ko}’의 영어 이름은?`, ans: E[i].en, opts: epOpts(i, -1, 'en'), why: epWhy(i) }; },
+      epFact() { const [t, i] = EFACTS[Math.floor(Math.random() * EFACTS.length)]; return { q: `“${t}” — 어느 세(世)일까?`, ans: E[i].ko, opts: epOpts(i, -1), why: epWhy(i) }; },
+      yd() { return Object.assign({}, YDQ[Math.floor(Math.random() * YDQ.length)]); },
+    });
+    const TYPES = ['next', 'prev', 'era', 'en', 'ko', 'fact', 'fact', 'ext', 'edge', 'epNext', 'epPeriod', 'epEn', 'epFact', 'epFact', 'yd'];
+    const ORDER = ['선캄브리아 시대', '고생대', '중생대', '신생대', '백악기', '팔레오기', '네오기', '제4기'];
     let qs = [], qi = 0, score = 0;
     const makeSet = () => {
       const seen = new Set(), out = [];
@@ -2147,7 +2551,8 @@
       while (out.length < 10 && guard++ < 400) {
         const q = GEN[TYPES[Math.floor(Math.random() * TYPES.length)]]();
         if (seen.has(q.q)) continue;
-        q.opts = Array.from(new Set(q.opts));
+        q.opts = shuffle(Array.from(new Set(q.opts)));
+        if (/대\(代\)에 속할까|기\(紀\)에 속할까/.test(q.q)) q.opts.sort((a, b) => ORDER.indexOf(a) - ORDER.indexOf(b));
         if (!q.opts.includes(q.ans) || q.opts.length < 4) continue;
         seen.add(q.q); out.push(q);
       }
