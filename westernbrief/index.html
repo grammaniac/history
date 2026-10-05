@@ -399,6 +399,13 @@
   }
   .ch-en { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 32px); opacity: .86; }
   .ch-summary { max-width: 640px; margin-top: 26px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.8; opacity: .9; }
+  .ch-alias { opacity: .55; margin: 0 .15em; }
+  .ch-note {
+    max-width: 640px; margin-top: 22px; padding: 2px 0 2px 16px;
+    border-left: 2px solid rgba(255, 255, 255, .45);
+    font-size: 14.5px; line-height: 1.75; opacity: .88;
+  }
+  .ch-note b { display: block; margin-bottom: 4px; font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .2em; }
   .ch-meta {
     display: flex; flex-wrap: wrap; gap: 10px 32px;
     margin-top: 30px; padding-top: 18px;
@@ -674,7 +681,7 @@
     <p class="hero-en"><span class="line"><span style="--d:.5s">From Antiquity to the Present</span></span></p>
 
     <div class="hero-row">
-      <p class="hero-lede reveal" style="--d:.6s">서양 문명의 흐름을 네 시대로 나누어 살펴봅니다 — 고대(Ancient), 중세(Medieval), 근세(Early Modern), 그리고 근현대(Modern). 각 시대를 가른 결정적 사건과 사상의 변화를 한눈에 정리하고, 혼동하기 쉬운 개념은 <b>NOTE</b>로 짚어 두었습니다.</p>
+      <p class="hero-lede reveal" style="--d:.6s">서양 문명의 흐름을 네 시대로 나누어 살펴봅니다 — 고대(Ancient), 중세(Medieval), 근세(Early Modern · Pre-Modern), 그리고 근현대(Modern). 각 시대를 가른 결정적 사건과 사상의 변화를 한눈에 정리하고, 혼동하기 쉬운 개념은 <b>NOTE</b>로 짚어 두었습니다.</p>
       <dl class="hero-stats reveal" style="--d:.7s">
         <div><dt>Eras</dt><dd><span class="count" data-to="4">4</span></dd></div>
         <div><dt>Milestones</dt><dd><span class="count" data-to="11">11</span></dd></div>
@@ -886,8 +893,9 @@
       <div class="open-inner">
         <p class="ch-kicker reveal">Era III · c. 1500 — 1789</p>
         <h2 class="ch-title reveal" style="--d:.08s">근세</h2>
-        <p class="ch-en reveal" style="--d:.16s">The Early Modern Period</p>
+        <p class="ch-en reveal" style="--d:.16s">Early Modern <span class="ch-alias">·</span> Pre-Modern</p>
         <p class="ch-summary reveal" style="--d:.24s">신 중심에서 인간 중심으로. 르네상스 인문주의와 종교개혁, 과학혁명, 그리고 계몽주의를 거치며 ‘근대’의 사상적 기반이 마련된 격동의 시기.</p>
+        <p class="ch-note reveal" style="--d:.28s"><b>EARLY MODERN = PRE-MODERN</b>GRE 기출에서는 이 시기를 <span style="white-space:nowrap">Pre-Modern(premodern)</span>으로 지칭하기도 한다. 다만 premodern은 ‘근대 이전’ 전반을 넓게 가리키는 말로도 쓰인다 — 예: <i>premodern literature</i>, <i>premodern Amazonia</i>.</p>
         <div class="ch-meta reveal" style="--d:.32s"><span>c. 1500 — 1789</span><span>03 Milestones</span><span>Humanism → Reason</span></div>
       </div>
     </div>
@@ -1094,7 +1102,7 @@
 </main>
 
 <footer class="colophon">
-  <p class="motto reveal"><span>Antiquity</span><i>·</i><span>Middle Ages</span><i>·</i><span>Early Modern</span><i>·</i><span>Modern</span></p>
+  <p class="motto reveal"><span>Antiquity</span><i>·</i><span>Middle Ages</span><i>·</i><span>Early&nbsp;/&nbsp;Pre-Modern</span><i>·</i><span>Modern</span></p>
   <div class="colophon-meta">
     <span>Western History · A Visual Timeline</span>
     <span>연대는 학계 통설을 따르며, 시대 구분의 경계는 관례적입니다.</span>
