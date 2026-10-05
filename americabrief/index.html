@@ -1,441 +1,1195 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-active="0">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>간략한 미국 역사</title>
+<meta name="description" content="1607년 제임스타운에서 1945년 초강대국의 등장까지 — 세 개의 장, 열 개의 이정표로 읽는 미국사.">
+<script>
+  (function () {
+    var d = document.documentElement;
+    d.classList.add('js');
+    try {
+      var t = localStorage.getItem('history-theme');
+      if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* ───────── Tokens ───────── */
   :root {
-    --ink: #1a1a1a;
-    --ink-soft: #2a2a2a;
-    --ink-mute: #5a5a5a;
-    --line: #c8c2b3;
-    --line-soft: #ddd6c5;
-    --paper: #faf7f0;
-    --paper-2: #f4efe4;
-    --accent: #8b3a2e;
-    --accent-2: #1e3a5f;
-    --gold: #b8893a;
+    color-scheme: light;
+    --paper: #f4efe5;
+    --paper-2: #ebe4d6;
+    --card: #fffcf6;
+    --ink: #1a1712;
+    --ink-2: #4b4439;
+    --ink-3: #7d7465;
+    --line: rgba(26, 23, 18, .14);
+    --line-2: rgba(26, 23, 18, .07);
+    --on-band: #f7efe1;
+    --shadow: 0 1px 2px rgba(26, 23, 18, .05), 0 18px 40px -22px rgba(26, 23, 18, .28);
+    --shadow-hi: 0 2px 4px rgba(26, 23, 18, .06), 0 30px 60px -24px rgba(26, 23, 18, .38);
+    --grain: .05;
+
+    /* Chapter I — 식민과 건국 (crimson) */
+    --c1: #9a2e22; --c1-band: #5e1c15; --c1-tint: #f5e9e2;
+    /* Chapter II — 분열과 산업화 (bronze) */
+    --c2: #8a6214; --c2-band: #4f3a0f; --c2-tint: #f4ecdb;
+    /* Chapter III — 초강대국의 부상 (navy) */
+    --c3: #22508c; --c3-band: #142c4c; --c3-tint: #e6edf5;
+
+    --accent: var(--ink);
+    --serif: 'Fraunces', 'Noto Serif KR', Georgia, serif;
+    --serif-ko: 'Noto Serif KR', 'Fraunces', Georgia, serif;
+    --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --nav-h: 64px;
+    --gutter: clamp(16px, 5vw, 72px);
+    --ease: cubic-bezier(.2, .7, .1, 1);
   }
 
-  html, body {
-    height: 100%;
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #0f0e0c; --paper-2: #171512; --card: #1a1815;
+      --ink: #efe8da; --ink-2: #c4baa8; --ink-3: #8e8574;
+      --line: rgba(239, 232, 218, .14); --line-2: rgba(239, 232, 218, .07);
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 40px -20px rgba(0, 0, 0, .75);
+      --shadow-hi: 0 2px 4px rgba(0, 0, 0, .45), 0 30px 60px -22px rgba(0, 0, 0, .85);
+      --grain: .07;
+      --c1: #ec8b78; --c1-band: #3c1510; --c1-tint: #16100e;
+      --c2: #e2b45c; --c2-band: #33270f; --c2-tint: #15120c;
+      --c3: #8cb3ea; --c3-band: #10223b; --c3-tint: #0c121a;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0f0e0c; --paper-2: #171512; --card: #1a1815;
+    --ink: #efe8da; --ink-2: #c4baa8; --ink-3: #8e8574;
+    --line: rgba(239, 232, 218, .14); --line-2: rgba(239, 232, 218, .07);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 40px -20px rgba(0, 0, 0, .75);
+    --shadow-hi: 0 2px 4px rgba(0, 0, 0, .45), 0 30px 60px -22px rgba(0, 0, 0, .85);
+    --grain: .07;
+    --c1: #ec8b78; --c1-band: #3c1510; --c1-tint: #16100e;
+    --c2: #e2b45c; --c2-band: #33270f; --c2-tint: #15120c;
+    --c3: #8cb3ea; --c3-band: #10223b; --c3-tint: #0c121a;
+  }
+
+  :root[data-active="1"] { --accent: var(--c1); }
+  :root[data-active="2"] { --accent: var(--c2); }
+  :root[data-active="3"] { --accent: var(--c3); }
+
+  /* ───────── Base ───────── */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + 8px);
+    -webkit-text-size-adjust: 100%;
+    background: var(--paper);
+  }
+  body {
     background: var(--paper);
     color: var(--ink);
-    font-family: 'IBM Plex Sans KR', -apple-system, sans-serif;
-    font-weight: 400;
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+    overflow-wrap: break-word;
     overflow-x: hidden;
   }
-
-  .stage {
-    min-height: 100vh;
-    padding: 2.5vh 3vw;
-    display: flex;
-    flex-direction: column;
-    background:
-      radial-gradient(ellipse at top left, rgba(184, 137, 58, 0.05), transparent 50%),
-      radial-gradient(ellipse at bottom right, rgba(30, 58, 95, 0.04), transparent 50%),
-      var(--paper);
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: var(--grain);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-  /* ===== 헤더 ===== */
-  header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    padding-bottom: 1.4vh;
-    border-bottom: 2px solid var(--ink);
-    margin-bottom: 2vh;
-  }
+  .en { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--ink-3); }
+  .kw { color: var(--e, var(--accent)); font-weight: 700; }
 
-  .title-block {
-    display: flex;
-    align-items: baseline;
-    gap: 1.4vw;
-  }
-
-  .eyebrow {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 400;
-    color: var(--accent);
-    font-size: 1.5vw;
-    letter-spacing: 0.02em;
-  }
-
-  h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 3vw;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-  }
-
-  .subtitle {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 400;
-    color: var(--ink-mute);
-    font-size: 1.3vw;
-  }
-
-  /* ===== 세기별 그룹 컨테이너 ===== */
-  .timeline {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    position: relative;
-  }
-
-  /* 세기 구분선 — 세로 */
-  .timeline::before,
-  .timeline::after {
-    content: '';
-    position: absolute;
-    top: 1vh;
-    bottom: 1vh;
-    width: 1px;
-    background: linear-gradient(180deg,
-      transparent 0%,
-      var(--line) 8%,
-      var(--line) 92%,
-      transparent 100%);
-  }
-  .timeline::before { left: 33.333%; }
-  .timeline::after { left: 66.666%; }
-
-  .col {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5vh;
-    padding: 0 1.4vw;
-    position: relative;
-  }
-
-  /* 세기 헤더 */
-  .col-header {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 1.15vw;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding-bottom: 0.8vh;
-    margin-bottom: 0.4vh;
-    border-bottom: 1px solid var(--line);
-    text-align: center;
-  }
-
-  .col:nth-child(2) .col-header { color: var(--gold); }
-  .col:nth-child(3) .col-header { color: var(--accent-2); }
-
-  /* ===== 시대 카드 ===== */
-  .era {
-    background: linear-gradient(180deg, #ffffff 0%, var(--paper-2) 100%);
-    border: 1px solid var(--line-soft);
-    border-radius: 6px;
-    padding: 1.4vh 1.2vw 1.5vh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    flex: 1;
-  }
-
-  .era::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
+  /* ───────── Scroll progress ───────── */
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 70; pointer-events: none; }
+  .progress span {
+    display: block; height: 100%;
     background: var(--accent);
-    border-radius: 6px 6px 0 0;
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    transition: background-color .5s;
   }
 
-  .era.blue::before { background: var(--accent-2); }
-  .era.gold::before { background: var(--gold); }
-  .era.dark::before { background: var(--ink); }
-
-  .era-head {
-    display: flex;
-    align-items: baseline;
-    gap: 0.8vw;
-    margin-bottom: 0.6vh;
-    padding-bottom: 0.7vh;
-    border-bottom: 1px dashed var(--line-soft);
+  /* ───────── Top bar ───────── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+    height: var(--nav-h);
+    display: flex; align-items: center; gap: clamp(12px, 2.4vw, 32px);
+    padding: 0 var(--gutter);
+    border-bottom: 1px solid transparent;
+    transition: background-color .35s, border-color .35s;
   }
+  .topbar.scrolled {
+    background: var(--paper);
+    background: color-mix(in srgb, var(--paper) 84%, transparent);
+    -webkit-backdrop-filter: saturate(1.3) blur(14px);
+    backdrop-filter: saturate(1.3) blur(14px);
+    border-bottom-color: var(--line);
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; white-space: nowrap;
+    font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink);
+  }
+  .brand-mark {
+    font-family: var(--mono); font-style: normal; font-size: 10.5px; font-weight: 600;
+    letter-spacing: .14em;
+    padding: 4px 7px; border: 1px solid currentColor; border-radius: 2px;
+  }
+  .segs { list-style: none; display: flex; gap: 10px; flex: 1; max-width: 640px; margin: 0 auto; }
+  .segs li { flex: 1; min-width: 0; }
+  .seg {
+    display: flex; flex-direction: column; gap: 7px;
+    padding: 8px 0; text-decoration: none;
+    color: var(--ink-3);
+    transition: color .3s;
+  }
+  .seg-label {
+    font-size: 12px; font-weight: 600; line-height: 1;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .seg-label b { font-family: var(--mono); font-weight: 600; color: var(--seg); margin-right: 6px; }
+  .seg-track { position: relative; height: 2px; border-radius: 2px; background: var(--line); overflow: hidden; }
+  .seg-track i {
+    position: absolute; inset: 0;
+    background: var(--seg);
+    transform-origin: 0 50%;
+    transform: scaleX(var(--p, 0));
+  }
+  .seg.active, .seg:hover { color: var(--ink); }
 
-  .year {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 1.6vw;
+  .yd { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; min-width: 96px; line-height: 1; }
+  .yd small { font-family: var(--mono); font-size: 9.5px; letter-spacing: .2em; color: var(--ink-3); }
+  .yd-num {
+    font-family: var(--serif); font-weight: 600; font-size: 22px;
+    font-variant-numeric: tabular-nums lining-nums;
     color: var(--accent);
-    letter-spacing: 0.01em;
-    line-height: 1;
     white-space: nowrap;
+    transition: color .5s;
   }
+  .yd:not(.on) .yd-num { font-size: 14px; color: var(--ink-3); letter-spacing: .02em; }
 
-  .era.blue .year { color: var(--accent-2); }
-  .era.gold .year { color: var(--gold); }
-  .era.dark .year { color: var(--ink); }
-
-  .label {
-    font-family: 'IBM Plex Sans KR', sans-serif;
-    font-weight: 600;
-    font-size: 1.25vw;
-    color: var(--ink);
-    line-height: 1.2;
+  .theme-btn {
+    flex: none;
+    width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: border-color .3s, transform .5s var(--ease);
   }
+  .theme-btn:hover { border-color: var(--ink-3); transform: rotate(180deg); }
+  .theme-btn svg { width: 16px; height: 16px; }
 
-  .label .en {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    display: block;
-    color: var(--ink-mute);
-    font-size: 1vw;
-    margin-top: 0.15vh;
-  }
-
-  ul.points {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5vh;
-    flex: 1;
-  }
-
-  ul.points li {
-    font-size: 1.1vw;
-    line-height: 1.4;
-    color: var(--ink-soft);
+  /* ───────── Hero ───────── */
+  .hero {
     position: relative;
-    padding-left: 1vw;
+    min-height: 100vh; min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: calc(var(--nav-h) + 6vh) var(--gutter) 9vh;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: -20%; z-index: -1;
+    background:
+      radial-gradient(40% 50% at 12% 18%, color-mix(in srgb, var(--c1) 16%, transparent), transparent 70%),
+      radial-gradient(36% 46% at 88% 30%, color-mix(in srgb, var(--c3) 14%, transparent), transparent 70%),
+      radial-gradient(40% 40% at 60% 100%, color-mix(in srgb, var(--c2) 12%, transparent), transparent 70%);
+    animation: drift 24s ease-in-out infinite alternate;
+  }
+  @keyframes drift { to { transform: translate3d(3%, -2%, 0) scale(1.06); } }
+
+  .hero-inner { max-width: 1180px; width: 100%; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(17px, 1.7vw, 23px);
+    color: var(--c1);
+  }
+  .hero-title {
+    font-family: var(--serif-ko); font-weight: 900;
+    font-size: clamp(52px, 9vw, 136px);
+    line-height: 1.04; letter-spacing: -.035em;
+    margin: .12em 0 .16em;
+  }
+  .hero-title .line { display: inline-block; vertical-align: top; }
+  .line { display: block; overflow: hidden; padding-bottom: .04em; }
+  .line > span { display: inline-block; transform: translateY(108%); animation: rise 1.2s var(--ease) forwards; animation-delay: var(--d, 0s); }
+  @keyframes rise { to { transform: none; } }
+  .hero-en {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(20px, 2.6vw, 36px);
+    color: var(--ink-2);
+  }
+  .hero-row {
+    display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(24px, 5vw, 80px); align-items: end;
+    margin-top: clamp(28px, 5vh, 56px);
+  }
+  .hero-lede { max-width: 560px; color: var(--ink-2); font-size: clamp(16px, 1.3vw, 18px); }
+  .hero-stats { display: flex; justify-content: flex-end; gap: clamp(20px, 4vw, 56px); }
+  .hero-stats div { display: flex; flex-direction: column; gap: 6px; }
+  .hero-stats dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
+  .hero-stats dd {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(34px, 4vw, 56px); line-height: 1;
+    font-variant-numeric: tabular-nums lining-nums;
   }
 
-  ul.points li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 1vw;
-    top: 0.05vh;
+  /* Ruler (timeline at scale) */
+  .ruler { display: none; margin-top: clamp(36px, 7vh, 72px); }
+  .js .ruler { display: block; }
+  .ruler-cap {
+    display: flex; justify-content: space-between; gap: 16px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-3);
+    padding-bottom: 14px;
+  }
+  .ruler-track { position: relative; height: 52px; }
+  .band {
+    position: absolute; top: 26px; height: 8px;
+    background: var(--b); border-radius: 1px;
+    transform-origin: 0 50%; transform: scaleX(0);
+    transition: transform 1.3s var(--ease), filter .3s;
+    transition-delay: calc(.25s + var(--i) * .2s);
+  }
+  .band:hover { filter: brightness(1.15); }
+  .ruler.in .band { transform: scaleX(1); }
+  .band-label {
+    position: absolute; bottom: 14px; left: 0;
+    font-size: 12px; font-weight: 600; color: var(--b); white-space: nowrap;
+    opacity: 0; transition: opacity .8s; transition-delay: calc(.7s + var(--i) * .2s);
+  }
+  .band.end .band-label { left: auto; right: 0; }
+  .band-label b { font-family: var(--mono); margin-right: 6px; }
+  .ruler.in .band-label { opacity: 1; }
+  .pin {
+    position: absolute; top: 30px; z-index: 2;
+    width: 22px; height: 22px; margin: -11px 0 0 -11px;
+    background: none; border: 0; cursor: pointer;
+    opacity: 0; transform: scale(.4);
+    transition: opacity .5s, transform .5s var(--ease);
+    transition-delay: calc(1s + var(--i) * .06s);
+  }
+  .ruler.in .pin { opacity: 1; transform: none; }
+  .pin::before {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: 9px; height: 9px;
+    background: var(--paper); border: 2px solid var(--b);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: transform .3s var(--ease), background-color .3s;
+  }
+  .pin:hover::before, .pin:focus-visible::before { background: var(--b); transform: translate(-50%, -50%) rotate(45deg) scale(1.35); }
+  .tip {
+    position: absolute; bottom: calc(100% + 8px); left: 50%;
+    transform: translate(-50%, 6px);
+    padding: 7px 11px; border-radius: 3px;
+    background: var(--ink); color: var(--paper);
+    font-size: 12.5px; font-weight: 500; white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s, transform .3s var(--ease);
+  }
+  .tip b { font-family: var(--mono); font-weight: 600; margin-right: 8px; color: var(--b); filter: brightness(1.4); }
+  .pin.tip-l .tip { left: 0; transform: translate(0, 6px); }
+  .pin.tip-r .tip { left: auto; right: 0; transform: translate(0, 6px); }
+  .pin:hover .tip, .pin:focus-visible .tip { opacity: 1; transform: translate(-50%, 0); }
+  .pin.tip-l:hover .tip, .pin.tip-l:focus-visible .tip,
+  .pin.tip-r:hover .tip, .pin.tip-r:focus-visible .tip { transform: none; }
+  .ruler-axis { position: relative; height: 26px; border-top: 1px solid var(--line); }
+  .tick { position: absolute; top: 0; height: 6px; border-left: 1px solid var(--ink-3); }
+  .tick span {
+    position: absolute; top: 9px; left: 0; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); white-space: nowrap;
+  }
+  .ruler-legend {
+    list-style: none;
+    display: flex; flex-wrap: wrap; gap: 10px 28px;
+    margin-top: 14px;
+    font-size: 13px; color: var(--ink-2);
+  }
+  .ruler-legend li { display: flex; align-items: center; gap: 8px; }
+  .ruler-legend i { width: 18px; height: 3px; background: var(--b); }
+  .ruler-legend span { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+
+  .scroll-cue {
+    position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .24em;
+    color: var(--ink-3); text-decoration: none;
+  }
+  .scroll-cue i { width: 1px; height: 34px; background: var(--line); position: relative; overflow: hidden; }
+  .scroll-cue i::after {
+    content: ""; position: absolute; left: 0; top: -40%; width: 100%; height: 40%;
+    background: var(--ink-2);
+    animation: drip 2.2s var(--ease) infinite;
+  }
+  @keyframes drip { to { top: 100%; } }
+
+  /* ───────── Chapters ───────── */
+  .chapter[data-era="1"] { --e: var(--c1); --e-band: var(--c1-band); --e-tint: var(--c1-tint); }
+  .chapter[data-era="2"] { --e: var(--c2); --e-band: var(--c2-band); --e-tint: var(--c2-tint); }
+  .chapter[data-era="3"] { --e: var(--c3); --e-band: var(--c3-band); --e-tint: var(--c3-tint); }
+
+  .chapter-open {
+    position: relative; overflow: hidden; isolation: isolate;
+    min-height: 74vh;
+    display: flex; align-items: flex-end;
+    padding: clamp(110px, 18vh, 200px) var(--gutter) clamp(56px, 10vh, 112px);
+    background: var(--e-band);
+    color: var(--on-band);
+  }
+  .chapter-open::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(60% 80% at 0% 0%, rgba(255, 255, 255, .10), transparent 60%),
+      repeating-linear-gradient(115deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 14px);
+  }
+  .chapter-open::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+    background: var(--e);
+    transform-origin: 0 50%; transform: scaleX(var(--open-p, 0));
+  }
+  .big-num {
+    position: absolute; z-index: -1; right: -1vw; top: 50%;
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(240px, 40vw, 620px); line-height: .78;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, .2);
+    transform: translateY(calc(-50% + var(--py, 0px)));
+    pointer-events: none; user-select: none;
+    will-change: transform;
+  }
+  .open-inner { width: 100%; max-width: 1180px; margin: 0 auto; }
+  .ch-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; opacity: .78; }
+  .ch-title {
+    font-family: var(--serif-ko); font-weight: 900;
+    font-size: clamp(46px, 7.6vw, 112px);
+    line-height: 1.04; letter-spacing: -.03em;
+    margin: .22em 0 .1em;
+  }
+  .ch-en { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 32px); opacity: .86; }
+  .ch-summary { max-width: 640px; margin-top: 26px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.8; opacity: .9; }
+  .ch-meta {
+    display: flex; flex-wrap: wrap; gap: 10px 32px;
+    margin-top: 30px; padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, .22);
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; opacity: .85;
   }
 
-  .era.blue ul.points li::before { color: var(--accent-2); }
-  .era.gold ul.points li::before { color: var(--gold); }
-  .era.dark ul.points li::before { color: var(--ink); }
+  .chapter-body { background: var(--e-tint); padding: clamp(64px, 12vh, 140px) var(--gutter); }
+  .timeline { position: relative; max-width: 1180px; margin: 0 auto; }
+  .spine {
+    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+    transform: translateX(-50%);
+    background: var(--line);
+  }
+  .spine i {
+    position: absolute; inset: 0;
+    background: var(--e);
+    transform-origin: 50% 0; transform: scaleY(0);
+  }
+  .events { list-style: none; display: flex; flex-direction: column; gap: clamp(48px, 9vh, 104px); }
+  .event {
+    display: grid; grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr);
+    align-items: start;
+  }
+  .when { grid-column: 1; grid-row: 1; text-align: right; padding-top: 4px; }
+  .node { grid-column: 2; grid-row: 1; justify-self: center; }
+  .card { grid-column: 3; grid-row: 1; }
+  .event:nth-child(even) .when { grid-column: 3; text-align: left; }
+  .event:nth-child(even) .card { grid-column: 1; }
 
-  ul.points li.sub {
-    padding-left: 2vw;
-    color: var(--ink-mute);
-    font-size: 1vw;
+  .when-year {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(46px, 5.6vw, 84px); line-height: .95; letter-spacing: -.025em;
+    font-variant-numeric: lining-nums;
+    color: var(--e);
+  }
+  .when-year small { font-family: var(--serif-ko); font-weight: 700; font-size: .4em; letter-spacing: 0; margin-left: .18em; }
+  .when-range { font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; color: var(--ink-3); margin-top: 12px; }
+  .when-tag {
+    display: inline-block; margin-top: 12px;
+    padding: 3px 11px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; color: var(--e);
+    border: 1px solid color-mix(in srgb, var(--e) 45%, transparent);
   }
 
-  ul.points li.sub::before {
-    content: '–';
-    left: 1vw;
-    color: var(--ink-mute);
+  .node {
+    position: relative; z-index: 1;
+    width: 18px; height: 18px; margin-top: 26px;
+    border-radius: 50%;
+    background: var(--e-tint); border: 2px solid var(--line);
+    transition: background-color .5s, border-color .5s, box-shadow .5s;
   }
-
-  .keyword {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 600;
-    color: var(--accent);
+  .event.active .node {
+    background: var(--e); border-color: var(--e);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--e) 16%, transparent);
   }
-
-  .en-inline {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    color: var(--ink-mute);
-    font-size: 0.95em;
+  .event.current .node::after {
+    content: ""; position: absolute; inset: -2px; border-radius: 50%;
+    border: 2px solid var(--e);
+    animation: pulse 2.2s ease-out infinite;
   }
+  @keyframes pulse { from { transform: scale(1); opacity: .8; } to { transform: scale(2.8); opacity: 0; } }
 
-  .era.blue .keyword { color: var(--accent-2); }
-  .era.gold .keyword { color: var(--gold); }
-  .era.dark .keyword { color: var(--ink); }
+  .card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: clamp(22px, 2.6vw, 36px);
+    box-shadow: var(--shadow);
+    transition: box-shadow .5s var(--ease), border-color .5s;
+  }
+  .card::before {
+    content: ""; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 3px;
+    border-radius: 6px 0 0 6px;
+    background: var(--e);
+    transform-origin: 50% 0; transform: scaleY(0);
+    transition: transform .8s var(--ease);
+  }
+  .event.active .card::before { transform: scaleY(1); }
+  .card:hover { box-shadow: var(--shadow-hi); border-color: color-mix(in srgb, var(--e) 35%, var(--line)); }
+  .card-title { font-family: var(--serif-ko); font-weight: 700; font-size: clamp(23px, 2.1vw, 30px); line-height: 1.3; letter-spacing: -.01em; }
+  .card-en { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-3); margin-top: 2px; }
 
-  /* ===== 푸터 ===== */
-  footer {
-    margin-top: 1.8vh;
-    padding-top: 1.2vh;
+  .points { list-style: none; display: grid; gap: 9px; margin-top: 20px; }
+  .points li { position: relative; padding-left: 24px; }
+  .points li::before {
+    content: ""; position: absolute; left: 3px; top: .62em;
+    width: 7px; height: 7px; background: var(--e);
+    transform: rotate(45deg);
+  }
+  .points li.sub { padding-left: 44px; font-size: 15.5px; color: var(--ink-2); margin-top: -3px; }
+  .points li.sub::before { left: 25px; top: .7em; width: 5px; height: 5px; background: transparent; border: 1px solid var(--ink-3); }
+
+  .stats { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 22px; margin-top: 24px; padding: 18px 20px; border-radius: 4px; background: color-mix(in srgb, var(--e) 7%, transparent); }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 2.8vw, 38px); line-height: 1; color: var(--e); font-variant-numeric: tabular-nums lining-nums; }
+  .stat-cap { font-size: 12.5px; color: var(--ink-3); }
+  .stats .arrow { font-family: var(--serif); font-size: 26px; color: var(--ink-3); }
+
+  .ledger-h {
+    margin-top: 26px; padding-bottom: 8px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink-3);
+    border-bottom: 1px solid var(--line);
+  }
+  .ledger > div {
+    display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 14.5px; line-height: 1.6;
+  }
+  .ledger dt { font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--e); padding-top: 1px; }
+  .ledger dd { color: var(--ink-2); }
+
+  .note {
+    margin-top: 22px; padding: 14px 18px;
+    border-left: 2px solid var(--e); border-radius: 0 4px 4px 0;
+    background: color-mix(in srgb, var(--e) 8%, transparent);
+    font-size: 14.5px; line-height: 1.7; color: var(--ink-2);
+  }
+  .note b { display: block; margin-bottom: 4px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; color: var(--e); }
+
+  /* ───────── Colophon ───────── */
+  .colophon { padding: clamp(80px, 16vh, 180px) var(--gutter) 56px; text-align: center; }
+  .motto {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(28px, 5vw, 68px); line-height: 1.15; letter-spacing: -.01em;
+  }
+  .motto span:nth-of-type(1) { color: var(--c1); }
+  .motto span:nth-of-type(2) { color: var(--c1); }
+  .motto span:nth-of-type(3) { color: var(--c2); }
+  .motto span:nth-of-type(4) { color: var(--c3); }
+  .motto i { font-style: normal; color: var(--ink-3); margin: 0 .2em; }
+  .colophon-meta {
+    max-width: 1180px; margin: clamp(56px, 10vh, 110px) auto 0; padding-top: 22px;
     border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 1.1vw;
-    color: var(--ink-mute);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px;
+    font-size: 13px; color: var(--ink-3); text-align: left;
+  }
+  .colophon-meta a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .3s; }
+  .colophon-meta a:hover { border-color: var(--ink-2); }
+  kbd {
+    font-family: var(--mono); font-size: 11px;
+    padding: 1px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 3px;
   }
 
-  .footer-meta {
-    font-style: normal;
-    font-family: 'IBM Plex Sans KR', sans-serif;
-    font-size: 0.95vw;
-    letter-spacing: 0.05em;
+  /* ───────── Reveal ───────── */
+  .js .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 1s var(--ease), transform 1s var(--ease);
+    transition-delay: var(--d, 0s);
+  }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  /* ───────── Responsive ───────── */
+  @media (max-width: 980px) {
+    .brand-text { display: none; }
+    .hero-row { grid-template-columns: 1fr; }
+    .hero-stats { justify-content: flex-start; }
+  }
+  @media (max-width: 860px) {
+    .timeline { padding-left: 0; }
+    .spine { left: 11px; transform: none; }
+    .event { grid-template-columns: 24px minmax(0, 1fr); column-gap: 18px; }
+    .node { grid-column: 1; grid-row: 1; margin-top: 18px; width: 16px; height: 16px; }
+    .when, .event:nth-child(even) .when { grid-column: 2; grid-row: 1; text-align: left; padding-top: 0; }
+    .card, .event:nth-child(even) .card { grid-column: 2; grid-row: 2; margin-top: 18px; }
+    .when-year { font-size: clamp(42px, 12vw, 60px); }
+    .when-range, .when-tag { display: inline-block; margin-top: 10px; }
+    .when-range { margin-right: 10px; }
+    .scroll-cue { display: none; }
+  }
+  @media (max-width: 640px) {
+    :root { --nav-h: 56px; }
+    body { font-size: 16px; }
+    .segs { gap: 6px; }
+    .seg-label span { display: none; }
+    .yd { min-width: 72px; }
+    .yd-num { font-size: 18px; }
+    .theme-btn { width: 34px; height: 34px; }
+    .band-label span { display: none; }
+    .chapter-open { min-height: 64vh; }
+    .ledger > div { grid-template-columns: 80px minmax(0, 1fr); gap: 10px; font-size: 14px; }
+    .card { padding: 22px 20px; }
+    .stats .arrow { transform: rotate(90deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+    .js .reveal { opacity: 1; transform: none; }
+  }
+
+  @media print {
+    .topbar, .progress, .scroll-cue, .theme-btn, .ruler { display: none !important; }
+    body::after { display: none; }
+    .js .reveal { opacity: 1; transform: none; }
+    .hero, .chapter-open { min-height: auto; }
+    .card { box-shadow: none; break-inside: avoid; }
   }
 </style>
 </head>
 <body>
-  <div class="stage">
-    <header>
-      <div class="title-block">
-        <span class="eyebrow">A Brief History of —</span>
-        <h1>간략한 미국 역사</h1>
-      </div>
-      <span class="subtitle">From Colonization to Superpower · 1630 — 1945</span>
-    </header>
 
-    <main class="timeline">
+<div class="progress" aria-hidden="true"><span></span></div>
 
-      <!-- ═══════════ 17–18세기 ═══════════ -->
-      <div class="col">
-        <div class="col-header">17 — 18 Century · 식민과 건국</div>
+<nav class="topbar" aria-label="장 이동">
+  <a class="brand" href="#top"><span class="brand-mark">USA</span><span class="brand-text">A Brief History</span></a>
+  <ol class="segs">
+    <li><a class="seg" href="#ch1" style="--seg: var(--c1)"><span class="seg-label"><b>I</b><span>식민과 건국</span></span><span class="seg-track"><i></i></span></a></li>
+    <li><a class="seg" href="#ch2" style="--seg: var(--c2)"><span class="seg-label"><b>II</b><span>분열과 산업화</span></span><span class="seg-track"><i></i></span></a></li>
+    <li><a class="seg" href="#ch3" style="--seg: var(--c3)"><span class="seg-label"><b>III</b><span>초강대국의 부상</span></span><span class="seg-track"><i></i></span></a></li>
+  </ol>
+  <div class="yd" aria-live="off"><small>YEAR</small><span class="yd-num">1607—1945</span></div>
+  <button class="theme-btn" type="button" aria-label="테마 전환">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+  </button>
+</nav>
 
-        <section class="era">
-          <div class="era-head">
-            <span class="year">1630</span>
-            <div class="label">이민의 시작<span class="en">Early Colonization</span></div>
-          </div>
-          <ul class="points">
-            <li>유럽으로부터 신대륙 이주 개시</li>
-          </ul>
-        </section>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <p class="eyebrow"><span class="line"><span style="--d:.05s">A Brief History of —</span></span></p>
+    <h1 class="hero-title">
+      <span class="line"><span style="--d:.15s">간략한</span></span>
+      <span class="line"><span style="--d:.3s">미국&nbsp;역사</span></span>
+    </h1>
+    <p class="hero-en"><span class="line"><span style="--d:.5s">From Colonization to Superpower</span></span></p>
 
-        <section class="era">
-          <div class="era-head">
-            <span class="year">1700</span>
-            <div class="label">대량 이민<span class="en">Mass Immigration</span></div>
-          </div>
-          <ul class="points">
-            <li>식민지 정착 본격화</li>
-          </ul>
-        </section>
+    <div class="hero-row">
+      <p class="hero-lede reveal" style="--d:.6s">영국인의 첫 정착에서 2차 세계대전 이후 초강대국의 등장까지. 미국사 340여 년을 세 개의 장(章)과 열 개의 이정표로 압축했습니다. 각 이정표에는 핵심 연표와 함께, 흔히 틀리기 쉬운 지점을 <b>NOTE</b>로 짚어 두었습니다.</p>
+      <dl class="hero-stats reveal" style="--d:.7s">
+        <div><dt>Chapters</dt><dd><span class="count" data-to="3">3</span></dd></div>
+        <div><dt>Milestones</dt><dd><span class="count" data-to="10">10</span></dd></div>
+        <div><dt>Years</dt><dd><span class="count" data-to="338">338</span></dd></div>
+      </dl>
+    </div>
 
-        <section class="era dark">
-          <div class="era-head">
-            <span class="year">1775–1783</span>
-            <div class="label">미국 혁명<span class="en">American Revolution</span></div>
-          </div>
-          <ul class="points">
-            <li><span class="keyword">1776</span> 독립 선언</li>
-            <li>세계 최초의 <span class="keyword">민주공화국</span> 탄생</li>
-            <li class="sub">투표권 — 백인 · 남성 · 지주 한정</li>
-          </ul>
-        </section>
-
-        <section class="era gold">
-          <div class="era-head">
-            <span class="year">18C 末</span>
-            <div class="label">불평등의 심화<span class="en">Land-based Divide</span></div>
-          </div>
-          <ul class="points">
-            <li>땅에 의한 <span class="keyword">불평등</span> 심화</li>
-            <li class="sub">동북부 — 상업</li>
-            <li class="sub">동남부 — 노예 농장</li>
-          </ul>
-        </section>
-      </div>
-
-      <!-- ═══════════ 19세기 ═══════════ -->
-      <div class="col">
-        <div class="col-header">19 Century · 분열과 산업화</div>
-
-        <section class="era gold">
-          <div class="era-head">
-            <span class="year">19C 前半部</span>
-            <div class="label">잭슨 시대<span class="en">Jacksonian / Antebellum</span></div>
-          </div>
-          <ul class="points">
-            <li>동북부 <span class="keyword">공업</span> 시작</li>
-            <li class="sub">英 산업혁명의 여파</li>
-          </ul>
-        </section>
-
-        <section class="era">
-          <div class="era-head">
-            <span class="year">1861–65</span>
-            <div class="label">남북전쟁<span class="en">Civil War</span></div>
-          </div>
-          <ul class="points">
-            <li><span class="keyword">1865</span> 수정헌법 13조 <span class="en-inline">13th Amendment</span></li>
-            <li class="sub">노예 해방</li>
-            <li><span class="keyword">1868</span> 수정헌법 14조 <span class="en-inline">14th Amendment</span></li>
-            <li class="sub">해방된 노예에게 시민권 부여</li>
-          </ul>
-        </section>
-
-        <section class="era blue">
-          <div class="era-head">
-            <span class="year">19C 後半部</span>
-            <div class="label">도금 시대<span class="en">The Gilded Age</span></div>
-          </div>
-          <ul class="points">
-            <li>전국토 개발 · 산업화</li>
-            <li><span class="keyword">Industrialist Capitalism</span></li>
-            <li class="sub">세계사적 2차 산업혁명</li>
-          </ul>
-        </section>
-      </div>
-
-      <!-- ═══════════ 20세기 ═══════════ -->
-      <div class="col">
-        <div class="col-header">20 Century · 초강대국의 부상</div>
-
-        <section class="era dark">
-          <div class="era-head">
-            <span class="year">1914–18</span>
-            <div class="label">제1차 세계대전<span class="en">World War I</span></div>
-          </div>
-          <ul class="points">
-            <li>미국 개입으로 종전</li>
-            <li>오스만 · 오스트리아 등 <span class="keyword">제국의 해체</span></li>
-            <li>윌슨의 <span class="keyword">민족자결주의</span> 선언</li>
-            <li>동유럽 신생국가 우후죽순</li>
-            <li class="sub">내전 · 외환으로 인명 살상</li>
-          </ul>
-        </section>
-
-        <section class="era">
-          <div class="era-head">
-            <span class="year">1920</span>
-            <div class="label">여성 투표권<span class="en">Women's Suffrage</span></div>
-          </div>
-          <ul class="points">
-            <li>수정헌법 19조 <span class="en-inline">19th Amendment</span></li>
-            <li class="sub">여성 투표권 획득</li>
-          </ul>
-        </section>
-
-        <section class="era dark">
-          <div class="era-head">
-            <span class="year">1939–45</span>
-            <div class="label">제2차 세계대전<span class="en">World War II</span></div>
-          </div>
-          <ul class="points">
-            <li>미국 개입으로 종전</li>
-            <li>전후 미국 <span class="keyword">초강대국</span> 부상</li>
-          </ul>
-        </section>
-      </div>
-
-    </main>
-
-    <footer>
-      <span>Colonies · Republic · Industry · Empire</span>
-      <span class="footer-meta">GRE Verbal · 미국 역사 개관</span>
-    </footer>
+    <figure class="ruler reveal" style="--d:.2s" data-min="1600" data-max="1950" data-step="50">
+      <figcaption class="ruler-cap"><span>Timeline at scale</span><span>이정표를 눌러 이동</span></figcaption>
+      <div class="ruler-track"></div>
+      <div class="ruler-axis"></div>
+      <ul class="ruler-legend"></ul>
+    </figure>
   </div>
+  <a class="scroll-cue" href="#ch1" aria-label="첫 장으로">SCROLL<i></i></a>
+</header>
+
+<main>
+
+  <!-- ═════════════ CHAPTER I ═════════════ -->
+  <section class="chapter" id="ch1" data-era="1" data-roman="I" data-short="식민과 건국" data-start="1607" data-end="1800">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">I</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Chapter I · 17 — 18 Century</p>
+        <h2 class="ch-title reveal" style="--d:.08s">식민과 건국</h2>
+        <p class="ch-en reveal" style="--d:.16s">Colonies &amp; the Founding</p>
+        <p class="ch-summary reveal" style="--d:.24s">유럽인의 이주로 시작된 13개 식민지가 영국과의 전쟁을 거쳐 독립 공화국으로 태어난다. 그러나 ‘자유’가 미치는 범위는 좁았고, 땅과 노예제를 둘러싼 불평등이 새 나라의 구조 속에 깊이 새겨졌다.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>1607 — 1800</span><span>04 Milestones</span><span>Jamestown → Constitution</span></div>
+      </div>
+    </div>
+
+    <div class="chapter-body">
+      <div class="timeline">
+        <div class="spine" aria-hidden="true"><i></i></div>
+        <ol class="events">
+
+          <li class="event" data-year="1607" data-label="1607">
+            <div class="when reveal">
+              <div class="when-year">1607</div>
+              <div class="when-range">1565 — 1640</div>
+              <span class="when-tag">식민의 시작</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">영국 식민의 시작</h3>
+              <p class="card-en">Early Colonization</p>
+              <ul class="points">
+                <li>유럽으로부터 신대륙 이주 개시</li>
+                <li><span class="kw">1607</span> 제임스타운(버지니아) — 최초의 영구적 영국인 정착지</li>
+                <li><span class="kw">1620</span> 메이플라워호 · 플리머스 식민지</li>
+                <li class="sub">종교의 자유를 찾아 건너온 청교도 분리파 ‘필그림’</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1565</dt><dd>스페인, 세인트오거스틴(플로리다) 건설 — 현 미국 영토에서 가장 오래된 유럽인 정착지</dd></div>
+                <div><dt>1619</dt><dd>버지니아 식민지 의회 개원 · 첫 아프리카인 강제 이송 기록</dd></div>
+                <div><dt>1630</dt><dd>매사추세츠만 식민지 — 청교도 ‘대이주(Great Migration)’ 시작 (~1640, 약 2만 명)</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b>1630년은 청교도 대이주가 시작된 해다. 영국인의 첫 영구 정착은 그보다 23년 앞선 1607년 제임스타운이다.</p>
+            </article>
+          </li>
+
+          <li class="event" data-year="1700" data-label="18C" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">18C</div>
+              <div class="when-range">1700 — 1775</div>
+              <span class="when-tag">인구 10배</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">대량 이민</h3>
+              <p class="card-en">Mass Immigration</p>
+              <ul class="points">
+                <li>식민지 정착 본격화 — 대서양 연안을 따라 13개 식민지 형성</li>
+                <li>스코틀랜드계 아일랜드인 · 독일인 등 잉글랜드 밖에서 온 이민 급증</li>
+                <li>아프리카인의 <span class="kw">강제 이주</span> — 대서양 노예무역의 확대</li>
+              </ul>
+              <div class="stats">
+                <div class="stat"><span class="stat-num"><span class="count" data-to="250000">250,000</span></span><span class="stat-cap">1700년 식민지 인구 (추정)</span></div>
+                <span class="arrow" aria-hidden="true">→</span>
+                <div class="stat"><span class="stat-num"><span class="count" data-from="250000" data-to="2500000">2,500,000</span></span><span class="stat-cap">1775년 (추정) · 약 10배</span></div>
+              </div>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1732</dt><dd>조지아 식민지 설립 — 13개 식민지 완성</dd></div>
+                <div><dt>1754–63</dt><dd>프렌치-인디언 전쟁 — 영국 승리, 그러나 막대한 전비</dd></div>
+                <div><dt>1765</dt><dd>인지세법 — “대표 없이 과세 없다”, 혁명의 불씨</dd></div>
+              </dl>
+            </article>
+          </li>
+
+          <li class="event" data-year="1775" data-label="1775">
+            <div class="when reveal">
+              <div class="when-year">1775</div>
+              <div class="when-range">1775 — 1783</div>
+              <span class="when-tag">독립 전쟁</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">미국 혁명</h3>
+              <p class="card-en">American Revolution</p>
+              <ul class="points">
+                <li><span class="kw">1776</span> 독립 선언 <span class="en">Declaration of Independence</span></li>
+                <li>계몽사상에 기초한 근대 <span class="kw">공화국</span>의 탄생</li>
+                <li class="sub">1787 연방 헌법 — 오늘날까지 효력을 지닌 가장 오래된 성문 국가 헌법 중 하나</li>
+                <li>투표권은 대체로 백인 · 남성 · 재산 소유자(지주)로 한정</li>
+                <li class="sub">자격 요건은 주마다 달랐다</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1775.4</dt><dd>렉싱턴 · 콩코드 전투 — 독립 전쟁 발발</dd></div>
+                <div><dt>1776.7.4</dt><dd>독립 선언서 채택</dd></div>
+                <div><dt>1783</dt><dd>파리 조약 — 영국, 미국의 독립 승인</dd></div>
+                <div><dt>1787</dt><dd>필라델피아 제헌회의 · 헌법 제정 (1788 비준, 1789 발효)</dd></div>
+                <div><dt>1791</dt><dd>권리장전 — 수정헌법 1–10조</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b>‘세계 최초의 민주공화국’은 과장이다. 로마 공화정, 베네치아, 네덜란드 공화국 같은 선례가 있었고, 건국자들도 ‘민주정’이 아닌 ‘공화정’을 표방했다. 미국은 계몽사상(로크 · 몽테스키외)을 성문 헌법으로 구현한 근대 공화국의 선구적 모델로 평가된다.</p>
+            </article>
+          </li>
+
+          <li class="event" data-year="1793" data-label="18C 末" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">18C<small>末</small></div>
+              <div class="when-range">1780 — 1800</div>
+              <span class="when-tag">남북의 분기</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">불평등의 심화</h3>
+              <p class="card-en">The Land-based Divide</p>
+              <ul class="points">
+                <li>땅에 의한 <span class="kw">불평등</span> 심화</li>
+                <li class="sub">북부 — 상업 · 해운 · 자영농</li>
+                <li class="sub">남부 — 노예 노동에 기반한 대농장(플랜테이션)</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1780</dt><dd>펜실베이니아 점진적 노예해방법 — 북부 각 주에서 노예제 폐지가 시작</dd></div>
+                <div><dt>1787</dt><dd>북서부 조례 — 오하이오강 이북 신영토에서 노예제 금지</dd></div>
+                <div><dt>1793</dt><dd>휘트니의 조면기(cotton gin) — 면화 재배와 남부 노예제의 급팽창</dd></div>
+              </dl>
+            </article>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ CHAPTER II ═════════════ -->
+  <section class="chapter" id="ch2" data-era="2" data-roman="II" data-short="분열과 산업화" data-start="1800" data-end="1900">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">II</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Chapter II · 19 Century</p>
+        <h2 class="ch-title reveal" style="--d:.08s">분열과 산업화</h2>
+        <p class="ch-en reveal" style="--d:.16s">Division &amp; Industry</p>
+        <p class="ch-summary reveal" style="--d:.24s">영토는 대륙 끝까지 넓어지고, 북부의 공장과 남부의 플랜테이션은 서로 다른 두 개의 미국을 만들어 낸다. 그 균열은 내전으로 터졌고, 전쟁 뒤의 미국은 세계 최대의 공업국을 향해 질주한다.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>1800 — 1900</span><span>03 Milestones</span><span>Mill Towns → Gilded Age</span></div>
+      </div>
+    </div>
+
+    <div class="chapter-body">
+      <div class="timeline">
+        <div class="spine" aria-hidden="true"><i></i></div>
+        <ol class="events">
+
+          <li class="event" data-year="1830" data-label="19C 前半" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">19C<small>前半</small></div>
+              <div class="when-range">c. 1815 — 1850s</div>
+              <span class="when-tag">잭슨 민주주의</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">잭슨 시대 · 남북전쟁 이전</h3>
+              <p class="card-en">Jacksonian Era / Antebellum</p>
+              <ul class="points">
+                <li>동북부 <span class="kw">공업</span> 시작 — 뉴잉글랜드의 섬유 공장</li>
+                <li class="sub">英 산업혁명의 여파 — 영국 방적 기술의 이식</li>
+                <li>백인 남성 <span class="kw">보통선거</span> 확대 — 재산 자격 요건의 철폐</li>
+                <li>서부 팽창과 원주민 강제 이주</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1793</dt><dd>슬레이터 방적공장(로드아일랜드) — 영국 기술로 세운 미국 최초의 성공적 수력 방적공장</dd></div>
+                <div><dt>1803</dt><dd>루이지애나 매입 — 영토가 약 두 배로</dd></div>
+                <div><dt>1825</dt><dd>이리 운하 개통 — 동부 시장과 서부 내륙의 연결</dd></div>
+                <div><dt>1829–37</dt><dd>앤드루 잭슨 대통령 재임</dd></div>
+                <div><dt>1830</dt><dd>인디언 이주법 → 1838 ‘눈물의 길’</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b><i>Antebellum</i>(라틴어 ‘전쟁 이전’)은 대략 1815–1861년, 잭슨 시대(Jacksonian Era)는 1820년대 말–1840년대를 가리킨다.</p>
+            </article>
+          </li>
+
+          <li class="event" data-year="1861" data-label="1861">
+            <div class="when reveal">
+              <div class="when-year">1861</div>
+              <div class="when-range">1861 — 1865</div>
+              <span class="when-tag">내전</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">남북전쟁</h3>
+              <p class="card-en">Civil War</p>
+              <ul class="points">
+                <li><span class="kw">1865</span> 수정헌법 13조 <span class="en">13th Amendment</span></li>
+                <li class="sub">노예제 폐지 — 노예 해방의 법적 완성</li>
+                <li><span class="kw">1868</span> 수정헌법 14조 <span class="en">14th Amendment</span></li>
+                <li class="sub">해방된 노예에게 시민권 부여 — 출생 시민권 · 법의 평등한 보호</li>
+                <li><span class="kw">1870</span> 수정헌법 15조 <span class="en">15th Amendment</span></li>
+                <li class="sub">인종을 이유로 한 투표권 제한 금지 (남성)</li>
+              </ul>
+              <div class="stats">
+                <div class="stat"><span class="stat-num"><span class="count" data-to="620000">620,000</span>+</span><span class="stat-cap">사망자 — 전통적 추정치 (최근 연구는 약 75만 명)</span></div>
+              </div>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1861.4</dt><dd>섬터 요새 포격 — 개전</dd></div>
+                <div><dt>1863.1.1</dt><dd>링컨, 노예해방선언 (남부연합 지역 대상)</dd></div>
+                <div><dt>1865.4</dt><dd>애퍼매톡스에서 남군 항복 — 종전 · 링컨 암살</dd></div>
+                <div><dt>1865–77</dt><dd>재건 시대(Reconstruction)</dd></div>
+              </dl>
+            </article>
+          </li>
+
+          <li class="event" data-year="1870" data-label="19C 後半" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">19C<small>後半</small></div>
+              <div class="when-range">c. 1870 — 1900</div>
+              <span class="when-tag">2차 산업혁명</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">도금 시대</h3>
+              <p class="card-en">The Gilded Age</p>
+              <ul class="points">
+                <li>전국토 개발 · 산업화 — 철도가 대륙을 하나로</li>
+                <li><span class="kw">Industrial Capitalism</span> — 철강 · 석유 · 금융의 거대 기업</li>
+                <li class="sub">세계사적 2차 산업혁명 — 철강 · 전기 · 석유 · 화학</li>
+                <li>19세기 말, 영국을 넘어 세계 최대의 공업국으로</li>
+                <li>대규모 이민과 빈부 격차 — ‘금박’ 아래의 그늘</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1869</dt><dd>대륙횡단철도 완공</dd></div>
+                <div><dt>1870</dt><dd>록펠러, 스탠더드 오일 설립</dd></div>
+                <div><dt>1873</dt><dd>트웨인 · 워너의 소설 『도금 시대』 — 시대 명칭의 유래</dd></div>
+                <div><dt>1879</dt><dd>에디슨, 실용 백열전구</dd></div>
+                <div><dt>1890</dt><dd>셔먼 반독점법</dd></div>
+                <div><dt>1892</dt><dd>엘리스섬 이민국 개설</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b><i>Gilded</i>(금박을 입힌)는 <i>Golden</i>(황금의)과 다르다. 번쩍이는 겉면 아래 부패와 빈곤을 감춘 시대라는 풍자가 담긴 이름이다.</p>
+            </article>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ CHAPTER III ═════════════ -->
+  <section class="chapter" id="ch3" data-era="3" data-roman="III" data-short="초강대국의 부상" data-start="1900" data-end="1945">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">III</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Chapter III · 20 Century</p>
+        <h2 class="ch-title reveal" style="--d:.08s">초강대국의 부상</h2>
+        <p class="ch-en reveal" style="--d:.16s">Rise of a Superpower</p>
+        <p class="ch-summary reveal" style="--d:.24s">두 차례의 세계대전에 뒤늦게, 그러나 결정적으로 뛰어든 미국은 전쟁이 끝날 때마다 더 강해졌다. 그 사이 여성은 투표권을 얻었고, 1945년의 미국은 새로운 세계 질서의 설계자가 된다.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>1900 — 1945</span><span>03 Milestones</span><span>Wilson → Pax Americana</span></div>
+      </div>
+    </div>
+
+    <div class="chapter-body">
+      <div class="timeline">
+        <div class="spine" aria-hidden="true"><i></i></div>
+        <ol class="events">
+
+          <li class="event" data-year="1914" data-label="1914">
+            <div class="when reveal">
+              <div class="when-year">1914</div>
+              <div class="when-range">1914 — 1918</div>
+              <span class="when-tag">1917 참전</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">제1차 세계대전</h3>
+              <p class="card-en">World War I</p>
+              <ul class="points">
+                <li><span class="kw">1917</span> 미국 참전 → 연합국 승리에 결정적 기여</li>
+                <li>독일 · 오스트리아-헝가리 · 러시아 · 오스만 — <span class="kw">제국의 해체</span></li>
+                <li>윌슨의 <span class="kw">민족자결주의</span> 선언 <span class="en">Fourteen Points, 1918</span></li>
+                <li>동유럽 신생국가 우후죽순 — 폴란드 · 체코슬로바키아 · 유고슬라비아 · 발트 3국</li>
+                <li class="sub">내전 · 외환으로 인명 살상</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1917.4</dt><dd>미국, 독일에 선전포고 — 무제한 잠수함 작전 · 치머만 전보</dd></div>
+                <div><dt>1918.1</dt><dd>윌슨, ‘14개조’ 발표</dd></div>
+                <div><dt>1918.11.11</dt><dd>휴전 협정 — 종전</dd></div>
+                <div><dt>1919</dt><dd>베르사유 조약 — 미 상원은 비준을 거부, 미국은 국제연맹에 불참</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b>‘미국의 개입으로 종전’은 단순화다. 미국은 개전 2년 8개월 뒤에야 참전했고 전쟁의 대부분은 유럽 열강이 치렀다. 다만 미국의 병력과 물자가 1918년 연합국의 승리를 앞당긴 결정적 요인이었다.</p>
+            </article>
+          </li>
+
+          <li class="event" data-year="1920" data-label="1920">
+            <div class="when reveal">
+              <div class="when-year">1920</div>
+              <div class="when-range">1848 — 1920</div>
+              <span class="when-tag">참정권</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">여성 투표권</h3>
+              <p class="card-en">Women’s Suffrage</p>
+              <ul class="points">
+                <li>수정헌법 19조 <span class="en">19th Amendment</span></li>
+                <li class="sub">성별을 이유로 한 투표권 제한 금지 — 여성 투표권 획득</li>
+                <li>70여 년에 걸친 참정권 운동의 결실</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1848</dt><dd>세네카폴스 대회 — 여성 참정권 운동의 출발</dd></div>
+                <div><dt>1869</dt><dd>와이오밍 준주, 최초로 여성 투표권 인정</dd></div>
+                <div><dt>1920.8.18</dt><dd>테네시주의 비준으로 수정헌법 19조 확정</dd></div>
+              </dl>
+            </article>
+          </li>
+
+          <li class="event" data-year="1939" data-label="1939">
+            <div class="when reveal">
+              <div class="when-year">1939</div>
+              <div class="when-range">1939 — 1945</div>
+              <span class="when-tag">1941 참전</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">제2차 세계대전</h3>
+              <p class="card-en">World War II</p>
+              <ul class="points">
+                <li><span class="kw">1941</span> 진주만 공습 → 미국 참전</li>
+                <li>유럽 · 태평양 두 전선에서 연합국의 승리를 주도</li>
+                <li>전후 미국 <span class="kw">초강대국</span> 부상 — 미 · 소 양극 체제, 냉전의 시작</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1941.12.7</dt><dd>일본, 진주만 공습</dd></div>
+                <div><dt>1944.6.6</dt><dd>노르망디 상륙작전</dd></div>
+                <div><dt>1944.7</dt><dd>브레턴우즈 회의 — 달러 중심의 국제 통화 체제</dd></div>
+                <div><dt>1945.8</dt><dd>히로시마 · 나가사키 원폭 투하 → 일본 항복</dd></div>
+                <div><dt>1945.10</dt><dd>국제연합(UN) 출범</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b>승리는 소련의 동부전선을 포함한 연합국 전체의 것이었다. 미국은 참전 전부터 ‘민주주의의 병기창’으로 막대한 물자를 공급했고, 참전 후에는 두 전선에서 승리를 이끌었다.</p>
+            </article>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <p class="motto reveal"><span>Colonies</span><i>·</i><span>Republic</span><i>·</i><span>Industry</span><i>·</i><span>Empire</span></p>
+  <div class="colophon-meta">
+    <span>GRE Verbal · 미국 역사 개관</span>
+    <span>연대는 학계 통설을 따르며, 인구 · 사망자 수는 추정치입니다.</span>
+    <span><kbd>←</kbd> <kbd>→</kbd> 이정표 이동</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+  const doc = document.documentElement;
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NOW = new Date().getFullYear();
+  const num = v => (v === 'now' ? NOW : Number(v));
+  const fmtYear = y => String(y);
+  const nf = new Intl.NumberFormat('ko-KR');
+
+  const chapters = $$('.chapter');
+  const events = $$('.event');
+
+  const goTo = el => {
+    const top = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.26;
+    window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+  };
+
+  /* Theme */
+  const themeBtn = $('.theme-btn');
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => (doc.dataset.theme ? doc.dataset.theme === 'dark' : mq.matches);
+  const syncTheme = () => themeBtn.setAttribute('aria-label', isDark() ? '밝은 테마로 전환' : '어두운 테마로 전환');
+  themeBtn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    doc.dataset.theme = next;
+    try { localStorage.setItem('history-theme', next); } catch (e) {}
+    syncTheme();
+  });
+  if (mq.addEventListener) mq.addEventListener('change', syncTheme);
+  syncTheme();
+
+  /* Ruler: chapters and milestones drawn at true scale */
+  const ruler = $('.ruler');
+  if (ruler) {
+    const min = num(ruler.dataset.min), max = num(ruler.dataset.max), step = num(ruler.dataset.step);
+    const pct = y => ((clamp(y, min, max) - min) / (max - min)) * 100;
+    const track = $('.ruler-track', ruler), axis = $('.ruler-axis', ruler), legend = $('.ruler-legend', ruler);
+    chapters.forEach((ch, i) => {
+      const s = num(ch.dataset.start), e = num(ch.dataset.end);
+      const band = document.createElement('a');
+      band.className = 'band' + (i === chapters.length - 1 ? ' end' : '');
+      band.href = '#' + ch.id;
+      band.style.cssText = `left:${pct(s)}%;width:${pct(e) - pct(s)}%;--b:var(--c${ch.dataset.era});--i:${i}`;
+      band.setAttribute('aria-label', `${ch.dataset.roman}장 ${ch.dataset.short}`);
+      band.innerHTML = `<span class="band-label"><b>${ch.dataset.roman}</b><span>${ch.dataset.short}</span></span>`;
+      track.appendChild(band);
+      const li = document.createElement('li');
+      li.style.setProperty('--b', `var(--c${ch.dataset.era})`);
+      li.innerHTML = `<i></i>${ch.dataset.short} <span>${s}–${e} · ${e - s}년</span>`;
+      legend.appendChild(li);
+    });
+    events.forEach((ev, i) => {
+      const p = pct(num(ev.dataset.year));
+      const title = $('.card-title', ev).textContent;
+      const pin = document.createElement('button');
+      pin.type = 'button';
+      pin.className = 'pin' + (p < 12 ? ' tip-l' : p > 88 ? ' tip-r' : '');
+      pin.style.cssText = `left:${p}%;--b:var(--c${ev.closest('.chapter').dataset.era});--i:${i}`;
+      pin.setAttribute('aria-label', `${ev.dataset.label} ${title}`);
+      pin.innerHTML = `<span class="tip"><b>${ev.dataset.label}</b>${title}</span>`;
+      pin.addEventListener('click', () => goTo(ev));
+      track.appendChild(pin);
+    });
+    for (let y = Math.ceil(min / step) * step; y <= max; y += step) {
+      const t = document.createElement('span');
+      t.className = 'tick';
+      t.style.left = pct(y) + '%';
+      t.innerHTML = `<span>${fmtYear(y)}</span>`;
+      axis.appendChild(t);
+    }
+  }
+
+  /* Counters */
+  const runCount = el => {
+    const to = Number(el.dataset.to);
+    if (reduce) { el.textContent = nf.format(to); return; }
+    const from = Number(el.dataset.from || 0), dur = 1800, t0 = performance.now();
+    const tick = t => {
+      const k = clamp((t - t0) / dur, 0, 1), e = 1 - Math.pow(1 - k, 4);
+      el.textContent = nf.format(Math.round(from + (to - from) * e));
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const counters = $$('.count');
+  if (!reduce) counters.forEach(el => { el.textContent = nf.format(Number(el.dataset.from || 0)); });
+
+  /* Reveal on scroll */
+  const reveals = $$('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        $$('.count', en.target).forEach(runCount);
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+    counters.forEach(runCount);
+  }
+
+  /* Year display in the top bar */
+  const yd = $('.yd'), ydNum = $('.yd-num');
+  const ydDefault = ydNum.textContent;
+  let shown = null, target, rafY = 0;
+  const showYear = ev => {
+    const y = ev ? num(ev.dataset.year) : null;
+    if (y === target) return;
+    target = y;
+    cancelAnimationFrame(rafY);
+    if (y === null) { ydNum.textContent = ydDefault; yd.classList.remove('on'); shown = null; return; }
+    yd.classList.add('on');
+    const prefix = ev.dataset.approx ? 'c. ' : '';
+    const from = shown === null ? y : shown;
+    if (reduce || from === y) { shown = y; ydNum.textContent = prefix + fmtYear(y); return; }
+    const t0 = performance.now(), dur = 700;
+    const step = t => {
+      const k = clamp((t - t0) / dur, 0, 1), e = 1 - Math.pow(1 - k, 3);
+      shown = Math.round(from + (y - from) * e);
+      ydNum.textContent = prefix + fmtYear(shown);
+      if (k < 1) rafY = requestAnimationFrame(step);
+    };
+    rafY = requestAnimationFrame(step);
+  };
+
+  /* Scroll-driven state */
+  const bar = $('.progress span'), topbar = $('.topbar');
+  const segs = $$('.seg');
+  const opens = chapters.map(ch => $('.chapter-open', ch));
+  const bigNums = chapters.map(ch => $('.big-num', ch));
+  const timelines = chapters.map(ch => $('.timeline', ch));
+  const spines = chapters.map(ch => $('.spine i', ch));
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const vh = window.innerHeight, mid = vh * 0.55;
+    const maxScroll = doc.scrollHeight - vh;
+    bar.style.transform = `scaleX(${maxScroll > 0 ? clamp(window.scrollY / maxScroll, 0, 1) : 0})`;
+    topbar.classList.toggle('scrolled', window.scrollY > 24);
+
+    let activeEra = '0';
+    chapters.forEach((ch, i) => {
+      const r = ch.getBoundingClientRect();
+      segs[i].style.setProperty('--p', clamp((mid - r.top) / r.height, 0, 1).toFixed(4));
+      const inside = r.top <= mid && r.bottom > mid;
+      segs[i].classList.toggle('active', inside);
+      if (inside) activeEra = ch.dataset.era;
+
+      const ro = opens[i].getBoundingClientRect();
+      if (ro.bottom > 0 && ro.top < vh) {
+        opens[i].style.setProperty('--open-p', clamp((vh - ro.top) / (vh + ro.height * 0.5), 0, 1).toFixed(4));
+        if (!reduce) bigNums[i].style.setProperty('--py', (ro.top * -0.22).toFixed(1) + 'px');
+      }
+      const rt = timelines[i].getBoundingClientRect();
+      spines[i].style.transform = `scaleY(${clamp((mid - rt.top) / rt.height, 0, 1).toFixed(4)})`;
+    });
+    doc.dataset.active = activeEra;
+
+    let current = null;
+    events.forEach(ev => {
+      const on = ev.getBoundingClientRect().top < mid;
+      ev.classList.toggle('active', on);
+      if (on) current = ev;
+    });
+    events.forEach(ev => ev.classList.toggle('current', ev === current));
+    showYear(current);
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+
+  /* Keyboard: ← → (or j / k) to step between milestones */
+  window.addEventListener('keydown', e => {
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '')) return;
+    const fwd = e.key === 'ArrowRight' || e.key === 'j';
+    const back = e.key === 'ArrowLeft' || e.key === 'k';
+    if (!fwd && !back) return;
+    const line = window.innerHeight * 0.26;
+    const next = fwd
+      ? events.find(ev => ev.getBoundingClientRect().top > line + 8)
+      : events.slice().reverse().find(ev => ev.getBoundingClientRect().top < line - 8);
+    e.preventDefault();
+    if (next) goTo(next);
+    else if (back) window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+})();
+</script>
 </body>
 </html>

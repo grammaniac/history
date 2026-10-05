@@ -1,506 +1,1322 @@
 <!DOCTYPE html>
-
-<html lang="ko">
+<html lang="ko" data-active="0">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>서양사 연표: 고대에서 현대까지</title>
+<meta name="description" content="고대 그리스에서 모더니즘까지 — 네 개의 시대, 열한 개의 이정표로 읽는 서양 문명사.">
+<script>
+  (function () {
+    var d = document.documentElement;
+    d.classList.add('js');
+    try {
+      var t = localStorage.getItem('history-theme');
+      if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ───────── Tokens ───────── */
   :root {
-    --bg: #f5f1e8;
-    --bg-paper: #faf6ed;
-    --ink: #2a2620;
-    --ink-soft: #5c5447;
-    --ink-faint: #8a8170;
-    --rule: #d4cab5;
-    --rule-soft: #e8e0cd;
+    color-scheme: light;
+    --paper: #f4efe5;
+    --paper-2: #ebe4d6;
+    --card: #fffcf6;
+    --ink: #1a1712;
+    --ink-2: #4b4439;
+    --ink-3: #7d7465;
+    --line: rgba(26, 23, 18, .14);
+    --line-2: rgba(26, 23, 18, .07);
+    --on-band: #f7efe1;
+    --shadow: 0 1px 2px rgba(26, 23, 18, .05), 0 18px 40px -22px rgba(26, 23, 18, .28);
+    --shadow-hi: 0 2px 4px rgba(26, 23, 18, .06), 0 30px 60px -24px rgba(26, 23, 18, .38);
+    --grain: .05;
 
-```
---c1: #6b4423;  /* Ancient — terracotta brown */
---c2: #4a5d3a;  /* Medieval — forest green */
---c3: #8b3a2e;  /* Pre-Modern — burgundy */
---c4: #1e3a5f;  /* Modern — ink blue */
+    /* Era I — 고대 (antique gold) */
+    --c1: #87621a; --c1-band: #4c390f; --c1-tint: #f4eedd;
+    /* Era II — 중세 (forest green) */
+    --c2: #2b6346; --c2-band: #173a29; --c2-tint: #e6efe8;
+    /* Era III — 근세 (crimson) */
+    --c3: #8e2a3a; --c3-band: #551a24; --c3-tint: #f5e7ea;
+    /* Era IV — 근현대 (ink blue) */
+    --c4: #22508c; --c4-band: #142c4c; --c4-tint: #e6edf5;
 
---c1-soft: #a8825a;
---c2-soft: #7d9268;
---c3-soft: #c4715f;
---c4-soft: #4d6e94;
-```
+    --accent: var(--ink);
+    --serif: 'Fraunces', 'Noto Serif KR', Georgia, serif;
+    --serif-ko: 'Noto Serif KR', 'Fraunces', Georgia, serif;
+    --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --nav-h: 64px;
+    --gutter: clamp(16px, 5vw, 72px);
+    --ease: cubic-bezier(.2, .7, .1, 1);
+  }
 
-}
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #0f0e0c; --paper-2: #171512; --card: #1a1815;
+      --ink: #efe8da; --ink-2: #c4baa8; --ink-3: #8e8574;
+      --line: rgba(239, 232, 218, .14); --line-2: rgba(239, 232, 218, .07);
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 40px -20px rgba(0, 0, 0, .75);
+      --shadow-hi: 0 2px 4px rgba(0, 0, 0, .45), 0 30px 60px -22px rgba(0, 0, 0, .85);
+      --grain: .07;
+      --c1: #e2b65e; --c1-band: #31260e; --c1-tint: #14110b;
+      --c2: #7ec49d; --c2-band: #0f2a1d; --c2-tint: #0c140f;
+      --c3: #ec8496; --c3-band: #3a1219; --c3-tint: #170d10;
+      --c4: #8cb3ea; --c4-band: #10223b; --c4-tint: #0c121a;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0f0e0c; --paper-2: #171512; --card: #1a1815;
+    --ink: #efe8da; --ink-2: #c4baa8; --ink-3: #8e8574;
+    --line: rgba(239, 232, 218, .14); --line-2: rgba(239, 232, 218, .07);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 40px -20px rgba(0, 0, 0, .75);
+    --shadow-hi: 0 2px 4px rgba(0, 0, 0, .45), 0 30px 60px -22px rgba(0, 0, 0, .85);
+    --grain: .07;
+    --c1: #e2b65e; --c1-band: #31260e; --c1-tint: #14110b;
+    --c2: #7ec49d; --c2-band: #0f2a1d; --c2-tint: #0c140f;
+    --c3: #ec8496; --c3-band: #3a1219; --c3-tint: #170d10;
+    --c4: #8cb3ea; --c4-band: #10223b; --c4-tint: #0c121a;
+  }
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
+  :root[data-active="1"] { --accent: var(--c1); }
+  :root[data-active="2"] { --accent: var(--c2); }
+  :root[data-active="3"] { --accent: var(--c3); }
+  :root[data-active="4"] { --accent: var(--c4); }
 
-html {
-color-scheme: light only;
-background: #f5f1e8;
-}
+  /* ───────── Base ───────── */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + 8px);
+    -webkit-text-size-adjust: 100%;
+    background: var(--paper);
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: var(--grain);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-@media (prefers-color-scheme: dark) {
-:root {
-–bg: #f5f1e8 !important;
-–bg-paper: #faf6ed !important;
-–ink: #2a2620 !important;
-–ink-soft: #5c5447 !important;
-–ink-faint: #8a8170 !important;
-–rule: #d4cab5 !important;
-–rule-soft: #e8e0cd !important;
-}
-html, body { background: #f5f1e8 !important; color: #2a2620 !important; }
-}
+  .en { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--ink-3); }
+  .kw { color: var(--e, var(--accent)); font-weight: 700; }
 
-body {
-font-family: ‘IBM Plex Sans KR’, sans-serif;
-background: #f5f1e8;
-background-color: var(–bg);
-color: var(–ink);
-font-size: 17px;
-line-height: 1.65;
-min-height: 100vh;
--webkit-text-size-adjust: 100%;
-background-image:
-radial-gradient(circle at 20% 10%, rgba(139, 58, 46, 0.04) 0%, transparent 40%),
-radial-gradient(circle at 80% 80%, rgba(30, 58, 95, 0.04) 0%, transparent 40%);
-}
+  /* ───────── Scroll progress ───────── */
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 70; pointer-events: none; }
+  .progress span {
+    display: block; height: 100%;
+    background: var(--accent);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    transition: background-color .5s;
+  }
 
-/* === HEADER === */
-.header {
-max-width: 1280px;
-margin: 0 auto;
-padding: 60px 40px 40px;
-border-bottom: 1px solid var(–rule);
-}
+  /* ───────── Top bar ───────── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+    height: var(--nav-h);
+    display: flex; align-items: center; gap: clamp(12px, 2.4vw, 32px);
+    padding: 0 var(--gutter);
+    border-bottom: 1px solid transparent;
+    transition: background-color .35s, border-color .35s;
+  }
+  .topbar.scrolled {
+    background: var(--paper);
+    background: color-mix(in srgb, var(--paper) 84%, transparent);
+    -webkit-backdrop-filter: saturate(1.3) blur(14px);
+    backdrop-filter: saturate(1.3) blur(14px);
+    border-bottom-color: var(--line);
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; white-space: nowrap;
+    font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink);
+  }
+  .brand-mark {
+    font-family: var(--mono); font-style: normal; font-size: 10.5px; font-weight: 600;
+    letter-spacing: .14em;
+    padding: 4px 7px; border: 1px solid currentColor; border-radius: 2px;
+  }
+  .segs { list-style: none; display: flex; gap: 10px; flex: 1; max-width: 640px; margin: 0 auto; }
+  .segs li { flex: 1; min-width: 0; }
+  .seg {
+    display: flex; flex-direction: column; gap: 7px;
+    padding: 8px 0; text-decoration: none;
+    color: var(--ink-3);
+    transition: color .3s;
+  }
+  .seg-label {
+    font-size: 12px; font-weight: 600; line-height: 1;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .seg-label b { font-family: var(--mono); font-weight: 600; color: var(--seg); margin-right: 6px; }
+  .seg-track { position: relative; height: 2px; border-radius: 2px; background: var(--line); overflow: hidden; }
+  .seg-track i {
+    position: absolute; inset: 0;
+    background: var(--seg);
+    transform-origin: 0 50%;
+    transform: scaleX(var(--p, 0));
+  }
+  .seg.active, .seg:hover { color: var(--ink); }
 
-.eyebrow {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 11px;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–ink-faint);
-margin-bottom: 16px;
-}
+  .yd { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; min-width: 128px; line-height: 1; }
+  .yd small { font-family: var(--mono); font-size: 9.5px; letter-spacing: .2em; color: var(--ink-3); }
+  .yd-num {
+    font-family: var(--serif); font-weight: 600; font-size: 22px;
+    font-variant-numeric: tabular-nums lining-nums;
+    color: var(--accent);
+    white-space: nowrap;
+    transition: color .5s;
+  }
+  .yd:not(.on) .yd-num { font-size: 14px; color: var(--ink-3); letter-spacing: .02em; }
 
-h1 {
-font-family: ‘Fraunces’, serif;
-font-weight: 600;
-font-size: clamp(32px, 5vw, 56px);
-line-height: 1.05;
-letter-spacing: -0.02em;
-margin-bottom: 18px;
-}
+  .theme-btn {
+    flex: none;
+    width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: border-color .3s, transform .5s var(--ease);
+  }
+  .theme-btn:hover { border-color: var(--ink-3); transform: rotate(180deg); }
+  .theme-btn svg { width: 16px; height: 16px; }
 
-h1 em {
-font-style: italic;
-font-weight: 400;
-color: var(–ink-soft);
-}
+  /* ───────── Hero ───────── */
+  .hero {
+    position: relative;
+    min-height: 100vh; min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: calc(var(--nav-h) + 6vh) var(--gutter) 9vh;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: -20%; z-index: -1;
+    background:
+      radial-gradient(40% 50% at 12% 18%, color-mix(in srgb, var(--c1) 16%, transparent), transparent 70%),
+      radial-gradient(36% 46% at 88% 30%, color-mix(in srgb, var(--c4) 14%, transparent), transparent 70%),
+      radial-gradient(40% 40% at 60% 100%, color-mix(in srgb, var(--c3) 12%, transparent), transparent 70%);
+    animation: drift 24s ease-in-out infinite alternate;
+  }
+  @keyframes drift { to { transform: translate3d(3%, -2%, 0) scale(1.06); } }
 
-.subtitle {
-font-size: 17px;
-color: var(–ink-soft);
-max-width: 680px;
-line-height: 1.7;
-}
+  .hero-inner { max-width: 1180px; width: 100%; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(17px, 1.7vw, 23px);
+    color: var(--c1);
+  }
+  .hero-title {
+    font-family: var(--serif-ko); font-weight: 900;
+    font-size: clamp(52px, 9vw, 136px);
+    line-height: 1.04; letter-spacing: -.035em;
+    margin: .12em 0 .16em;
+  }
+  .hero-title .line { display: inline-block; vertical-align: top; }
+  .hero-title .hero-sub {
+    display: block; margin-top: .2em;
+    font-size: .38em; font-weight: 500; letter-spacing: -.015em;
+    color: var(--ink-2);
+  }
+  .line { display: block; overflow: hidden; padding-bottom: .04em; }
+  .line > span { display: inline-block; transform: translateY(108%); animation: rise 1.2s var(--ease) forwards; animation-delay: var(--d, 0s); }
+  @keyframes rise { to { transform: none; } }
+  .hero-en {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(20px, 2.6vw, 36px);
+    color: var(--ink-2);
+  }
+  .hero-row {
+    display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(24px, 5vw, 80px); align-items: end;
+    margin-top: clamp(28px, 5vh, 56px);
+  }
+  .hero-lede { max-width: 560px; color: var(--ink-2); font-size: clamp(16px, 1.3vw, 18px); }
+  .hero-stats { display: flex; justify-content: flex-end; gap: clamp(20px, 4vw, 56px); }
+  .hero-stats div { display: flex; flex-direction: column; gap: 6px; }
+  .hero-stats dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
+  .hero-stats dd {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(34px, 4vw, 56px); line-height: 1;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
 
-/* === TIMELINE BAR === */
-.timeline-bar {
-max-width: 1280px;
-margin: 50px auto 0;
-padding: 0 40px;
-}
+  /* Ruler (timeline at scale) */
+  .ruler { display: none; margin-top: clamp(36px, 7vh, 72px); }
+  .js .ruler { display: block; }
+  .ruler-cap {
+    display: flex; justify-content: space-between; gap: 16px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-3);
+    padding-bottom: 14px;
+  }
+  .ruler-track { position: relative; height: 52px; }
+  .band {
+    position: absolute; top: 26px; height: 8px;
+    background: var(--b); border-radius: 1px;
+    transform-origin: 0 50%; transform: scaleX(0);
+    transition: transform 1.3s var(--ease), filter .3s;
+    transition-delay: calc(.25s + var(--i) * .2s);
+  }
+  .band:hover { filter: brightness(1.15); }
+  .ruler.in .band { transform: scaleX(1); }
+  .band-label {
+    position: absolute; bottom: 14px; left: 0;
+    font-size: 12px; font-weight: 600; color: var(--b); white-space: nowrap;
+    opacity: 0; transition: opacity .8s; transition-delay: calc(.7s + var(--i) * .2s);
+  }
+  .band.end .band-label { left: auto; right: 0; }
+  .band-label b { font-family: var(--mono); margin-right: 6px; }
+  .ruler.in .band-label { opacity: 1; }
+  .pin {
+    position: absolute; top: 30px; z-index: 2;
+    width: 22px; height: 22px; margin: -11px 0 0 -11px;
+    background: none; border: 0; cursor: pointer;
+    opacity: 0; transform: scale(.4);
+    transition: opacity .5s, transform .5s var(--ease);
+    transition-delay: calc(1s + var(--i) * .06s);
+  }
+  .ruler.in .pin { opacity: 1; transform: none; }
+  .pin::before {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: 9px; height: 9px;
+    background: var(--paper); border: 2px solid var(--b);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: transform .3s var(--ease), background-color .3s;
+  }
+  .pin:hover::before, .pin:focus-visible::before { background: var(--b); transform: translate(-50%, -50%) rotate(45deg) scale(1.35); }
+  .tip {
+    position: absolute; bottom: calc(100% + 8px); left: 50%;
+    transform: translate(-50%, 6px);
+    padding: 7px 11px; border-radius: 3px;
+    background: var(--ink); color: var(--paper);
+    font-size: 12.5px; font-weight: 500; white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s, transform .3s var(--ease);
+  }
+  .tip b { font-family: var(--mono); font-weight: 600; margin-right: 8px; color: var(--b); filter: brightness(1.4); }
+  .pin.tip-l .tip { left: 0; transform: translate(0, 6px); }
+  .pin.tip-r .tip { left: auto; right: 0; transform: translate(0, 6px); }
+  .pin:hover .tip, .pin:focus-visible .tip { opacity: 1; transform: translate(-50%, 0); }
+  .pin.tip-l:hover .tip, .pin.tip-l:focus-visible .tip,
+  .pin.tip-r:hover .tip, .pin.tip-r:focus-visible .tip { transform: none; }
+  .ruler-axis { position: relative; height: 26px; border-top: 1px solid var(--line); }
+  .tick { position: absolute; top: 0; height: 6px; border-left: 1px solid var(--ink-3); }
+  .tick span {
+    position: absolute; top: 9px; left: 0; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); white-space: nowrap;
+  }
+  .ruler-legend {
+    list-style: none;
+    display: flex; flex-wrap: wrap; gap: 10px 28px;
+    margin-top: 14px;
+    font-size: 13px; color: var(--ink-2);
+  }
+  .ruler-legend li { display: flex; align-items: center; gap: 8px; }
+  .ruler-legend i { width: 18px; height: 3px; background: var(--b); }
+  .ruler-legend span { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
 
-.timeline-track {
-position: relative;
-height: 80px;
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
-gap: 2px;
-}
+  .scroll-cue {
+    position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .24em;
+    color: var(--ink-3); text-decoration: none;
+  }
+  .scroll-cue i { width: 1px; height: 34px; background: var(--line); position: relative; overflow: hidden; }
+  .scroll-cue i::after {
+    content: ""; position: absolute; left: 0; top: -40%; width: 100%; height: 40%;
+    background: var(--ink-2);
+    animation: drip 2.2s var(--ease) infinite;
+  }
+  @keyframes drip { to { top: 100%; } }
 
-.era-segment {
-position: relative;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 8px;
-border-top: 3px solid;
-color: var(–ink-soft);
-}
+  /* ───────── Chapters ───────── */
+  .chapter[data-era="1"] { --e: var(--c1); --e-band: var(--c1-band); --e-tint: var(--c1-tint); }
+  .chapter[data-era="2"] { --e: var(--c2); --e-band: var(--c2-band); --e-tint: var(--c2-tint); }
+  .chapter[data-era="3"] { --e: var(--c3); --e-band: var(--c3-band); --e-tint: var(--c3-tint); }
+  .chapter[data-era="4"] { --e: var(--c4); --e-band: var(--c4-band); --e-tint: var(--c4-tint); }
 
-.era-segment:nth-child(1) { border-color: var(–c1); }
-.era-segment:nth-child(2) { border-color: var(–c2); }
-.era-segment:nth-child(3) { border-color: var(–c3); }
-.era-segment:nth-child(4) { border-color: var(–c4); }
+  .chapter-open {
+    position: relative; overflow: hidden; isolation: isolate;
+    min-height: 74vh;
+    display: flex; align-items: flex-end;
+    padding: clamp(110px, 18vh, 200px) var(--gutter) clamp(56px, 10vh, 112px);
+    background: var(--e-band);
+    color: var(--on-band);
+  }
+  .chapter-open::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(60% 80% at 0% 0%, rgba(255, 255, 255, .10), transparent 60%),
+      repeating-linear-gradient(115deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 14px);
+  }
+  .chapter-open::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+    background: var(--e);
+    transform-origin: 0 50%; transform: scaleX(var(--open-p, 0));
+  }
+  .big-num {
+    position: absolute; z-index: -1; right: -1vw; top: 50%;
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(240px, 40vw, 620px); line-height: .78;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, .2);
+    transform: translateY(calc(-50% + var(--py, 0px)));
+    pointer-events: none; user-select: none;
+    will-change: transform;
+  }
+  .open-inner { width: 100%; max-width: 1180px; margin: 0 auto; }
+  .ch-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; opacity: .78; }
+  .ch-title {
+    font-family: var(--serif-ko); font-weight: 900;
+    font-size: clamp(46px, 7.6vw, 112px);
+    line-height: 1.04; letter-spacing: -.03em;
+    margin: .22em 0 .1em;
+  }
+  .ch-en { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 32px); opacity: .86; }
+  .ch-summary { max-width: 640px; margin-top: 26px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.8; opacity: .9; }
+  .ch-meta {
+    display: flex; flex-wrap: wrap; gap: 10px 32px;
+    margin-top: 30px; padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, .22);
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; opacity: .85;
+  }
 
-.era-year {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 12px;
-color: var(–ink-faint);
-margin-top: 6px;
-}
+  .chapter-body { background: var(--e-tint); padding: clamp(64px, 12vh, 140px) var(--gutter); }
+  .timeline { position: relative; max-width: 1180px; margin: 0 auto; }
+  .spine {
+    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+    transform: translateX(-50%);
+    background: var(--line);
+  }
+  .spine i {
+    position: absolute; inset: 0;
+    background: var(--e);
+    transform-origin: 50% 0; transform: scaleY(0);
+  }
+  .events { list-style: none; display: flex; flex-direction: column; gap: clamp(48px, 9vh, 104px); }
+  .event {
+    display: grid; grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr);
+    align-items: start;
+  }
+  .when { grid-column: 1; grid-row: 1; text-align: right; padding-top: 4px; }
+  .node { grid-column: 2; grid-row: 1; justify-self: center; }
+  .card { grid-column: 3; grid-row: 1; }
+  .event:nth-child(even) .when { grid-column: 3; text-align: left; }
+  .event:nth-child(even) .card { grid-column: 1; }
 
-.era-num {
-font-family: ‘Fraunces’, serif;
-font-size: 20px;
-font-weight: 600;
-}
+  .when-year {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(46px, 5.6vw, 84px); line-height: .95; letter-spacing: -.025em;
+    font-variant-numeric: lining-nums;
+    color: var(--e);
+  }
+  .when-year small { font-family: var(--serif-ko); font-weight: 700; font-size: .4em; letter-spacing: 0; margin-left: .18em; }
+  .when-range { font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; color: var(--ink-3); margin-top: 12px; }
+  .when-tag {
+    display: inline-block; margin-top: 12px;
+    padding: 3px 11px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; color: var(--e);
+    border: 1px solid color-mix(in srgb, var(--e) 45%, transparent);
+  }
 
-/* === ERA CARDS === */
-.eras {
-max-width: 1280px;
-margin: 60px auto 0;
-padding: 0 40px 80px;
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 32px;
-}
+  .node {
+    position: relative; z-index: 1;
+    width: 18px; height: 18px; margin-top: 26px;
+    border-radius: 50%;
+    background: var(--e-tint); border: 2px solid var(--line);
+    transition: background-color .5s, border-color .5s, box-shadow .5s;
+  }
+  .event.active .node {
+    background: var(--e); border-color: var(--e);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--e) 16%, transparent);
+  }
+  .event.current .node::after {
+    content: ""; position: absolute; inset: -2px; border-radius: 50%;
+    border: 2px solid var(--e);
+    animation: pulse 2.2s ease-out infinite;
+  }
+  @keyframes pulse { from { transform: scale(1); opacity: .8; } to { transform: scale(2.8); opacity: 0; } }
 
-.era-card {
-background: var(–bg-paper);
-border: 1px solid var(–rule);
-border-radius: 2px;
-padding: 36px 32px;
-position: relative;
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  .card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: clamp(22px, 2.6vw, 36px);
+    box-shadow: var(--shadow);
+    transition: box-shadow .5s var(--ease), border-color .5s;
+  }
+  .card::before {
+    content: ""; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 3px;
+    border-radius: 6px 0 0 6px;
+    background: var(--e);
+    transform-origin: 50% 0; transform: scaleY(0);
+    transition: transform .8s var(--ease);
+  }
+  .event.active .card::before { transform: scaleY(1); }
+  .card:hover { box-shadow: var(--shadow-hi); border-color: color-mix(in srgb, var(--e) 35%, var(--line)); }
+  .card-title { font-family: var(--serif-ko); font-weight: 700; font-size: clamp(23px, 2.1vw, 30px); line-height: 1.3; letter-spacing: -.01em; }
+  .card-en { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-3); margin-top: 2px; }
 
-.era-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 12px 32px rgba(42, 38, 32, 0.08);
-}
+  .points { list-style: none; display: grid; gap: 9px; margin-top: 20px; }
+  .points li { position: relative; padding-left: 24px; }
+  .points li::before {
+    content: ""; position: absolute; left: 3px; top: .62em;
+    width: 7px; height: 7px; background: var(--e);
+    transform: rotate(45deg);
+  }
+  .points li.sub { padding-left: 44px; font-size: 15.5px; color: var(--ink-2); margin-top: -3px; }
+  .points li.sub::before { left: 25px; top: .7em; width: 5px; height: 5px; background: transparent; border: 1px solid var(--ink-3); }
 
-.era-card::before {
-content: ‘’;
-position: absolute;
-top: 0; left: 0;
-width: 4px;
-height: 100%;
-background: var(–era-color);
-}
+  .stats { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 22px; margin-top: 24px; padding: 18px 20px; border-radius: 4px; background: color-mix(in srgb, var(--e) 7%, transparent); }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 2.8vw, 38px); line-height: 1; color: var(--e); font-variant-numeric: tabular-nums lining-nums; }
+  .stat-cap { font-size: 12.5px; color: var(--ink-3); }
+  .stats .arrow { font-family: var(--serif); font-size: 26px; color: var(--ink-3); }
 
-.era-card[data-era=“1”] { –era-color: var(–c1); –era-soft: var(–c1-soft); }
-.era-card[data-era=“2”] { –era-color: var(–c2); –era-soft: var(–c2-soft); }
-.era-card[data-era=“3”] { –era-color: var(–c3); –era-soft: var(–c3-soft); }
-.era-card[data-era=“4”] { –era-color: var(–c4); –era-soft: var(–c4-soft); }
+  .ledger-h {
+    margin-top: 26px; padding-bottom: 8px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink-3);
+    border-bottom: 1px solid var(--line);
+  }
+  .ledger > div {
+    display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 14.5px; line-height: 1.6;
+  }
+  .ledger dt { font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--e); padding-top: 1px; }
+  .ledger dd { color: var(--ink-2); }
 
-.card-head {
-display: flex;
-align-items: baseline;
-gap: 16px;
-margin-bottom: 8px;
-padding-bottom: 20px;
-border-bottom: 1px solid var(–rule-soft);
-}
+  .note {
+    margin-top: 22px; padding: 14px 18px;
+    border-left: 2px solid var(--e); border-radius: 0 4px 4px 0;
+    background: color-mix(in srgb, var(--e) 8%, transparent);
+    font-size: 14.5px; line-height: 1.7; color: var(--ink-2);
+  }
+  .note b { display: block; margin-bottom: 4px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; color: var(--e); }
 
-.card-num {
-font-family: ‘Fraunces’, serif;
-font-size: 54px;
-font-weight: 600;
-color: var(–era-color);
-line-height: 1;
-font-feature-settings: “lnum”;
-}
+  /* ───────── Colophon ───────── */
+  .colophon { padding: clamp(80px, 16vh, 180px) var(--gutter) 56px; text-align: center; }
+  .motto {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(28px, 5vw, 68px); line-height: 1.15; letter-spacing: -.01em;
+  }
+  .motto span:nth-of-type(1) { color: var(--c1); }
+  .motto span:nth-of-type(2) { color: var(--c2); }
+  .motto span:nth-of-type(3) { color: var(--c3); }
+  .motto span:nth-of-type(4) { color: var(--c4); }
+  .motto i { font-style: normal; color: var(--ink-3); margin: 0 .2em; }
+  .colophon-meta {
+    max-width: 1180px; margin: clamp(56px, 10vh, 110px) auto 0; padding-top: 22px;
+    border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px;
+    font-size: 13px; color: var(--ink-3); text-align: left;
+  }
+  .colophon-meta a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .3s; }
+  .colophon-meta a:hover { border-color: var(--ink-2); }
+  kbd {
+    font-family: var(--mono); font-size: 11px;
+    padding: 1px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 3px;
+  }
 
-.card-titles {
-flex: 1;
-}
+  /* ───────── Reveal ───────── */
+  .js .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 1s var(--ease), transform 1s var(--ease);
+    transition-delay: var(--d, 0s);
+  }
+  .js .reveal.in { opacity: 1; transform: none; }
 
-.card-title-en {
-font-family: ‘Fraunces’, serif;
-font-size: 30px;
-font-weight: 600;
-color: var(–ink);
-letter-spacing: -0.01em;
-line-height: 1.15;
-}
+  .ruler-insight { margin-top: 14px; max-width: 640px; font-size: 13.5px; color: var(--ink-3); }
 
-.card-period {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 13px;
-color: var(–ink-faint);
-margin-top: 8px;
-letter-spacing: 0.05em;
-}
+  /* Plague dots */
+  .stats.plague { display: block; }
+  .dots { display: grid; grid-template-columns: repeat(15, 14px); gap: 7px; }
+  .dots i {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--e);
+    transition: background-color .7s, box-shadow .7s, opacity .7s;
+    transition-delay: var(--dd, 0s);
+  }
+  .card.in .dots i.dead { background: transparent; box-shadow: inset 0 0 0 1.5px var(--ink-3); opacity: .7; }
+  .card.in .dots i.maybe { background: color-mix(in srgb, var(--e) 30%, transparent); }
+  .dots-cap { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 14px; font-size: 12.5px; color: var(--ink-3); }
+  .dots-cap span { display: inline-flex; align-items: center; gap: 6px; }
+  .dots-cap i { width: 9px; height: 9px; border-radius: 50%; }
+  .d-live { background: var(--e); }
+  .d-dead { box-shadow: inset 0 0 0 1.5px var(--ink-3); }
+  .d-maybe { background: color-mix(in srgb, var(--e) 30%, transparent); }
 
-.card-summary {
-font-size: 16px;
-color: var(–ink-soft);
-margin: 20px 0 8px;
-line-height: 1.7;
-}
+  /* Definition box */
+  .def {
+    position: relative; margin-top: 24px; padding: 20px 20px 18px;
+    border: 1px solid var(--line); border-top: 2px solid var(--e); border-radius: 0 0 4px 4px;
+    background: var(--paper);
+  }
+  .def::before {
+    content: "DEFINITION"; position: absolute; top: -10px; left: 16px;
+    padding: 0 8px; background: var(--card);
+    font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--e);
+  }
+  .def dt { font-family: var(--serif-ko); font-weight: 700; font-size: 18px; }
+  .def dt .en { font-size: 16px; margin-left: 4px; }
+  .def dd { margin-top: 6px; font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+  .def .vs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
+  .vs span {
+    padding: 2px 9px; border-radius: 999px;
+    border: 1px solid var(--line);
+    font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink);
+  }
+  .vs b { font-weight: 400; color: var(--e); margin: 0 4px; }
 
-/* === EVENTS WITHIN ERA === */
-.events {
-margin-top: 20px;
-display: flex;
-flex-direction: column;
-gap: 14px;
-}
+  /* ───────── Responsive ───────── */
+  @media (max-width: 980px) {
+    .brand-text { display: none; }
+    .hero-row { grid-template-columns: 1fr; }
+    .hero-stats { justify-content: flex-start; }
+  }
+  @media (max-width: 860px) {
+    .timeline { padding-left: 0; }
+    .spine { left: 11px; transform: none; }
+    .event { grid-template-columns: 24px minmax(0, 1fr); column-gap: 18px; }
+    .node { grid-column: 1; grid-row: 1; margin-top: 18px; width: 16px; height: 16px; }
+    .when, .event:nth-child(even) .when { grid-column: 2; grid-row: 1; text-align: left; padding-top: 0; }
+    .card, .event:nth-child(even) .card { grid-column: 2; grid-row: 2; margin-top: 18px; }
+    .when-year { font-size: clamp(42px, 12vw, 60px); }
+    .when-range, .when-tag { display: inline-block; margin-top: 10px; }
+    .when-range { margin-right: 10px; }
+    .scroll-cue { display: none; }
+  }
+  @media (max-width: 640px) {
+    :root { --nav-h: 56px; }
+    body { font-size: 16px; }
+    .segs { gap: 6px; }
+    .seg-label span { display: none; }
+    .yd { min-width: 96px; }
+    .yd-num { letter-spacing: -.01em; }
+    .yd-num { font-size: 18px; }
+    .theme-btn { width: 34px; height: 34px; }
+    .band-label span { display: none; }
+    .chapter-open { min-height: 64vh; }
+    .ledger > div { grid-template-columns: 92px minmax(0, 1fr); gap: 10px; font-size: 14px; }
+    .card { padding: 22px 20px; }
+    .stats .arrow { transform: rotate(90deg); }
+    .dots { grid-template-columns: repeat(10, 14px); }
+  }
 
-.event {
-display: grid;
-grid-template-columns: 80px 1fr;
-gap: 16px;
-align-items: flex-start;
-padding: 12px 0;
-border-top: 1px dashed var(–rule-soft);
-}
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+    .js .reveal { opacity: 1; transform: none; }
+  }
 
-.event:first-child { border-top: none; }
-
-.event-when {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 11px;
-color: var(–era-color);
-font-weight: 500;
-padding-top: 3px;
-letter-spacing: 0.03em;
-}
-
-.event-body {
-font-size: 14px;
-}
-
-.event-title {
-font-weight: 600;
-color: var(–ink);
-margin-bottom: 3px;
-}
-
-.event-title .en {
-font-family: ‘Fraunces’, serif;
-font-style: italic;
-font-weight: 500;
-color: var(–era-soft);
-margin-left: 6px;
-font-size: 13px;
-}
-
-.event-note {
-color: var(–ink-soft);
-font-size: 13px;
-line-height: 1.55;
-}
-
-/* === FOOTER === */
-.footer {
-max-width: 1280px;
-margin: 0 auto;
-padding: 30px 40px 60px;
-border-top: 1px solid var(–rule);
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 11px;
-color: var(–ink-faint);
-letter-spacing: 0.05em;
-display: flex;
-justify-content: space-between;
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 900px) {
-.header, .timeline-bar, .eras, .footer {
-padding-left: 24px;
-padding-right: 24px;
-}
-.eras {
-grid-template-columns: 1fr;
-gap: 24px;
-}
-.timeline-track {
-height: 70px;
-}
-.era-segment {
-padding: 6px 4px;
-}
-.era-segment span:first-child {
-font-size: 14px;
-}
-.card-num { font-size: 38px; }
-.card-title-en { font-size: 22px; }
-}
-
-@media (max-width: 520px) {
-.header { padding-top: 40px; padding-bottom: 28px; }
-.event {
-grid-template-columns: 60px 1fr;
-gap: 12px;
-}
-}
-
-/* Subtle fade-in */
-.era-card {
-animation: fadeUp 0.6s ease forwards;
-opacity: 0;
-}
-.era-card[data-era=“1”] { animation-delay: 0.1s; }
-.era-card[data-era=“2”] { animation-delay: 0.2s; }
-.era-card[data-era=“3”] { animation-delay: 0.3s; }
-.era-card[data-era=“4”] { animation-delay: 0.4s; }
-
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(12px); }
-to { opacity: 1; transform: translateY(0); }
-}
+  @media print {
+    .topbar, .progress, .scroll-cue, .theme-btn, .ruler { display: none !important; }
+    body::after { display: none; }
+    .js .reveal { opacity: 1; transform: none; }
+    .hero, .chapter-open { min-height: auto; }
+    .card { box-shadow: none; break-inside: avoid; }
+  }
 </style>
-
 </head>
 <body>
 
-<header class="header">
-  <div class="eyebrow">A Timeline · 西洋史</div>
-  <h1>서양사 연표<br><em>고대에서 현대까지</em></h1>
-  <p class="subtitle">서양 문명의 흐름을 네 시대로 나누어 살펴봅니다 — 고대(Ancient), 중세(Medieval), 근세(Pre-Modern), 그리고 근현대(Modern). 각 시대를 가른 결정적 사건과 사상의 변화를 한눈에 정리했습니다.</p>
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<nav class="topbar" aria-label="시대 이동">
+  <a class="brand" href="#top"><span class="brand-mark">西洋史</span><span class="brand-text">A Visual Timeline</span></a>
+  <ol class="segs">
+    <li><a class="seg" href="#ch1" style="--seg: var(--c1)"><span class="seg-label"><b>I</b><span>고대</span></span><span class="seg-track"><i></i></span></a></li>
+    <li><a class="seg" href="#ch2" style="--seg: var(--c2)"><span class="seg-label"><b>II</b><span>중세</span></span><span class="seg-track"><i></i></span></a></li>
+    <li><a class="seg" href="#ch3" style="--seg: var(--c3)"><span class="seg-label"><b>III</b><span>근세</span></span><span class="seg-track"><i></i></span></a></li>
+    <li><a class="seg" href="#ch4" style="--seg: var(--c4)"><span class="seg-label"><b>IV</b><span>근현대</span></span><span class="seg-track"><i></i></span></a></li>
+  </ol>
+  <div class="yd" aria-live="off"><small>YEAR</small><span class="yd-num">800 BCE—Now</span></div>
+  <button class="theme-btn" type="button" aria-label="테마 전환">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+  </button>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <p class="eyebrow"><span class="line"><span style="--d:.05s">A Timeline · 西洋史</span></span></p>
+    <h1 class="hero-title">
+      <span class="line"><span style="--d:.15s">서양사&nbsp;연표</span></span>
+      <span class="hero-sub line"><span style="--d:.32s">고대에서 현대까지</span></span>
+    </h1>
+    <p class="hero-en"><span class="line"><span style="--d:.5s">From Antiquity to the Present</span></span></p>
+
+    <div class="hero-row">
+      <p class="hero-lede reveal" style="--d:.6s">서양 문명의 흐름을 네 시대로 나누어 살펴봅니다 — 고대(Ancient), 중세(Medieval), 근세(Early Modern), 그리고 근현대(Modern). 각 시대를 가른 결정적 사건과 사상의 변화를 한눈에 정리하고, 혼동하기 쉬운 개념은 <b>NOTE</b>로 짚어 두었습니다.</p>
+      <dl class="hero-stats reveal" style="--d:.7s">
+        <div><dt>Eras</dt><dd><span class="count" data-to="4">4</span></dd></div>
+        <div><dt>Milestones</dt><dd><span class="count" data-to="11">11</span></dd></div>
+        <div><dt>Years</dt><dd><span class="count" id="span-years" data-to="2800">2,800</span></dd></div>
+      </dl>
+    </div>
+
+    <figure class="ruler reveal" style="--d:.2s" data-min="-800" data-max="now" data-step="500">
+      <figcaption class="ruler-cap"><span>Timeline at scale</span><span>이정표를 눌러 이동</span></figcaption>
+      <div class="ruler-track"></div>
+      <div class="ruler-axis"></div>
+      <ul class="ruler-legend"></ul>
+      <p class="ruler-insight">시대의 길이를 실제 비율로 그렸습니다. 고대에서 근현대로 올수록 한 시대는 짧아지고, 변화의 속도는 빨라집니다.</p>
+    </figure>
+  </div>
+  <a class="scroll-cue" href="#ch1" aria-label="첫 시대로">SCROLL<i></i></a>
 </header>
 
-<section class="timeline-bar" aria-label="시대 구분 막대">
-  <div class="timeline-track">
-    <div class="era-segment">
-      <span class="era-num">1</span>
-      <span class="era-year">BCE-500 → 500</span>
-    </div>
-    <div class="era-segment">
-      <span class="era-num">2</span>
-      <span class="era-year">500 → 1500</span>
-    </div>
-    <div class="era-segment">
-      <span class="era-num">3</span>
-      <span class="era-year">1500 → 1850</span>
-    </div>
-    <div class="era-segment">
-      <span class="era-num">4</span>
-      <span class="era-year">1850 → Present</span>
-    </div>
-  </div>
-</section>
+<main>
 
-<main class="eras">
-
-  <!-- ERA 1: ANCIENT -->
-
-  <article class="era-card" data-era="1">
-    <div class="card-head">
-      <div class="card-num">01</div>
-      <div class="card-titles">
-        <div class="card-title-en">Ancient</div>
-        <div class="card-period">5세기까지 · until 5C</div>
+  <!-- ═════════════ ERA I · ANCIENT ═════════════ -->
+  <section class="chapter" id="ch1" data-era="1" data-roman="I" data-short="고대" data-start="-800" data-end="476" data-range="c. 800 BCE–476">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">I</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Era I · c. 800 BCE — 476 CE</p>
+        <h2 class="ch-title reveal" style="--d:.08s">고대</h2>
+        <p class="ch-en reveal" style="--d:.16s">Classical Antiquity</p>
+        <p class="ch-summary reveal" style="--d:.24s">그리스 · 로마 문명을 중심으로 한 고전 고대. 철학 · 민주정 · 공화정 · 제국 — 서양 사상과 정치 제도의 원형이 이 시기에 형성되었습니다.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>c. 800 BCE — 476</span><span>02 Milestones</span><span>Polis → Empire</span></div>
       </div>
     </div>
-    <p class="card-summary">그리스·로마 문명을 중심으로 한 고전 고대. 서양 사상과 정치 제도의 원형이 이 시기에 형성되었습니다.</p>
-    <div class="events">
-      <div class="event">
-        <div class="event-when">~5C</div>
-        <div class="event-body">
-          <div class="event-title">고대 그리스·로마 <span class="en">Classical Antiquity</span></div>
-          <div class="event-note">철학·민주정·공화정·제국이라는 서양사의 토대 개념이 자리잡은 시기.</div>
-        </div>
-      </div>
-    </div>
-  </article>
 
-  <!-- ERA 2: MEDIEVAL -->
+    <div class="chapter-body">
+      <div class="timeline">
+        <div class="spine" aria-hidden="true"><i></i></div>
+        <ol class="events">
 
-  <article class="era-card" data-era="2">
-    <div class="card-head">
-      <div class="card-num">02</div>
-      <div class="card-titles">
-        <div class="card-title-en">Middle Age, Medieval</div>
-        <div class="card-period">5C 이후 · 5C onward</div>
-      </div>
-    </div>
-    <p class="card-summary">로마 멸망 이후 약 천 년에 걸친 중세. 기독교 세계관과 봉건 질서가 지배했으며, 후반부에 큰 전쟁과 흑사병이 사회를 뒤흔들었습니다.</p>
-    <div class="events">
-      <div class="event">
-        <div class="event-when">10-13C</div>
-        <div class="event-body">
-          <div class="event-title">중세의 전성기 <span class="en">High Middle Ages</span></div>
-          <div class="event-note">봉건제의 안정, 대성당 건축, 대학의 탄생. 기독교 문명이 절정에 이른 시기.</div>
-        </div>
-      </div>
-      <div class="event">
-        <div class="event-when">14-15C</div>
-        <div class="event-body">
-          <div class="event-title">Pest 창궐 <span class="en">The Black Death</span></div>
-          <div class="event-note">유럽 인구의 약 1/3이 사망. 중세적 세계관과 봉건 질서가 흔들리며 근세로 가는 문이 열림.</div>
-        </div>
-      </div>
-    </div>
-  </article>
+          <li class="event" data-year="-800" data-label="c. 800 BCE" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">800<small>BCE</small></div>
+              <div class="when-range">c. 800 — 146 BCE</div>
+              <span class="when-tag">폴리스와 철학</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">고대 그리스</h3>
+              <p class="card-en">Ancient Greece</p>
+              <ul class="points">
+                <li>폴리스(도시국가)와 시민 공동체</li>
+                <li>아테네 <span class="kw">민주정</span> <span class="en">dēmokratia</span> — 시민의 직접 참여</li>
+                <li>소크라테스 · 플라톤 · 아리스토텔레스 — 서양 <span class="kw">철학</span>의 출발</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>776 BCE</dt><dd>제1회 올림피아 제전 (전승)</dd></div>
+                <div><dt>508/7 BCE</dt><dd>클레이스테네스의 개혁 — 아테네 민주정의 기틀</dd></div>
+                <div><dt>490–479 BCE</dt><dd>페르시아 전쟁</dd></div>
+                <div><dt>399 BCE</dt><dd>소크라테스 처형</dd></div>
+                <div><dt>336–323 BCE</dt><dd>알렉산드로스 대왕 재위 — 동방 원정 → 헬레니즘 시대</dd></div>
+                <div><dt>146 BCE</dt><dd>코린토스 함락 — 그리스, 로마의 지배 아래로</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b><i>Democracy</i> = <i>dēmos</i>(민중) + <i>kratos</i>(지배). 다만 아테네에서 정치에 참여한 ‘시민’은 성인 남성 자유민에 한정되었다.</p>
+            </article>
+          </li>
 
-  <!-- ERA 3: PRE-MODERN -->
+          <li class="event" data-year="-509" data-label="509 BCE">
+            <div class="when reveal">
+              <div class="when-year">509<small>BCE</small></div>
+              <div class="when-range">509 BCE — 476 CE</div>
+              <span class="when-tag">공화정 → 제국</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">로마</h3>
+              <p class="card-en">Republic &amp; Empire</p>
+              <ul class="points">
+                <li><span class="kw">공화정</span> <span class="en">res publica</span> — 원로원과 집정관, 견제와 균형</li>
+                <li><span class="kw">제국</span> — 지중해 세계의 통일, 로마법과 도로망</li>
+                <li>기독교 공인 → 국교화 — 중세 세계관의 씨앗</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>509 BCE</dt><dd>왕정 폐지, 공화정 수립 (전승)</dd></div>
+                <div><dt>27 BCE</dt><dd>아우구스투스 — 제정의 시작, ‘로마의 평화(Pax Romana)’</dd></div>
+                <div><dt>313</dt><dd>밀라노 칙령 — 기독교 공인</dd></div>
+                <div><dt>380</dt><dd>테살로니카 칙령 — 기독교 국교화</dd></div>
+                <div><dt>395</dt><dd>로마 제국, 동 · 서로 분할</dd></div>
+                <div><dt>476</dt><dd>서로마 제국 멸망 — 고대의 끝</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b><i>Republic</i>의 어원 <i>res publica</i>는 ‘공공의 것’. 군주 한 사람이 아니라 공동체가 주권을 갖는 정체(政體)를 뜻한다.</p>
+            </article>
+          </li>
 
-  <article class="era-card" data-era="3">
-    <div class="card-head">
-      <div class="card-num">03</div>
-      <div class="card-titles">
-        <div class="card-title-en">Pre-Modern / Early-Modern</div>
-        <div class="card-period">16C - 18C 중반 · 1500-1850</div>
+        </ol>
       </div>
     </div>
-    <p class="card-summary">신 중심에서 인간 중심으로. 르네상스 인본주의와 과학혁명, 그리고 시민혁명을 거치며 '근대'의 사상적 기반이 마련된 격동의 시기.</p>
-    <div class="events">
-      <div class="event">
-        <div class="event-when">16C</div>
-        <div class="event-body">
-          <div class="event-title">Renaissance <span class="en">Humanitarianism</span></div>
-          <div class="event-note">신학 중심에서 인간 중심으로. 고전 부흥과 함께 사상·예술 전반의 부활이 일어남.</div>
-        </div>
-      </div>
-      <div class="event">
-        <div class="event-when">17C</div>
-        <div class="event-body">
-          <div class="event-title">Empiricism <span class="en">자연과학의 시작</span></div>
-          <div class="event-note">경험·관찰·실험을 지식의 근거로 삼는 사고가 자리잡으며 근대 과학이 출발.<br><span style="display:inline-block; margin-top:6px; color:var(--ink);"><strong>경험주의(empiricism)</strong>: 반복적 실험(replication)을 통해 검증된 것만 과학적 사실로 인정.</span></div>
-        </div>
-      </div>
-    </div>
-  </article>
+  </section>
 
-  <!-- ERA 4: MODERN -->
+  <!-- ═════════════ ERA II · MEDIEVAL ═════════════ -->
+  <section class="chapter" id="ch2" data-era="2" data-roman="II" data-short="중세" data-start="476" data-end="1500" data-range="476–c. 1500">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">II</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Era II · 476 — c. 1500</p>
+        <h2 class="ch-title reveal" style="--d:.08s">중세</h2>
+        <p class="ch-en reveal" style="--d:.16s">The Middle Ages</p>
+        <p class="ch-summary reveal" style="--d:.24s">로마 멸망 이후 약 천 년에 걸친 중세. 기독교 세계관과 봉건 질서가 지배했으며, 후반부에 큰 전쟁과 흑사병이 사회를 뒤흔들었습니다.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>476 — c. 1500</span><span>03 Milestones</span><span>Faith → Crisis</span></div>
+      </div>
+    </div>
 
-  <article class="era-card" data-era="4">
-    <div class="card-head">
-      <div class="card-num">04</div>
-      <div class="card-titles">
-        <div class="card-title-en">Modern</div>
-        <div class="card-period">18C 말 - 20C 초 · 1850-Present</div>
+    <div class="chapter-body">
+      <div class="timeline">
+        <div class="spine" aria-hidden="true"><i></i></div>
+        <ol class="events">
+
+          <li class="event" data-year="500" data-label="5–10C" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">5–10C</div>
+              <div class="when-range">476 — c. 1000</div>
+              <span class="when-tag">기독교 왕국</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">중세 초기</h3>
+              <p class="card-en">Early Middle Ages</p>
+              <ul class="points">
+                <li>게르만 왕국의 성립 — 프랑크 왕국의 부상</li>
+                <li>교회와 수도원이 고전 학문을 보존</li>
+                <li><span class="kw">봉건제</span>의 형성 — 영주와 기사, 장원과 농노</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>c. 500</dt><dd>프랑크 왕 클로비스, 가톨릭으로 개종</dd></div>
+                <div><dt>800</dt><dd>샤를마뉴, 교황에게서 서로마 황제관을 받음</dd></div>
+                <div><dt>843</dt><dd>베르됭 조약 — 프랑크 왕국 3분</dd></div>
+                <div><dt>962</dt><dd>오토 1세 대관 — 신성 로마 제국의 시작</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b>한때 ‘암흑시대(Dark Ages)’로 불렸지만, 오늘날 학계는 이 표현을 피한다.</p>
+            </article>
+          </li>
+
+          <li class="event" data-year="1000" data-label="11–13C" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">11–13C</div>
+              <div class="when-range">c. 1000 — 1300</div>
+              <span class="when-tag">전성기</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">중세의 전성기</h3>
+              <p class="card-en">High Middle Ages</p>
+              <ul class="points">
+                <li>봉건제의 안정, <span class="kw">대성당</span> 건축, <span class="kw">대학</span>의 탄생</li>
+                <li>기독교 문명이 절정에 이른 시기 — 교황권의 전성기</li>
+                <li>십자군 원정과 도시 · 상업의 부활</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1054</dt><dd>동서 교회의 대분열</dd></div>
+                <div><dt>1088</dt><dd>볼로냐 대학 — 유럽 최초의 대학 (전승)</dd></div>
+                <div><dt>1096–1291</dt><dd>십자군 원정</dd></div>
+                <div><dt>1163</dt><dd>파리 노트르담 대성당 착공 — 고딕 양식</dd></div>
+                <div><dt>1215</dt><dd>마그나 카르타</dd></div>
+              </dl>
+            </article>
+          </li>
+
+          <li class="event" data-year="1347" data-label="1347">
+            <div class="when reveal">
+              <div class="when-year">1347</div>
+              <div class="when-range">1347 — 1351</div>
+              <span class="when-tag">중세의 위기</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">흑사병 창궐</h3>
+              <p class="card-en">The Black Death</p>
+              <ul class="points">
+                <li>유럽 인구의 약 <span class="kw">1/3</span> 이상이 사망 — 추정 30–50%</li>
+                <li>노동력 부족 → 농노제 동요, <span class="kw">봉건 질서</span>의 붕괴 가속</li>
+                <li>중세적 세계관이 흔들리며 근세로 가는 문이 열림</li>
+                <li class="sub">이후 수 세기 동안 페스트가 반복 유행</li>
+              </ul>
+              <div class="stats plague">
+                <div class="dots" data-n="30" data-dead="10" data-maybe="5" role="img" aria-label="유럽 인구 30명 중 10명에서 15명이 사망한 것으로 추정"></div>
+                <p class="dots-cap"><span><i class="d-live"></i>생존</span><span><i class="d-dead"></i>사망 (약 1/3)</span><span><i class="d-maybe"></i>추정 범위 (최대 1/2)</span></p>
+              </div>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1337–1453</dt><dd>백년전쟁 — 잉글랜드 대 프랑스</dd></div>
+                <div><dt>1347</dt><dd>흑사병, 시칠리아 메시나에 상륙</dd></div>
+                <div><dt>c. 1450</dt><dd>구텐베르크의 활판 인쇄술</dd></div>
+                <div><dt>1453</dt><dd>콘스탄티노폴리스 함락 — 동로마 제국 멸망</dd></div>
+              </dl>
+            </article>
+          </li>
+
+        </ol>
       </div>
     </div>
-    <p class="card-summary">자본주의·산업화의 성숙, 사실주의에서 모더니즘으로 이어지는 미학의 격변. 인간과 세계를 보는 시선이 근본적으로 재편된 시기.</p>
-    <div class="events">
-      <div class="event">
-        <div class="event-when">18C 말 산업혁명, 시민혁명</div>
-        <div class="event-body">
-          <div class="event-title">소설(Novel)의 탄생 / 산업혁명 <span class="en">Civil Revolution</span></div>
-          <div class="event-note">평범한 사람들(ordinary people)의 일상(real life)을 산문(prose)으로 그리는 소설이 등장. 시민혁명과 함께 '보통 사람'이 역사의 주체로.<br><span style="display:inline-block; margin-top:6px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--era-soft);">American Revolution (1775-1783), French Revolution (1789-1799)</span></div>
-        </div>
-      </div>
-      <div class="event">
-        <div class="event-when">19C</div>
-        <div class="event-body">
-          <div class="event-title">자본주의 발달</div>
-          <div class="event-note">산업화와 도시화 속에서 현실을 있는 그대로 그리려는 사실주의(리얼리즘)가 문학·예술의 주류로.<br><span style="display:inline-block; margin-top:6px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--era-soft);">소설의 발달 · Realism</span></div>
-        </div>
-      </div>
-      <div class="event">
-        <div class="event-when">20C 초</div>
-        <div class="event-body">
-          <div class="event-title">Modernism <span class="en">건축·미술·문학</span></div>
-          <div class="event-note">기성 형식의 해체와 실험. 추상미술, 의식의 흐름, 기능주의 건축 등 전 장르에서 모더니즘이 폭발.<br><span style="display:inline-block; margin-top:6px; color:var(--ink);"><strong>실용주의</strong>: 돈, 효율, 기능, 사회, real world의 가치 중시.<br><span style="font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--era-soft);">practical, utilitarian, pragmatic &nbsp;↔&nbsp; aesthetic, theoretical</span></span></div>
-        </div>
+  </section>
+
+  <!-- ═════════════ ERA III · EARLY MODERN ═════════════ -->
+  <section class="chapter" id="ch3" data-era="3" data-roman="III" data-short="근세" data-start="1500" data-end="1789" data-range="c. 1500–1789">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">III</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Era III · c. 1500 — 1789</p>
+        <h2 class="ch-title reveal" style="--d:.08s">근세</h2>
+        <p class="ch-en reveal" style="--d:.16s">The Early Modern Period</p>
+        <p class="ch-summary reveal" style="--d:.24s">신 중심에서 인간 중심으로. 르네상스 인문주의와 종교개혁, 과학혁명, 그리고 계몽주의를 거치며 ‘근대’의 사상적 기반이 마련된 격동의 시기.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>c. 1500 — 1789</span><span>03 Milestones</span><span>Humanism → Reason</span></div>
       </div>
     </div>
-  </article>
+
+    <div class="chapter-body">
+      <div class="timeline">
+        <div class="spine" aria-hidden="true"><i></i></div>
+        <ol class="events">
+
+          <li class="event" data-year="1400" data-label="14–16C" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">14–16C</div>
+              <div class="when-range">c. 1350 — 1600</div>
+              <span class="when-tag">인간의 재발견</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">르네상스</h3>
+              <p class="card-en">Renaissance · Humanism</p>
+              <ul class="points">
+                <li>신학 중심에서 <span class="kw">인간 중심</span>으로</li>
+                <li>고전(그리스 · 로마)의 부흥과 함께 사상 · 예술 전반의 부활</li>
+                <li class="sub">14세기 이탈리아에서 시작 → 16세기 알프스 이북으로 확산</li>
+                <li><span class="kw">1517</span> 종교개혁 — 교회의 권위에 대한 도전</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>c. 1350</dt><dd>페트라르카 — ‘인문주의의 아버지’</dd></div>
+                <div><dt>1492</dt><dd>콜럼버스, 아메리카 도달</dd></div>
+                <div><dt>1504</dt><dd>미켈란젤로 〈다비드〉 완성</dd></div>
+                <div><dt>1517</dt><dd>루터의 ‘95개조 논제’ — 종교개혁의 시작</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b>르네상스의 핵심어는 <i>Humanism</i>(인문주의 · 인본주의)이다. <i>Humanitarianism</i>(인도주의 — 박애 · 구호)과 혼동하지 말 것.</p>
+            </article>
+          </li>
+
+          <li class="event" data-year="1600" data-label="17C" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">17C</div>
+              <div class="when-range">1543 — 1689</div>
+              <span class="when-tag">과학혁명</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">경험주의 · 과학혁명</h3>
+              <p class="card-en">Empiricism · Scientific Revolution</p>
+              <ul class="points">
+                <li><span class="kw">근대 과학</span>의 출발 — 경험 · 관찰 · 실험을 지식의 근거로</li>
+                <li>권위와 전통이 아닌 증거로 참과 거짓을 가림</li>
+              </ul>
+              <dl class="def">
+                <dt>경험주의 <span class="en">empiricism</span></dt>
+                <dd>감각 경험과 관찰에서 지식이 나온다는 입장. 과학에서는 반복적 실험(replication)을 통해 검증된 것만 사실로 인정한다.</dd>
+                <dd class="vs"><span>empirical</span><span>observational</span><b>↔</b><span>theoretical</span><span>a priori</span></dd>
+              </dl>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1543</dt><dd>코페르니쿠스 『천구의 회전에 관하여』 — 지동설</dd></div>
+                <div><dt>1620</dt><dd>베이컨 『신기관』 — 귀납법</dd></div>
+                <div><dt>1637</dt><dd>데카르트 『방법서설』 — 합리주의</dd></div>
+                <div><dt>1660</dt><dd>런던 왕립학회 창립 — 모토 ‘Nullius in verba(누구의 말도 그대로 믿지 말라)’</dd></div>
+                <div><dt>1687</dt><dd>뉴턴 『프린키피아』</dd></div>
+                <div><dt>1689</dt><dd>로크 『인간지성론』 — 마음은 ‘빈 서판(tabula rasa)’</dd></div>
+              </dl>
+            </article>
+          </li>
+
+          <li class="event" data-year="1700" data-label="18C" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">18C</div>
+              <div class="when-range">c. 1685 — 1789</div>
+              <span class="when-tag">이성의 시대</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">계몽주의</h3>
+              <p class="card-en">The Enlightenment</p>
+              <ul class="points">
+                <li><span class="kw">이성</span> · 진보 · 자연권 — 전통과 권위에 대한 비판</li>
+                <li>사회계약 · 삼권분립 — 시민혁명의 사상적 토대</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1748</dt><dd>몽테스키외 『법의 정신』 — 삼권분립</dd></div>
+                <div><dt>1751–72</dt><dd>디드로 · 달랑베르 『백과전서』</dd></div>
+                <div><dt>1762</dt><dd>루소 『사회계약론』</dd></div>
+                <div><dt>1784</dt><dd>칸트 「계몽이란 무엇인가」 — ‘Sapere aude(감히 알려고 하라)’</dd></div>
+              </dl>
+            </article>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ ERA IV · MODERN ═════════════ -->
+  <section class="chapter" id="ch4" data-era="4" data-roman="IV" data-short="근현대" data-start="1789" data-end="now" data-range="1789–현재">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">IV</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Era IV · 1789 — Present</p>
+        <h2 class="ch-title reveal" style="--d:.08s">근현대</h2>
+        <p class="ch-en reveal" style="--d:.16s">The Modern Age</p>
+        <p class="ch-summary reveal" style="--d:.24s">자본주의 · 산업화의 성숙, 사실주의에서 모더니즘으로 이어지는 미학의 격변. 인간과 세계를 보는 시선이 근본적으로 재편된 시기.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>1789 — Present</span><span>03 Milestones</span><span>Novel → Modernism</span></div>
+      </div>
+    </div>
+
+    <div class="chapter-body">
+      <div class="timeline">
+        <div class="spine" aria-hidden="true"><i></i></div>
+        <ol class="events">
+
+          <li class="event" data-year="1760" data-label="18C" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">18C</div>
+              <div class="when-range">1719 — 1799</div>
+              <span class="when-tag">근대의 문턱</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">소설의 탄생 · 이중 혁명</h3>
+              <p class="card-en">Rise of the Novel · Dual Revolution</p>
+              <ul class="points">
+                <li><span class="kw">소설(Novel)</span>의 탄생 — 평범한 사람들(ordinary people)의 일상(real life)을 산문(prose)으로</li>
+                <li><span class="kw">산업혁명</span> — 영국에서 시작된 기계 · 공장 생산</li>
+                <li><span class="kw">시민혁명</span> — ‘보통 사람’이 역사의 주체로</li>
+                <li class="sub">American Revolution (1775–1783) · French Revolution (1789–1799)</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1719</dt><dd>디포 『로빈슨 크루소』 — 영국 근대 소설의 출발점</dd></div>
+                <div><dt>1740</dt><dd>리처드슨 『파멜라』</dd></div>
+                <div><dt>c. 1760</dt><dd>영국에서 산업혁명 시작</dd></div>
+                <div><dt>1769</dt><dd>와트, 개량 증기기관 특허</dd></div>
+                <div><dt>1789</dt><dd>바스티유 함락 · 「인간과 시민의 권리 선언」</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b>소설은 18세기 전반 영국(디포 · 리처드슨 · 필딩)에서 꽃피었고, 세르반테스의 『돈키호테』(1605)를 근대 소설의 효시로 보기도 한다. 홉스봄은 산업혁명과 프랑스 혁명을 묶어 ‘이중 혁명(Dual Revolution)’이라 불렀다.</p>
+            </article>
+          </li>
+
+          <li class="event" data-year="1830" data-label="19C" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">19C</div>
+              <div class="when-range">c. 1830 — 1890</div>
+              <span class="when-tag">Realism</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">자본주의 발달 · 사실주의</h3>
+              <p class="card-en">Capitalism &amp; Realism</p>
+              <ul class="points">
+                <li>산업화와 도시화 — <span class="kw">자본주의</span>의 성숙</li>
+                <li>현실을 있는 그대로 그리려는 <span class="kw">사실주의(Realism)</span>가 문학 · 예술의 주류로</li>
+                <li class="sub">소설의 발달 — ‘소설의 세기’</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1848</dt><dd>마르크스 · 엥겔스 『공산당 선언』 · 유럽 각지의 혁명</dd></div>
+                <div><dt>1855</dt><dd>쿠르베, ‘사실주의관(Pavillon du Réalisme)’ 전시</dd></div>
+                <div><dt>1857</dt><dd>플로베르 『마담 보바리』</dd></div>
+                <div><dt>1867</dt><dd>마르크스 『자본론』 1권</dd></div>
+                <div><dt>1869</dt><dd>톨스토이 『전쟁과 평화』 완간</dd></div>
+              </dl>
+            </article>
+          </li>
+
+          <li class="event" data-year="1900" data-label="20C 初" data-approx="1">
+            <div class="when reveal">
+              <div class="when-year">20C<small>初</small></div>
+              <div class="when-range">c. 1890 — 1940</div>
+              <span class="when-tag">Modernism</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">모더니즘</h3>
+              <p class="card-en">Modernism — 건축 · 미술 · 문학</p>
+              <ul class="points">
+                <li>기성 형식의 <span class="kw">해체와 실험</span></li>
+                <li>추상미술 · 의식의 흐름 · 기능주의 건축 — 전 장르에서 모더니즘이 폭발</li>
+              </ul>
+              <dl class="def">
+                <dt>실용주의 <span class="en">pragmatism</span></dt>
+                <dd>돈, 효율, 기능, 사회, real world의 가치 중시. 철학으로서는 퍼스 · 제임스 · 듀이로 이어지는 미국 실용주의.</dd>
+                <dd class="vs"><span>practical</span><span>utilitarian</span><span>pragmatic</span><b>↔</b><span>aesthetic</span><span>theoretical</span></dd>
+              </dl>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1896</dt><dd>설리번, “형태는 기능을 따른다”</dd></div>
+                <div><dt>1907</dt><dd>피카소 〈아비뇽의 처녀들〉 · 제임스 『실용주의』</dd></div>
+                <div><dt>1919</dt><dd>바우하우스 설립</dd></div>
+                <div><dt>1922</dt><dd>조이스 『율리시스』 · 엘리엇 『황무지』</dd></div>
+                <div><dt>1925</dt><dd>울프 『댈러웨이 부인』 — 의식의 흐름</dd></div>
+              </dl>
+            </article>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-<footer class="footer">
-  <span>Western History · A Visual Timeline</span>
-  <span>BCE 500 — Present</span>
+<footer class="colophon">
+  <p class="motto reveal"><span>Antiquity</span><i>·</i><span>Middle Ages</span><i>·</i><span>Early Modern</span><i>·</i><span>Modern</span></p>
+  <div class="colophon-meta">
+    <span>Western History · A Visual Timeline</span>
+    <span>연대는 학계 통설을 따르며, 시대 구분의 경계는 관례적입니다.</span>
+    <span><kbd>←</kbd> <kbd>→</kbd> 이정표 이동</span>
+  </div>
 </footer>
 
+
+<script>
+(() => {
+  'use strict';
+  const doc = document.documentElement;
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NOW = new Date().getFullYear();
+  const num = v => (v === 'now' ? NOW : Number(v));
+  const fmtYear = y => (y < 0 ? `${-y} BCE` : String(Math.max(1, y)));
+  const tickLabel = y => (y === 0 ? 'BCE | CE' : fmtYear(y));
+  const nf = new Intl.NumberFormat('ko-KR');
+
+  const chapters = $$('.chapter');
+  const events = $$('.event');
+
+  const goTo = el => {
+    const top = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.26;
+    window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+  };
+
+  /* Theme */
+  const themeBtn = $('.theme-btn');
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => (doc.dataset.theme ? doc.dataset.theme === 'dark' : mq.matches);
+  const syncTheme = () => themeBtn.setAttribute('aria-label', isDark() ? '밝은 테마로 전환' : '어두운 테마로 전환');
+  themeBtn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    doc.dataset.theme = next;
+    try { localStorage.setItem('history-theme', next); } catch (e) {}
+    syncTheme();
+  });
+  if (mq.addEventListener) mq.addEventListener('change', syncTheme);
+  syncTheme();
+
+  /* Ruler: chapters and milestones drawn at true scale */
+  const ruler = $('.ruler');
+  if (ruler) {
+    const min = num(ruler.dataset.min), max = num(ruler.dataset.max), step = num(ruler.dataset.step);
+    const pct = y => ((clamp(y, min, max) - min) / (max - min)) * 100;
+    const track = $('.ruler-track', ruler), axis = $('.ruler-axis', ruler), legend = $('.ruler-legend', ruler);
+    chapters.forEach((ch, i) => {
+      const s = num(ch.dataset.start), e = num(ch.dataset.end);
+      const band = document.createElement('a');
+      band.className = 'band' + (i === chapters.length - 1 ? ' end' : '');
+      band.href = '#' + ch.id;
+      band.style.cssText = `left:${pct(s)}%;width:${pct(e) - pct(s)}%;--b:var(--c${ch.dataset.era});--i:${i}`;
+      band.setAttribute('aria-label', `${ch.dataset.roman}장 ${ch.dataset.short}`);
+      band.innerHTML = `<span class="band-label"><b>${ch.dataset.roman}</b><span>${ch.dataset.short}</span></span>`;
+      track.appendChild(band);
+      const li = document.createElement('li');
+      li.style.setProperty('--b', `var(--c${ch.dataset.era})`);
+      const span = e - s - (s < 0 && e > 0 ? 1 : 0);   // no year 0
+      li.innerHTML = `<i></i>${ch.dataset.short} <span>${ch.dataset.range} · 약 ${nf.format(Math.round(span / 10) * 10)}년</span>`;
+      legend.appendChild(li);
+    });
+    events.forEach((ev, i) => {
+      const p = pct(num(ev.dataset.year));
+      const title = $('.card-title', ev).textContent;
+      const pin = document.createElement('button');
+      pin.type = 'button';
+      pin.className = 'pin' + (p < 12 ? ' tip-l' : p > 88 ? ' tip-r' : '');
+      pin.style.cssText = `left:${p}%;--b:var(--c${ev.closest('.chapter').dataset.era});--i:${i}`;
+      pin.setAttribute('aria-label', `${ev.dataset.label} ${title}`);
+      pin.innerHTML = `<span class="tip"><b>${ev.dataset.label}</b>${title}</span>`;
+      pin.addEventListener('click', () => goTo(ev));
+      track.appendChild(pin);
+    });
+    for (let y = Math.ceil(min / step) * step; y <= max; y += step) {
+      const t = document.createElement('span');
+      t.className = 'tick';
+      t.style.left = pct(y) + '%';
+      t.innerHTML = `<span>${tickLabel(y)}</span>`;
+      axis.appendChild(t);
+    }
+  }
+
+  /* Span of the whole timeline, measured to the current year */
+  const spanYears = $('#span-years');
+  if (spanYears) spanYears.dataset.to = String(Math.round((NOW + 800 - 1) / 100) * 100);
+
+  /* Black Death: 30 people, about a third lost */
+  $$('.dots').forEach(box => {
+    const n = +box.dataset.n, dead = +box.dataset.dead, maybe = +box.dataset.maybe;
+    for (let k = 0; k < n; k++) {
+      const d = document.createElement('i');
+      if (k >= n - dead) d.className = 'dead';
+      else if (k >= n - dead - maybe) d.className = 'maybe';
+      d.style.setProperty('--dd', (0.6 + (n - k) * 0.06).toFixed(2) + 's');
+      box.appendChild(d);
+    }
+  });
+
+  /* Counters */
+  const runCount = el => {
+    const to = Number(el.dataset.to);
+    if (reduce) { el.textContent = nf.format(to); return; }
+    const from = Number(el.dataset.from || 0), dur = 1800, t0 = performance.now();
+    const tick = t => {
+      const k = clamp((t - t0) / dur, 0, 1), e = 1 - Math.pow(1 - k, 4);
+      el.textContent = nf.format(Math.round(from + (to - from) * e));
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const counters = $$('.count');
+  if (!reduce) counters.forEach(el => { el.textContent = nf.format(Number(el.dataset.from || 0)); });
+
+  /* Reveal on scroll */
+  const reveals = $$('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        $$('.count', en.target).forEach(runCount);
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+    counters.forEach(runCount);
+  }
+
+  /* Year display in the top bar */
+  const yd = $('.yd'), ydNum = $('.yd-num');
+  const ydDefault = ydNum.textContent;
+  let shown = null, target, rafY = 0;
+  const showYear = ev => {
+    const y = ev ? num(ev.dataset.year) : null;
+    if (y === target) return;
+    target = y;
+    cancelAnimationFrame(rafY);
+    if (y === null) { ydNum.textContent = ydDefault; yd.classList.remove('on'); shown = null; return; }
+    yd.classList.add('on');
+    const prefix = ev.dataset.approx ? 'c. ' : '';
+    const from = shown === null ? y : shown;
+    if (reduce || from === y) { shown = y; ydNum.textContent = prefix + fmtYear(y); return; }
+    const t0 = performance.now(), dur = 700;
+    const step = t => {
+      const k = clamp((t - t0) / dur, 0, 1), e = 1 - Math.pow(1 - k, 3);
+      shown = Math.round(from + (y - from) * e);
+      ydNum.textContent = prefix + fmtYear(shown);
+      if (k < 1) rafY = requestAnimationFrame(step);
+    };
+    rafY = requestAnimationFrame(step);
+  };
+
+  /* Scroll-driven state */
+  const bar = $('.progress span'), topbar = $('.topbar');
+  const segs = $$('.seg');
+  const opens = chapters.map(ch => $('.chapter-open', ch));
+  const bigNums = chapters.map(ch => $('.big-num', ch));
+  const timelines = chapters.map(ch => $('.timeline', ch));
+  const spines = chapters.map(ch => $('.spine i', ch));
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const vh = window.innerHeight, mid = vh * 0.55;
+    const maxScroll = doc.scrollHeight - vh;
+    bar.style.transform = `scaleX(${maxScroll > 0 ? clamp(window.scrollY / maxScroll, 0, 1) : 0})`;
+    topbar.classList.toggle('scrolled', window.scrollY > 24);
+
+    let activeEra = '0';
+    chapters.forEach((ch, i) => {
+      const r = ch.getBoundingClientRect();
+      segs[i].style.setProperty('--p', clamp((mid - r.top) / r.height, 0, 1).toFixed(4));
+      const inside = r.top <= mid && r.bottom > mid;
+      segs[i].classList.toggle('active', inside);
+      if (inside) activeEra = ch.dataset.era;
+
+      const ro = opens[i].getBoundingClientRect();
+      if (ro.bottom > 0 && ro.top < vh) {
+        opens[i].style.setProperty('--open-p', clamp((vh - ro.top) / (vh + ro.height * 0.5), 0, 1).toFixed(4));
+        if (!reduce) bigNums[i].style.setProperty('--py', (ro.top * -0.22).toFixed(1) + 'px');
+      }
+      const rt = timelines[i].getBoundingClientRect();
+      spines[i].style.transform = `scaleY(${clamp((mid - rt.top) / rt.height, 0, 1).toFixed(4)})`;
+    });
+    doc.dataset.active = activeEra;
+
+    let current = null;
+    events.forEach(ev => {
+      const on = ev.getBoundingClientRect().top < mid;
+      ev.classList.toggle('active', on);
+      if (on) current = ev;
+    });
+    events.forEach(ev => ev.classList.toggle('current', ev === current));
+    showYear(current);
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+
+  /* Keyboard: ← → (or j / k) to step between milestones */
+  window.addEventListener('keydown', e => {
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '')) return;
+    const fwd = e.key === 'ArrowRight' || e.key === 'j';
+    const back = e.key === 'ArrowLeft' || e.key === 'k';
+    if (!fwd && !back) return;
+    const line = window.innerHeight * 0.26;
+    const next = fwd
+      ? events.find(ev => ev.getBoundingClientRect().top > line + 8)
+      : events.slice().reverse().find(ev => ev.getBoundingClientRect().top < line - 8);
+    e.preventDefault();
+    if (next) goTo(next);
+    else if (back) window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+})();
+</script>
 </body>
 </html>
