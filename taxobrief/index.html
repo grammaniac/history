@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="ko" data-active="0">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생물 분류 체계: 역에서 종까지</title>
+<meta name="description" content="Domain · Kingdom · Phylum · Class · Order · Family · Genus · Species — 여덟 계급을 영어 · 한글 · 한자로 익히고, 생물 15종의 분류 사다리와 암기 게임으로 외우는 생물 분류 체계 페이지.">
+<script>
+  (function () {
+    var d = document.documentElement;
+    d.classList.add('js');
+    try {
+      var t = localStorage.getItem('history-theme');
+      if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ───────── Tokens ───────── */
+  :root {
+    color-scheme: light;
+    --paper: #f4efe5;
+    --paper-2: #ebe4d6;
+    --card: #fffcf6;
+    --ink: #1a1712;
+    --ink-2: #4b4439;
+    --ink-3: #7d7465;
+    --line: rgba(26, 23, 18, .14);
+    --line-2: rgba(26, 23, 18, .07);
+    --on-band: #f7efe1;
+    --shadow: 0 1px 2px rgba(26, 23, 18, .05), 0 18px 40px -22px rgba(26, 23, 18, .28);
+    --shadow-hi: 0 2px 4px rgba(26, 23, 18, .06), 0 30px 60px -24px rgba(26, 23, 18, .38);
+    --grain: .05;
+
+    /* I 분류 사다리 (navy) · II 여덟 계급 (teal-green) · III 학명 (amber) · IV 역사 (plum) */
+    --c1: #1f3a5f; --c1-band: #122339; --c1-tint: #e6ebf2;
+    --c2: #2b6f5a; --c2-band: #173d31; --c2-tint: #e5efeb;
+    --c3: #8f6312; --c3-band: #4e390d; --c3-tint: #f4eedb;
+    --c4: #7a2d63; --c4-band: #3e1734; --c4-tint: #f4e9f1;
+    /* Eight ranks — broad (cool) to narrow (warm) */
+    --r1: #1f3a5f; --r2: #1f4f6e; --r3: #1b6676; --r4: #2b6f5a; --r5: #3f7a3a; --r6: #6b7f22; --r7: #96701a; --r8: #b8561a;
+    --x: #b8261b; --ok: #2b7a4b;
+
+    --accent: var(--ink);
+    --serif: 'Fraunces', 'Noto Serif KR', Georgia, serif;
+    --serif-ko: 'Noto Serif KR', 'Fraunces', Georgia, serif;
+    --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --nav-h: 64px;
+    --gutter: clamp(16px, 5vw, 72px);
+    --ease: cubic-bezier(.2, .7, .1, 1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #0f0e0c; --paper-2: #171512; --card: #1a1815;
+      --ink: #efe8da; --ink-2: #c4baa8; --ink-3: #8e8574;
+      --line: rgba(239, 232, 218, .14); --line-2: rgba(239, 232, 218, .07);
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 40px -20px rgba(0, 0, 0, .75);
+      --shadow-hi: 0 2px 4px rgba(0, 0, 0, .45), 0 30px 60px -22px rgba(0, 0, 0, .85);
+      --grain: .07;
+      --c1: #8cb3ea; --c1-band: #10223b; --c1-tint: #0c121a;
+      --c2: #7fc49e; --c2-band: #0f2a1d; --c2-tint: #0c140f;
+      --c3: #e2b45c; --c3-band: #33270f; --c3-tint: #14110b;
+      --c4: #dc93c8; --c4-band: #2f1229; --c4-tint: #150e14;
+      --r1: #8cb3ea; --r2: #7fb6dc; --r3: #72c2d1; --r4: #7fc49e; --r5: #8fcc7a; --r6: #b7c75a; --r7: #e2b45c; --r8: #f0a066;
+      --x: #ff7a6b; --ok: #7fd3a0;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0f0e0c; --paper-2: #171512; --card: #1a1815;
+    --ink: #efe8da; --ink-2: #c4baa8; --ink-3: #8e8574;
+    --line: rgba(239, 232, 218, .14); --line-2: rgba(239, 232, 218, .07);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 40px -20px rgba(0, 0, 0, .75);
+    --shadow-hi: 0 2px 4px rgba(0, 0, 0, .45), 0 30px 60px -22px rgba(0, 0, 0, .85);
+    --grain: .07;
+    --c1: #8cb3ea; --c1-band: #10223b; --c1-tint: #0c121a;
+    --c2: #7fc49e; --c2-band: #0f2a1d; --c2-tint: #0c140f;
+    --c3: #e2b45c; --c3-band: #33270f; --c3-tint: #14110b;
+    --c4: #dc93c8; --c4-band: #2f1229; --c4-tint: #150e14;
+    --r1: #8cb3ea; --r2: #7fb6dc; --r3: #72c2d1; --r4: #7fc49e; --r5: #8fcc7a; --r6: #b7c75a; --r7: #e2b45c; --r8: #f0a066;
+    --x: #ff7a6b; --ok: #7fd3a0;
+  }
+
+  :root[data-active="1"] { --accent: var(--c1); }
+  :root[data-active="2"] { --accent: var(--c2); }
+  :root[data-active="3"] { --accent: var(--c3); }
+  :root[data-active="4"] { --accent: var(--c4); }
+
+  /* ───────── Base ───────── */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + 8px);
+    -webkit-text-size-adjust: 100%;
+    background: var(--paper);
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: var(--grain);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .en { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--ink-3); }
+  .kw { color: var(--e, var(--accent)); font-weight: 700; }
+
+  /* ───────── Scroll progress ───────── */
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 70; pointer-events: none; }
+  .progress span {
+    display: block; height: 100%;
+    background: var(--accent);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    transition: background-color .5s;
+  }
+
+  /* ───────── Top bar ───────── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+    height: var(--nav-h);
+    display: flex; align-items: center; gap: clamp(12px, 2.4vw, 32px);
+    padding: 0 var(--gutter);
+    border-bottom: 1px solid transparent;
+    transition: background-color .35s, border-color .35s;
+  }
+  .topbar.scrolled {
+    background: var(--paper);
+    background: color-mix(in srgb, var(--paper) 84%, transparent);
+    -webkit-backdrop-filter: saturate(1.3) blur(14px);
+    backdrop-filter: saturate(1.3) blur(14px);
+    border-bottom-color: var(--line);
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; white-space: nowrap;
+    font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink);
+  }
+  .brand-mark {
+    font-family: var(--mono); font-style: normal; font-size: 10.5px; font-weight: 600;
+    letter-spacing: .14em;
+    padding: 4px 7px; border: 1px solid currentColor; border-radius: 2px;
+  }
+  .segs { list-style: none; display: flex; gap: 10px; flex: 1; max-width: 640px; margin: 0 auto; }
+  .segs li { flex: 1; min-width: 0; }
+  .seg {
+    display: flex; flex-direction: column; gap: 7px;
+    padding: 8px 0; text-decoration: none;
+    color: var(--ink-3);
+    transition: color .3s;
+  }
+  .seg-label {
+    font-size: 12px; font-weight: 600; line-height: 1;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .seg-label b { font-family: var(--mono); font-weight: 600; color: var(--seg); margin-right: 6px; }
+  .seg-track { position: relative; height: 2px; border-radius: 2px; background: var(--line); overflow: hidden; }
+  .seg-track i {
+    position: absolute; inset: 0;
+    background: var(--seg);
+    transform-origin: 0 50%;
+    transform: scaleX(var(--p, 0));
+  }
+  .seg.active, .seg:hover { color: var(--ink); }
+
+  .yd { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; min-width: 128px; line-height: 1; }
+  .yd small { font-family: var(--mono); font-size: 9.5px; letter-spacing: .2em; color: var(--ink-3); }
+  .yd-num {
+    font-family: var(--serif); font-weight: 600; font-size: 22px;
+    font-variant-numeric: tabular-nums lining-nums;
+    color: var(--accent);
+    white-space: nowrap;
+    transition: color .5s;
+  }
+  .yd:not(.on) .yd-num { font-size: 14px; color: var(--ink-3); letter-spacing: .02em; }
+  .yd.on .yd-num { font-size: 17px; }
+
+  .theme-btn {
+    flex: none;
+    width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: border-color .3s, transform .5s var(--ease);
+  }
+  .theme-btn:hover { border-color: var(--ink-3); transform: rotate(180deg); }
+  .theme-btn svg { width: 16px; height: 16px; }
+
+  /* ───────── Hero ───────── */
+  .hero {
+    position: relative;
+    min-height: 100vh; min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: calc(var(--nav-h) + 6vh) var(--gutter) 9vh;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: -20%; z-index: -1;
+    background:
+      radial-gradient(40% 50% at 12% 18%, color-mix(in srgb, var(--c1) 16%, transparent), transparent 70%),
+      radial-gradient(36% 46% at 88% 30%, color-mix(in srgb, var(--c4) 14%, transparent), transparent 70%),
+      radial-gradient(40% 40% at 60% 100%, color-mix(in srgb, var(--c3) 12%, transparent), transparent 70%);
+    animation: drift 24s ease-in-out infinite alternate;
+  }
+  @keyframes drift { to { transform: translate3d(3%, -2%, 0) scale(1.06); } }
+
+  .hero-inner { max-width: 1180px; width: 100%; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(17px, 1.7vw, 23px);
+    color: var(--c1);
+  }
+  .hero-title {
+    font-family: var(--serif-ko); font-weight: 900;
+    font-size: clamp(52px, 9vw, 136px);
+    line-height: 1.04; letter-spacing: -.035em;
+    margin: .12em 0 .16em;
+  }
+  .hero-title .line { display: inline-block; vertical-align: top; }
+  .hero-title .hero-sub {
+    display: block; margin-top: .2em;
+    font-size: .38em; font-weight: 500; letter-spacing: -.015em;
+    color: var(--ink-2);
+  }
+  .line { display: block; overflow: hidden; padding-bottom: .04em; }
+  .line > span { display: inline-block; transform: translateY(108%); animation: rise 1.2s var(--ease) forwards; animation-delay: var(--d, 0s); }
+  @keyframes rise { to { transform: none; } }
+  .hero-en {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(20px, 2.6vw, 36px);
+    color: var(--ink-2);
+  }
+  .hero-row {
+    display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(24px, 5vw, 80px); align-items: end;
+    margin-top: clamp(28px, 5vh, 56px);
+  }
+  .hero-lede { max-width: 560px; color: var(--ink-2); font-size: clamp(16px, 1.3vw, 18px); }
+  .hero-stats { display: flex; justify-content: flex-end; gap: clamp(20px, 4vw, 56px); }
+  .hero-stats div { display: flex; flex-direction: column; gap: 6px; }
+  .hero-stats dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
+  .hero-stats dd {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(34px, 4vw, 56px); line-height: 1;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* Ruler (timeline at scale) */
+  .ruler { display: none; margin-top: clamp(36px, 7vh, 72px); }
+  .js .ruler { display: block; }
+  .ruler-cap {
+    display: flex; justify-content: space-between; gap: 16px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-3);
+    padding-bottom: 14px;
+  }
+  .ruler-track { position: relative; height: 52px; }
+  .band {
+    position: absolute; top: 26px; height: 8px;
+    background: var(--b); border-radius: 1px;
+    transform-origin: 0 50%; transform: scaleX(0);
+    transition: transform 1.3s var(--ease), filter .3s;
+    transition-delay: calc(.25s + var(--i) * .2s);
+  }
+  .band:hover { filter: brightness(1.15); }
+  .ruler.in .band { transform: scaleX(1); }
+  .band-label {
+    position: absolute; bottom: 14px; left: 0;
+    font-size: 12px; font-weight: 600; color: var(--b); white-space: nowrap;
+    opacity: 0; transition: opacity .8s; transition-delay: calc(.7s + var(--i) * .2s);
+  }
+  .band.end .band-label { left: auto; right: 0; }
+  .band-label b { font-family: var(--mono); margin-right: 6px; }
+  .ruler.in .band-label { opacity: 1; }
+  .pin {
+    position: absolute; top: 30px; z-index: 2;
+    width: 22px; height: 22px; margin: -11px 0 0 -11px;
+    background: none; border: 0; cursor: pointer;
+    opacity: 0; transform: scale(.4);
+    transition: opacity .5s, transform .5s var(--ease);
+    transition-delay: calc(1s + var(--i) * .06s);
+  }
+  .ruler.in .pin { opacity: 1; transform: none; }
+  .pin::before {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: 9px; height: 9px;
+    background: var(--paper); border: 2px solid var(--b);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: transform .3s var(--ease), background-color .3s;
+  }
+  .pin:hover::before, .pin:focus-visible::before { background: var(--b); transform: translate(-50%, -50%) rotate(45deg) scale(1.35); }
+  .tip {
+    position: absolute; bottom: calc(100% + 8px); left: 50%;
+    transform: translate(-50%, 6px);
+    padding: 7px 11px; border-radius: 3px;
+    background: var(--ink); color: var(--paper);
+    font-size: 12.5px; font-weight: 500; white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s, transform .3s var(--ease);
+  }
+  .tip b { font-family: var(--mono); font-weight: 600; margin-right: 8px; color: var(--b); filter: brightness(1.4); }
+  .pin.tip-l .tip { left: 0; transform: translate(0, 6px); }
+  .pin.tip-r .tip { left: auto; right: 0; transform: translate(0, 6px); }
+  .pin:hover .tip, .pin:focus-visible .tip { opacity: 1; transform: translate(-50%, 0); }
+  .pin.tip-l:hover .tip, .pin.tip-l:focus-visible .tip,
+  .pin.tip-r:hover .tip, .pin.tip-r:focus-visible .tip { transform: none; }
+  .ruler-axis { position: relative; height: 26px; border-top: 1px solid var(--line); }
+  .tick { position: absolute; top: 0; height: 6px; border-left: 1px solid var(--ink-3); }
+  .tick span {
+    position: absolute; top: 9px; left: 0; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); white-space: nowrap;
+  }
+  .ruler-legend {
+    list-style: none;
+    display: flex; flex-wrap: wrap; gap: 10px 28px;
+    margin-top: 14px;
+    font-size: 13px; color: var(--ink-2);
+  }
+  .ruler-legend li { display: flex; align-items: center; gap: 8px; }
+  .ruler-legend i { width: 18px; height: 3px; background: var(--b); }
+  .ruler-legend span { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+
+  .scroll-cue {
+    position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .24em;
+    color: var(--ink-3); text-decoration: none;
+  }
+  .scroll-cue i { width: 1px; height: 34px; background: var(--line); position: relative; overflow: hidden; }
+  .scroll-cue i::after {
+    content: ""; position: absolute; left: 0; top: -40%; width: 100%; height: 40%;
+    background: var(--ink-2);
+    animation: drip 2.2s var(--ease) infinite;
+  }
+  @keyframes drip { to { top: 100%; } }
+
+  /* ───────── Chapters ───────── */
+  .chapter[data-era="1"] { --e: var(--c1); --e-band: var(--c1-band); --e-tint: var(--c1-tint); }
+  .chapter[data-era="2"] { --e: var(--c2); --e-band: var(--c2-band); --e-tint: var(--c2-tint); }
+  .chapter[data-era="3"] { --e: var(--c3); --e-band: var(--c3-band); --e-tint: var(--c3-tint); }
+  .chapter[data-era="4"] { --e: var(--c4); --e-band: var(--c4-band); --e-tint: var(--c4-tint); }
+
+  .chapter-open {
+    position: relative; overflow: hidden; isolation: isolate;
+    min-height: 74vh;
+    display: flex; align-items: flex-end;
+    padding: clamp(110px, 18vh, 200px) var(--gutter) clamp(56px, 10vh, 112px);
+    background: var(--e-band);
+    color: var(--on-band);
+  }
+  .chapter-open::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(60% 80% at 0% 0%, rgba(255, 255, 255, .10), transparent 60%),
+      repeating-linear-gradient(115deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 14px);
+  }
+  .chapter-open::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+    background: var(--e);
+    transform-origin: 0 50%; transform: scaleX(var(--open-p, 0));
+  }
+  .big-num {
+    position: absolute; z-index: -1; right: -1vw; top: 50%;
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(240px, 40vw, 620px); line-height: .78;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, .2);
+    transform: translateY(calc(-50% + var(--py, 0px)));
+    pointer-events: none; user-select: none;
+    will-change: transform;
+  }
+  .open-inner { width: 100%; max-width: 1180px; margin: 0 auto; }
+  .ch-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; opacity: .78; }
+  .ch-title {
+    font-family: var(--serif-ko); font-weight: 900;
+    font-size: clamp(46px, 7.6vw, 112px);
+    line-height: 1.04; letter-spacing: -.03em;
+    margin: .22em 0 .1em;
+  }
+  .ch-en { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 32px); opacity: .86; }
+  .ch-summary { max-width: 640px; margin-top: 26px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.8; opacity: .9; }
+  .ch-alias { opacity: .55; margin: 0 .15em; }
+  .ch-note {
+    max-width: 640px; margin-top: 22px; padding: 2px 0 2px 16px;
+    border-left: 2px solid rgba(255, 255, 255, .45);
+    font-size: 14.5px; line-height: 1.75; opacity: .88;
+  }
+  .ch-note b { display: block; margin-bottom: 4px; font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .2em; }
+  .ch-meta {
+    display: flex; flex-wrap: wrap; gap: 10px 32px;
+    margin-top: 30px; padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, .22);
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; opacity: .85;
+  }
+
+  .chapter-body { background: var(--e-tint); padding: clamp(64px, 12vh, 140px) var(--gutter); }
+  .timeline { position: relative; max-width: 1180px; margin: 0 auto; }
+  .spine {
+    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+    transform: translateX(-50%);
+    background: var(--line);
+  }
+  .spine i {
+    position: absolute; inset: 0;
+    background: var(--e);
+    transform-origin: 50% 0; transform: scaleY(0);
+  }
+  .events { list-style: none; display: flex; flex-direction: column; gap: clamp(48px, 9vh, 104px); }
+  .event {
+    display: grid; grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr);
+    align-items: start;
+  }
+  .when { grid-column: 1; grid-row: 1; text-align: right; padding-top: 4px; }
+  .node { grid-column: 2; grid-row: 1; justify-self: center; }
+  .card { grid-column: 3; grid-row: 1; }
+  .event:nth-child(even) .when { grid-column: 3; text-align: left; }
+  .event:nth-child(even) .card { grid-column: 1; }
+
+  .when-year {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(46px, 5.6vw, 84px); line-height: .95; letter-spacing: -.025em;
+    font-variant-numeric: lining-nums;
+    color: var(--e);
+  }
+  .when-year small { font-family: var(--serif-ko); font-weight: 700; font-size: .4em; letter-spacing: 0; margin-left: .18em; }
+  .when-range { font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; color: var(--ink-3); margin-top: 12px; }
+  .when-tag {
+    display: inline-block; margin-top: 12px;
+    padding: 3px 11px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; color: var(--e);
+    border: 1px solid color-mix(in srgb, var(--e) 45%, transparent);
+  }
+
+  .node {
+    position: relative; z-index: 1;
+    width: 18px; height: 18px; margin-top: 26px;
+    border-radius: 50%;
+    background: var(--e-tint); border: 2px solid var(--line);
+    transition: background-color .5s, border-color .5s, box-shadow .5s;
+  }
+  .event.active .node {
+    background: var(--e); border-color: var(--e);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--e) 16%, transparent);
+  }
+  .event.current .node::after {
+    content: ""; position: absolute; inset: -2px; border-radius: 50%;
+    border: 2px solid var(--e);
+    animation: pulse 2.2s ease-out infinite;
+  }
+  @keyframes pulse { from { transform: scale(1); opacity: .8; } to { transform: scale(2.8); opacity: 0; } }
+
+  .card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: clamp(22px, 2.6vw, 36px);
+    box-shadow: var(--shadow);
+    transition: box-shadow .5s var(--ease), border-color .5s;
+  }
+  .card::before {
+    content: ""; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 3px;
+    border-radius: 6px 0 0 6px;
+    background: var(--e);
+    transform-origin: 50% 0; transform: scaleY(0);
+    transition: transform .8s var(--ease);
+  }
+  .event.active .card::before { transform: scaleY(1); }
+  .card:hover { box-shadow: var(--shadow-hi); border-color: color-mix(in srgb, var(--e) 35%, var(--line)); }
+  .card-title { font-family: var(--serif-ko); font-weight: 700; font-size: clamp(23px, 2.1vw, 30px); line-height: 1.3; letter-spacing: -.01em; }
+  .card-en { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-3); margin-top: 2px; }
+
+  .points { list-style: none; display: grid; gap: 9px; margin-top: 20px; }
+  .points li { position: relative; padding-left: 24px; }
+  .points li::before {
+    content: ""; position: absolute; left: 3px; top: .62em;
+    width: 7px; height: 7px; background: var(--e);
+    transform: rotate(45deg);
+  }
+  .points li.sub { padding-left: 44px; font-size: 15.5px; color: var(--ink-2); margin-top: -3px; }
+  .points li.sub::before { left: 25px; top: .7em; width: 5px; height: 5px; background: transparent; border: 1px solid var(--ink-3); }
+
+  .stats { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 22px; margin-top: 24px; padding: 18px 20px; border-radius: 4px; background: color-mix(in srgb, var(--e) 7%, transparent); }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 2.8vw, 38px); line-height: 1; color: var(--e); font-variant-numeric: tabular-nums lining-nums; }
+  .stat-cap { font-size: 12.5px; color: var(--ink-3); }
+  .stats .arrow { font-family: var(--serif); font-size: 26px; color: var(--ink-3); }
+
+  .ledger-h {
+    margin-top: 26px; padding-bottom: 8px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink-3);
+    border-bottom: 1px solid var(--line);
+  }
+  .ledger > div {
+    display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 14.5px; line-height: 1.6;
+  }
+  .ledger dt { font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--e); padding-top: 1px; }
+  .ledger dd { color: var(--ink-2); }
+
+  .note {
+    margin-top: 22px; padding: 14px 18px;
+    border-left: 2px solid var(--e); border-radius: 0 4px 4px 0;
+    background: color-mix(in srgb, var(--e) 8%, transparent);
+    font-size: 14.5px; line-height: 1.7; color: var(--ink-2);
+  }
+  .note b { display: block; margin-bottom: 4px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; color: var(--e); }
+
+  /* ───────── Colophon ───────── */
+  .colophon { padding: clamp(80px, 16vh, 180px) var(--gutter) 56px; text-align: center; }
+  .motto {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(28px, 5vw, 68px); line-height: 1.15; letter-spacing: -.01em;
+  }
+  .motto span:nth-of-type(1) { color: var(--r1); } .motto span:nth-of-type(2) { color: var(--r2); }
+  .motto span:nth-of-type(3) { color: var(--r3); } .motto span:nth-of-type(4) { color: var(--r4); }
+  .motto span:nth-of-type(5) { color: var(--r5); } .motto span:nth-of-type(6) { color: var(--r6); }
+  .motto span:nth-of-type(7) { color: var(--r7); } .motto span:nth-of-type(8) { color: var(--r8); }
+  .motto i { font-style: normal; color: var(--ink-3); margin: 0 .2em; }
+  .colophon-meta {
+    max-width: 1180px; margin: clamp(56px, 10vh, 110px) auto 0; padding-top: 22px;
+    border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px;
+    font-size: 13px; color: var(--ink-3); text-align: left;
+  }
+  .colophon-meta a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .3s; }
+  .colophon-meta a:hover { border-color: var(--ink-2); }
+  kbd {
+    font-family: var(--mono); font-size: 11px;
+    padding: 1px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 3px;
+  }
+
+  /* ───────── Reveal ───────── */
+  .js .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 1s var(--ease), transform 1s var(--ease);
+    transition-delay: var(--d, 0s);
+  }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  .ruler-insight { margin-top: 14px; max-width: 640px; font-size: 13.5px; color: var(--ink-3); }
+
+  /* Plague dots */
+  .stats.plague { display: block; }
+  .dots { display: grid; grid-template-columns: repeat(15, 14px); gap: 7px; }
+  .dots i {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--e);
+    transition: background-color .7s, box-shadow .7s, opacity .7s;
+    transition-delay: var(--dd, 0s);
+  }
+  .card.in .dots i.dead { background: transparent; box-shadow: inset 0 0 0 1.5px var(--ink-3); opacity: .7; }
+  .card.in .dots i.maybe { background: color-mix(in srgb, var(--e) 30%, transparent); }
+  .dots-cap { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 14px; font-size: 12.5px; color: var(--ink-3); }
+  .dots-cap span { display: inline-flex; align-items: center; gap: 6px; }
+  .dots-cap i { width: 9px; height: 9px; border-radius: 50%; }
+  .d-live { background: var(--e); }
+  .d-dead { box-shadow: inset 0 0 0 1.5px var(--ink-3); }
+  .d-maybe { background: color-mix(in srgb, var(--e) 30%, transparent); }
+
+  /* Definition box */
+  .def {
+    position: relative; margin-top: 24px; padding: 20px 20px 18px;
+    border: 1px solid var(--line); border-top: 2px solid var(--e); border-radius: 0 0 4px 4px;
+    background: var(--paper);
+  }
+  .def::before {
+    content: "DEFINITION"; position: absolute; top: -10px; left: 16px;
+    padding: 0 8px; background: var(--card);
+    font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--e);
+  }
+  .def dt { font-family: var(--serif-ko); font-weight: 700; font-size: 18px; }
+  .def dt .en { font-size: 16px; margin-left: 4px; }
+  .def dd { margin-top: 6px; font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+  .def .vs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
+  .vs span {
+    padding: 2px 9px; border-radius: 999px;
+    border: 1px solid var(--line);
+    font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink);
+  }
+  .vs b { font-weight: 400; color: var(--e); margin: 0 4px; }
+
+  /* Section headings (overview / studio) */
+  .sec-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-3); }
+  .sec-title { font-family: var(--serif-ko); font-weight: 900; font-size: clamp(38px, 5.4vw, 72px); line-height: 1.1; letter-spacing: -.02em; margin: .2em 0 .15em; }
+  .sec-en { font-family: var(--serif); font-style: italic; font-size: clamp(18px, 2vw, 26px); color: var(--ink-2); }
+  .sec-desc { max-width: 640px; margin-top: 18px; color: var(--ink-2); }
+
+  .ov-ctrl { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .pill-btn {
+    padding: 8px 15px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    font: 600 13.5px var(--sans); cursor: pointer;
+    transition: background-color .25s, color .25s, border-color .25s;
+  }
+  .pill-btn:hover { border-color: var(--ink-3); }
+  .pill-btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .ov-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(20px, 3.5vw, 48px); align-items: start; margin-top: 32px; }
+  .ov-note { margin-top: 12px; font-size: 13px; color: var(--ink-3); }
+  /* Mnemonics */
+  .mnemo { display: grid; gap: 14px; }
+  .m-card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px; box-shadow: var(--shadow); }
+  .m-k { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; color: var(--ink-3); }
+  .m-big { font-family: var(--serif); font-weight: 700; font-size: 60px; line-height: 1; margin: 10px 0 8px; }
+  .m-big i { font-style: normal; color: var(--ink-3); margin: 0 .12em; font-weight: 400; }
+  .m-card p:not(.m-k):not(.m-big) { font-size: 14.5px; color: var(--ink-2); }
+  .chant { display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 14px 0 16px; }
+  .chant .g { display: inline-flex; gap: 4px; }
+  .g2 { --ge: var(--c2); } .g3 { --ge: var(--c3); } .g4 { --ge: var(--c4); }
+  .chant i {
+    font-style: normal; font-family: var(--serif-ko); font-weight: 900; font-size: 26px; line-height: 1;
+    padding: 9px 8px; border-radius: 6px;
+    color: var(--ge); background: color-mix(in srgb, var(--ge) 11%, transparent);
+    transition: transform .25s var(--ease), background-color .25s, color .25s;
+  }
+  .chant i.lit { background: var(--ge); color: var(--paper); transform: translateY(-5px) scale(1.08); }
+  .m-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .en-mnemo { font-family: var(--serif); font-size: 20px; line-height: 1.55; margin: 10px 0 8px; color: var(--ink) !important; }
+  .en-mnemo b { font-weight: 800; color: var(--ge); }
+  .m-roots { list-style: none; display: grid; gap: 6px; margin-top: 10px; font-size: 14.5px; color: var(--ink-2); }
+  .m-roots b { font-family: var(--serif); font-style: italic; color: var(--ge); }
+
+  .pnum { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--e); margin-right: 10px; vertical-align: .3em; }
+  /* Studio */
+  .studio { background: var(--paper-2); padding: clamp(80px, 14vh, 150px) var(--gutter); }
+  .studio-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; margin-top: 36px; align-items: start; }
+  .game, .quiz { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: clamp(22px, 2.6vw, 32px); box-shadow: var(--shadow); }
+  .game h3, .quiz h3 { font-family: var(--serif-ko); font-size: 24px; font-weight: 700; }
+  .game-sub { margin-top: 4px; font-size: 14.5px; color: var(--ink-2); }
+  .g-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 16px 0 18px; font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); }
+  .g-bar label { display: inline-flex; align-items: center; gap: 6px; font-family: var(--sans); cursor: pointer; }
+  .g-bar .pill-btn { margin-left: auto; }
+  .g-time { color: var(--ink); font-weight: 600; }
+  .g-slots { list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+  .g-slots li {
+    min-height: 54px; padding: 4px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    border: 1px dashed color-mix(in srgb, var(--e) 50%, var(--line)); border-radius: 5px;
+    text-align: center; font-size: 12.5px; font-weight: 700; line-height: 1.25;
+  }
+  .g-slots li span { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--ink-3); }
+  .g-slots li.filled { background: var(--e); border: 1px solid var(--e); color: var(--paper); animation: pop .45s var(--ease); }
+  .g-slots li.filled span { color: inherit; opacity: .7; }
+  .g-slots.complete li { box-shadow: 0 0 0 2px color-mix(in srgb, var(--e) 40%, transparent); }
+  .g-tiles { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .tile {
+    padding: 9px 15px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+    font: 600 14px var(--sans); cursor: pointer;
+    transition: transform .2s var(--ease), opacity .3s, border-color .2s;
+  }
+  .tile:hover { border-color: var(--ink-3); transform: translateY(-2px); }
+  .tile.ok { opacity: .22; transform: scale(.94); cursor: default; }
+  .tile.bad { animation: shake .4s; border-color: var(--x); color: var(--x); }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+  @keyframes pop { from { transform: scale(.82); opacity: 0; } }
+  .g-msg, .q-feedback { margin-top: 16px; min-height: 1.7em; font-size: 14.5px; color: var(--ink-2); }
+  .q-bar { display: flex; justify-content: space-between; margin-top: 16px; font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); }
+  .q-prog { height: 3px; margin-top: 8px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  .q-prog i { display: block; height: 100%; background: var(--ink); transform-origin: 0 50%; transform: scaleX(var(--qp, 0)); transition: transform .4s var(--ease); }
+  .q-text { margin: 20px 0 16px; font-family: var(--serif-ko); font-size: 20px; font-weight: 700; line-height: 1.5; }
+  .q-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .q-opts button {
+    padding: 12px 14px; border-radius: 6px; text-align: left;
+    border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+    font: 500 15px var(--sans); cursor: pointer;
+    transition: border-color .2s, background-color .2s;
+  }
+  .q-opts button:hover:not(:disabled) { border-color: var(--ink-3); }
+  .q-opts button:disabled { cursor: default; }
+  .q-opts button.right { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 15%, transparent); font-weight: 700; }
+  .q-opts button.wrong { border-color: var(--x); background: color-mix(in srgb, var(--x) 12%, transparent); }
+  .q-feedback b.ok { color: var(--ok); } .q-feedback b.no { color: var(--x); }
+  .q-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .q-result { margin: 20px 0 8px; font-family: var(--serif); font-weight: 600; font-size: 64px; line-height: 1; }
+  .q-result small { font-size: .4em; color: var(--ink-3); }
+
+  .g-modes { display: inline-flex; gap: 4px; }
+  .pill-btn.sm { padding: 5px 11px; font-size: 12.5px; }
+  .g-slots { grid-template-columns: repeat(var(--cols, 6), minmax(0, 1fr)); }
+
+  /* ═════════ Taxonomy page ═════════ */
+  .topbar .studio-link {
+    flex: none;
+    padding: 7px 14px; border-radius: 999px;
+    border: 1px solid var(--line);
+    font-size: 12.5px; font-weight: 700; text-decoration: none; color: var(--ink);
+    transition: border-color .3s, background-color .3s;
+  }
+  .topbar .studio-link:hover { border-color: var(--ink-3); background: var(--line-2); }
+  .sci { font-style: italic; }
+  .taxon { font-family: var(--serif); font-style: italic; }
+
+  /* Hero funnel — where Homo sapiens lives */
+  .funnel { margin-top: clamp(36px, 7vh, 72px); }
+  .fn-rows { list-style: none; display: grid; gap: 6px; }
+  .fn-rows li { --r: var(--ink); }
+  .fn-rows a {
+    display: grid; grid-template-columns: 150px minmax(0, 1fr) 150px 150px;
+    align-items: center; gap: 14px;
+    padding: 4px 6px; border-radius: 6px; text-decoration: none; color: var(--ink);
+    transition: background-color .25s;
+  }
+  .fn-rows a:hover { background: color-mix(in srgb, var(--r) 10%, transparent); }
+  .fn-rank { display: flex; align-items: baseline; gap: 8px; font-size: 13.5px; font-weight: 700; white-space: nowrap; }
+  .fn-rank b { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--r); min-width: 28px; }
+  .fn-rank small { font-weight: 500; color: var(--ink-3); }
+  .fn-bar { position: relative; height: 22px; }
+  .fn-bar i {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: calc(var(--w) * 100%); min-width: 6px; border-radius: 3px;
+    background: var(--r);
+    transform-origin: 0 50%; transform: scaleX(0);
+    transition: transform 1.1s var(--ease);
+    transition-delay: calc(.2s + var(--i) * .11s);
+  }
+  .funnel.in .fn-bar i { transform: scaleX(1); }
+  .fn-taxon { font-family: var(--serif); font-style: italic; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .fn-n { font-family: var(--mono); font-size: 12px; color: var(--ink-2); text-align: right; white-space: nowrap; }
+  .fn-n b { font-weight: 600; color: var(--r); }
+  .fn-note { margin-top: 12px; font-size: 13px; color: var(--ink-3); }
+
+  /* Ladder (interactive) */
+  .ladder-wrap { max-width: 1180px; margin: 0 auto; }
+  .lad-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 32px; align-items: end; }
+  .lad-head h3 { font-family: var(--serif-ko); font-weight: 800; font-size: clamp(22px, 2.4vw, 30px); }
+  .lad-head p { margin-top: 6px; font-size: 15px; color: var(--ink-2); max-width: 620px; }
+  .cmp-toggle { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; cursor: pointer; user-select: none; white-space: nowrap; }
+  .cmp-toggle input { width: 18px; height: 18px; accent-color: var(--e); }
+  .org-block { margin-top: 20px; }
+  .org-k { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; color: var(--ink-3); margin-bottom: 8px; }
+  .org-k b { display: inline-grid; place-items: center; width: 18px; height: 18px; margin-right: 8px; border-radius: 50%; background: var(--e); color: var(--paper); font-size: 10px; letter-spacing: 0; }
+  .org-block.b .org-k b { background: var(--x); }
+  .org-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .org {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px 6px 9px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    font: 600 13.5px var(--sans); cursor: pointer;
+    transition: border-color .2s, background-color .2s, transform .2s var(--ease);
+  }
+  .org:hover { border-color: var(--ink-3); transform: translateY(-1px); }
+  .org[aria-pressed="true"] { background: var(--e); border-color: var(--e); color: var(--paper); }
+  .org-block.b .org[aria-pressed="true"] { background: var(--x); border-color: var(--x); }
+  .org em { font-style: normal; font-size: 16px; line-height: 1; }
+  .lad { margin-top: 28px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
+  .lad-row {
+    display: grid; grid-template-columns: 148px minmax(0, 1fr); align-items: stretch;
+    border-bottom: 1px solid var(--line);
+  }
+  .lad.cmp .lad-row { grid-template-columns: 148px minmax(0, 1fr) minmax(0, 1fr); }
+  .lad-row:last-child { border-bottom: 0; }
+  .lad-rank {
+    display: flex; flex-direction: column; justify-content: center; gap: 2px;
+    padding: 12px 16px; background: var(--rc); color: var(--paper);
+  }
+  .lad-rank b { font-family: var(--mono); font-size: 10.5px; opacity: .8; letter-spacing: .14em; }
+  .lad-rank span { font-size: 15px; font-weight: 800; }
+  .lad-rank small { font-size: 12px; opacity: .85; }
+  .lad-val {
+    display: flex; flex-direction: column; justify-content: center; gap: 2px;
+    padding: 12px 18px; min-height: 60px;
+    background: color-mix(in srgb, var(--rc) 6%, var(--card));
+    border-left: 1px solid var(--line);
+  }
+  .lad-val .v { font-family: var(--serif); font-size: 19px; font-weight: 600; }
+  .lad-val .v.sci { font-style: italic; }
+  .lad-val .k { font-size: 12.5px; color: var(--ink-3); }
+  .lad-val .k i { font-style: normal; color: var(--ink-2); }
+  .lad.cmp .lad-row.same .lad-val { background: color-mix(in srgb, var(--rc) 18%, var(--card)); }
+  .lad.cmp .lad-row.same .lad-val + .lad-val { border-left-style: dashed; }
+  .lad.cmp .lad-row.diff .lad-val { background: var(--card); }
+  .lad-row.split { position: relative; box-shadow: inset 0 0 0 2px var(--x); z-index: 1; }
+  .split-badge {
+    position: absolute; left: 148px; top: -11px; z-index: 2;
+    padding: 2px 10px; border-radius: 999px;
+    background: var(--x); color: #fff; font-size: 11.5px; font-weight: 800; white-space: nowrap;
+  }
+  .lad-msg { margin-top: 16px; font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+  .lad-msg b { color: var(--ink); }
+  .lad-msg .pill { display: inline-block; padding: 1px 10px; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--paper); background: var(--e); margin: 0 2px; }
+  .lad-msg .pill.x { background: var(--x); }
+  .lad-note { margin-top: 10px; font-size: 13px; color: var(--ink-3); }
+
+  /* Rank cards */
+  .rank-en { font-family: var(--serif); font-weight: 600; font-size: clamp(38px, 4.6vw, 64px); line-height: 1; letter-spacing: -.02em; color: var(--rc); }
+  .rank-ko { margin-top: 10px; font-family: var(--serif-ko); font-weight: 900; font-size: 26px; line-height: 1.2; color: var(--ink); }
+  .rank-ko small { font-family: var(--serif); font-weight: 400; font-size: 15px; color: var(--ink-3); margin-left: 8px; }
+  .chapter[data-era="2"] .event { --e: var(--rc); }
+  .chapter[data-era="2"] .when-tag { background: var(--rc); border-color: var(--rc); color: var(--paper); }
+  .chapter[data-era="2"] .node { background: var(--rc); border-color: var(--rc); box-shadow: 0 0 0 6px color-mix(in srgb, var(--rc) 16%, transparent); }
+  .taxa { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+  .taxa span { padding: 4px 11px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--e) 40%, var(--line)); font-family: var(--serif); font-size: 14.5px; }
+  .taxa span.sci { font-style: italic; }
+  .taxa span b { font-family: var(--sans); font-style: normal; font-weight: 500; font-size: 12px; color: var(--ink-3); margin-left: 6px; }
+  .taxa span.hi { background: var(--e); border-color: var(--e); color: var(--paper); }
+  .taxa span.hi b { color: var(--paper); opacity: .85; }
+  .sfx-line { margin-top: 16px; font-size: 14.5px; color: var(--ink-2); }
+  .sfx-line b { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; color: var(--e); margin-right: 10px; }
+  .sfx-line code { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink); background: color-mix(in srgb, var(--e) 10%, transparent); padding: 1px 7px; border-radius: 4px; }
+  .nest { position: relative; margin-top: 22px; padding: 14px; border-radius: 8px; background: color-mix(in srgb, var(--e) 6%, transparent); }
+  .nest-k { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; color: var(--e); margin-bottom: 8px; }
+  .nest-box { border: 1.5px solid var(--bc); border-radius: 7px; padding: 8px 10px 10px; }
+  .nest-box > b { display: block; font-size: 12px; font-weight: 700; color: var(--bc); margin-bottom: 6px; }
+  .nest-box > b i { font-family: var(--serif); font-weight: 400; margin-left: 6px; }
+  .nest-box .nest-box { margin-top: 2px; }
+  .nest-box.leaf { background: var(--bc); color: var(--paper); }
+  .nest-box.leaf > b { color: var(--paper); margin: 0; }
+
+  /* Naming */
+  .name-demo { margin-top: 22px; padding: 26px 22px 18px; border-radius: 8px; background: var(--paper); border: 1px solid var(--line); overflow-x: auto; }
+  .nd-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 22px; font-family: var(--serif); font-size: clamp(26px, 3.4vw, 40px); line-height: 1.1; }
+  .nd-part { position: relative; padding-bottom: 30px; margin-bottom: 6px; }
+  .nd-part::after { content: attr(data-l); position: absolute; left: 0; right: 0; bottom: 4px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; color: var(--pc); white-space: nowrap; }
+  .nd-part::before { content: ""; position: absolute; left: 0; right: 0; bottom: 22px; height: 2px; background: var(--pc); border-radius: 2px; }
+  .nd-part.g { --pc: var(--r7); font-style: italic; }
+  .nd-part.s { --pc: var(--r8); font-style: italic; }
+  .nd-part.a { --pc: var(--ink-3); font-size: .6em; color: var(--ink-2); }
+  .rules { list-style: none; display: grid; gap: 10px; margin-top: 18px; counter-reset: rule; }
+  .rules li { position: relative; padding-left: 36px; font-size: 15px; line-height: 1.65; }
+  .rules li::before { counter-increment: rule; content: counter(rule); position: absolute; left: 0; top: 2px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--e); color: var(--paper); font-family: var(--mono); font-size: 11.5px; font-weight: 600; }
+  .rules code { font-family: var(--serif); font-size: 16px; }
+  .ok-bad { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+  .ok-bad div { padding: 12px 14px; border-radius: 6px; font-family: var(--serif); font-size: 17px; }
+  .ok-bad .ok { background: color-mix(in srgb, var(--ok) 12%, transparent); border: 1px solid color-mix(in srgb, var(--ok) 45%, transparent); }
+  .ok-bad .bad { background: color-mix(in srgb, var(--x) 8%, transparent); border: 1px solid color-mix(in srgb, var(--x) 40%, transparent); text-decoration: line-through; text-decoration-color: var(--x); text-decoration-thickness: 1.5px; color: var(--ink-2); }
+  .ok-bad small { display: block; margin-top: 4px; font-family: var(--sans); font-size: 12px; color: var(--ink-3); text-decoration: none; }
+  .ok-bad .ok small::before { content: "✓ "; color: var(--ok); font-weight: 700; }
+  .ok-bad .bad small::before { content: "✗ "; color: var(--x); font-weight: 700; }
+  .sfx-wrap { overflow-x: auto; margin-top: 18px; -webkit-overflow-scrolling: touch; }
+  .sfx-hint { display: none; margin-top: 8px; font-size: 12px; color: var(--ink-3); }
+  .sfx { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 13.5px; }
+  .sfx th, .sfx td { padding: 9px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .sfx code { white-space: nowrap; }
+  .sfx th { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; font-weight: 600; color: var(--ink-3); text-transform: uppercase; }
+  .sfx td:first-child { font-weight: 700; color: var(--e); white-space: nowrap; }
+  .sfx code { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink); }
+  .sfx small { color: var(--ink-3); }
+  .sub-ranks { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 16px; font-size: 13.5px; }
+  .sub-ranks span { padding: 3px 10px; border-radius: 4px; background: color-mix(in srgb, var(--e) 8%, transparent); }
+  .sub-ranks span b { color: var(--e); margin-right: 4px; }
+  .sub-ranks span.main { background: var(--e); color: var(--paper); font-weight: 700; }
+  .sub-ranks span.main b { color: inherit; }
+  .sub-ranks i { color: var(--ink-3); font-style: normal; }
+
+  /* Rank table (hide & peek) */
+  .rtable { display: grid; grid-template-columns: 48px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); background: var(--card); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); }
+  .rtable > div { display: flex; align-items: center; padding: 11px 12px; border-bottom: 1px solid var(--line); min-height: 50px; }
+  .rtable > div:nth-last-child(-n+4) { border-bottom: 0; }
+  .rtable .h { min-height: 36px; padding: 8px 12px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; color: var(--ink-3); background: var(--paper-2); }
+  .rtable .n { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--rc); background: color-mix(in srgb, var(--rc) 10%, var(--card)); justify-content: center; }
+  .p-ko, .p-en, .p-ex {
+    font: inherit; color: inherit; background: none; border: 0; padding: 2px 4px; margin: -2px -4px;
+    border-radius: 3px; text-align: left; cursor: default;
+    transition: color .25s, background-color .25s;
+  }
+  .p-ko { font-family: var(--serif-ko); font-size: 17px; font-weight: 800; }
+  .p-ko small { font-family: var(--serif); font-weight: 400; font-size: 13px; color: var(--ink-3); margin-left: 6px; }
+  .p-en { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+  .p-ex { font-family: var(--serif); font-size: 16px; color: var(--ink-2); }
+  .rtable.mask-ko .p-ko:not(.peek), .rtable.mask-en .p-en:not(.peek), .rtable.mask-ex .p-ex:not(.peek) {
+    color: transparent; cursor: pointer;
+    background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--rc) 34%, transparent) 0 6px, color-mix(in srgb, var(--rc) 16%, transparent) 6px 12px);
+  }
+  .rtable.mask-ko .p-ko:not(.peek) small { color: transparent; }
+
+  /* Mnemonic extras */
+  .g-ko { --ge: var(--c2); }
+  .hanja { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+  .hanja li { padding: 10px 8px; border-radius: 6px; background: var(--paper); border: 1px solid var(--line); text-align: center; }
+  .hanja b { display: block; font-family: var(--serif-ko); font-size: 30px; font-weight: 900; line-height: 1.1; color: var(--rc); }
+  .hanja span { display: block; margin-top: 4px; font-size: 12.5px; color: var(--ink-2); }
+  .hanja small { display: block; font-size: 11px; color: var(--ink-3); }
+  .story { margin-top: 12px; font-size: 14.5px; line-height: 1.8; }
+  .story b { color: var(--c2); }
+  .addr { list-style: none; display: grid; gap: 4px; margin-top: 12px; }
+  .addr li { display: grid; grid-template-columns: 70px 1fr 1fr; gap: 8px; align-items: center; font-size: 13.5px; }
+  .addr li b { font-family: var(--serif); font-weight: 600; color: var(--rc); }
+  .addr li span { color: var(--ink-2); }
+  .addr li i { font-style: normal; font-weight: 700; }
+  .gloss { list-style: none; display: grid; gap: 8px; margin-top: 12px; }
+  .gloss li { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 10px; font-size: 14px; line-height: 1.55; padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+  .gloss li:last-child { border-bottom: 0; }
+  .gloss b { font-family: var(--serif); font-size: 15px; color: var(--c3); }
+  .gloss b small { display: block; font-family: var(--sans); font-size: 11px; color: var(--ink-3); font-weight: 500; }
+  .mnemo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 32px; }
+  .mnemo-grid .m-card { margin: 0; }
+  .m-card.wide { grid-column: 1 / -1; }
+  .ov-grid { margin-top: 32px; }
+
+  /* ───────── Taxonomy · responsive ───────── */
+  @media (max-width: 980px) {
+    .ov-grid, .studio-grid { grid-template-columns: minmax(0, 1fr); }
+    .fn-rows a { grid-template-columns: 120px minmax(0, 1fr) 120px; }
+    .fn-n { grid-column: 2 / -1; text-align: left; margin-top: -2px; }
+    .fn-bar { grid-row: 1; grid-column: 2; }
+    .fn-taxon { grid-row: 1; grid-column: 3; }
+    .lad-head { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .topbar { gap: 7px; }
+    .topbar .studio-link { padding: 5px 9px; font-size: 12px; }
+    .segs { gap: 4px; }
+    .seg-label b { margin-right: 0; }
+    .yd { min-width: 56px; }
+    .yd.on .yd-num { font-size: 14px; }
+    .sfx-hint { display: block; }
+    .fn-rows a { grid-template-columns: 96px minmax(0, 1fr); gap: 4px 10px; padding: 6px 4px; }
+    .fn-rank { font-size: 12.5px; }
+    .fn-rank small { display: none; }
+    .fn-bar { height: 16px; }
+    .fn-taxon { grid-row: 2; grid-column: 2; font-size: 14px; }
+    .fn-n { grid-row: 2; grid-column: 1; font-size: 11px; text-align: left; }
+    .lad-row, .lad.cmp .lad-row { grid-template-columns: 92px minmax(0, 1fr); }
+    .lad.cmp .lad-row { grid-template-columns: 92px minmax(0, 1fr) minmax(0, 1fr); }
+    .lad-rank { padding: 10px 10px; }
+    .lad-rank span { font-size: 13.5px; }
+    .lad-rank b { display: none; }
+    .lad-rank small { font-size: 11px; }
+    .lad-val { padding: 10px 10px; min-height: 54px; }
+    .lad-val .v { font-size: 15.5px; overflow-wrap: anywhere; }
+    .lad-val .k { font-size: 11.5px; }
+    .split-badge { left: 92px; }
+    .rank-en { font-size: clamp(34px, 11vw, 48px); }
+    .rank-ko { font-size: 22px; }
+    .rtable { grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1fr); }
+    .rtable .ex, .rtable .h.ex { display: none; }
+    .rtable > div { padding: 10px 8px; }
+    .p-ko { font-size: 15px; }
+    .p-en { font-size: 15px; }
+    .ok-bad, .mnemo-grid, .ep-big { grid-template-columns: minmax(0, 1fr); }
+    .hanja { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
+    .hanja b { font-size: 24px; }
+    .hanja span { font-size: 11px; }
+    .addr li { grid-template-columns: 60px 1fr 1fr; font-size: 12.5px; }
+    .gloss li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+    .sfx { font-size: 13px; }
+    .sfx th, .sfx td { padding: 8px 6px; }
+    .g-slots { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .q-opts { grid-template-columns: minmax(0, 1fr); }
+    .chant i { font-size: 22px; padding: 7px 6px; }
+    .m-big { font-size: 48px; }
+    .nd-line { font-size: 24px; }
+  }
+
+  /* ───────── Responsive ───────── */
+  @media (max-width: 980px) {
+    .brand-text { display: none; }
+    .hero-row { grid-template-columns: 1fr; }
+    .hero-stats { justify-content: flex-start; }
+  }
+  @media (max-width: 860px) {
+    .timeline { padding-left: 0; }
+    .spine { left: 11px; transform: none; }
+    .event { grid-template-columns: 24px minmax(0, 1fr); column-gap: 18px; }
+    .node { grid-column: 1; grid-row: 1; margin-top: 18px; width: 16px; height: 16px; }
+    .when, .event:nth-child(even) .when { grid-column: 2; grid-row: 1; text-align: left; padding-top: 0; }
+    .card, .event:nth-child(even) .card { grid-column: 2; grid-row: 2; margin-top: 18px; }
+    .when-year { font-size: clamp(42px, 12vw, 60px); }
+    .when-range, .when-tag { display: inline-block; margin-top: 10px; }
+    .when-range { margin-right: 10px; }
+    .scroll-cue { display: none; }
+  }
+  @media (max-width: 640px) {
+    :root { --nav-h: 56px; }
+    body { font-size: 16px; }
+    .segs { gap: 6px; }
+    .seg-label span { display: none; }
+    .yd { min-width: 96px; }
+    .yd-num { letter-spacing: -.01em; }
+    .yd-num { font-size: 18px; }
+    .theme-btn { width: 34px; height: 34px; }
+    .band-label span { display: none; }
+    .chapter-open { min-height: 64vh; }
+    .ledger > div { grid-template-columns: 92px minmax(0, 1fr); gap: 10px; font-size: 14px; }
+    .card { padding: 22px 20px; }
+    .stats .arrow { transform: rotate(90deg); }
+    .dots { grid-template-columns: repeat(10, 14px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+    .js .reveal { opacity: 1; transform: none; }
+  }
+
+  @media print {
+    .topbar, .progress, .scroll-cue, .theme-btn, .ruler { display: none !important; }
+    body::after { display: none; }
+    .js .reveal { opacity: 1; transform: none; }
+    .hero, .chapter-open { min-height: auto; }
+    .card { box-shadow: none; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<nav class="topbar" aria-label="장 이동">
+  <a class="brand" href="#top"><span class="brand-mark">分類</span><span class="brand-text">Taxonomy</span></a>
+  <ol class="segs">
+    <li><a class="seg" href="#ch1" style="--seg: var(--c1)"><span class="seg-label"><b>I</b><span>분류 사다리</span></span><span class="seg-track"><i></i></span></a></li>
+    <li><a class="seg" href="#ch2" style="--seg: var(--c2)"><span class="seg-label"><b>II</b><span>여덟 계급</span></span><span class="seg-track"><i></i></span></a></li>
+    <li><a class="seg" href="#ch3" style="--seg: var(--c3)"><span class="seg-label"><b>III</b><span>학명</span></span><span class="seg-track"><i></i></span></a></li>
+    <li><a class="seg" href="#ch4" style="--seg: var(--c4)"><span class="seg-label"><b>IV</b><span>역사</span></span><span class="seg-track"><i></i></span></a></li>
+  </ol>
+  <div class="yd" aria-live="off"><small>RANK</small><span class="yd-num">域 → 種</span></div>
+  <a class="studio-link" href="#studio">암기</a>
+  <button class="theme-btn" type="button" aria-label="테마 전환">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+  </button>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <p class="eyebrow"><span class="line"><span style="--d:.05s">Taxonomy · 分類學</span></span></p>
+    <h1 class="hero-title">
+      <span class="line"><span style="--d:.15s">생물&nbsp;분류&nbsp;체계</span></span>
+      <span class="hero-sub line"><span style="--d:.32s">역(域)에서 종(種)까지</span></span>
+    </h1>
+    <p class="hero-en"><span class="line"><span style="--d:.5s">From Domain to Species</span></span></p>
+
+    <div class="hero-row">
+      <p class="hero-lede reveal" style="--d:.6s">생물의 ‘주소’는 여덟 단계로 적습니다. 가장 넓은 <b>역(Domain)</b>에서 가장 좁은 <b>종(Species)</b>까지 — 큰 상자 안에 작은 상자가 들어 있는 구조입니다. 사람(<span class="sci">Homo sapiens</span>)의 주소를 따라가며 여덟 계급을 익히고, 두 생물이 어느 계급에서 갈라지는지 비교해 보세요. 맨 아래 <b>암기 스튜디오</b>에서 외운 것을 확인할 수 있습니다.</p>
+      <dl class="hero-stats reveal" style="--d:.7s">
+        <div><dt>Ranks</dt><dd><span class="count" data-to="8">8</span></dd></div>
+        <div><dt>Domains</dt><dd><span class="count" data-to="3">3</span></dd></div>
+        <div><dt>Species (described)</dt><dd><span class="count" data-to="2.1" data-dec="1">2.1</span>M</dd></div>
+      </dl>
+    </div>
+
+    <figure class="funnel reveal" style="--d:.2s">
+      <figcaption class="ruler-cap"><span>Where we live · 사람의 분류 주소</span><span>계급을 눌러 이동</span></figcaption>
+      <ol class="fn-rows">
+        <li style="--r: var(--r1); --w: 1; --i: 0"><a href="#rk-domain"><span class="fn-rank"><b>I</b>Domain <small>역</small></span><span class="fn-bar"><i></i></span><span class="fn-taxon">Eukarya</span><span class="fn-n">약 <b class="count" data-to="2100000">2,100,000</b> 종</span></a></li>
+        <li style="--r: var(--r2); --w: .97; --i: 1"><a href="#rk-kingdom"><span class="fn-rank"><b>II</b>Kingdom <small>계</small></span><span class="fn-bar"><i></i></span><span class="fn-taxon">Animalia</span><span class="fn-n">약 <b class="count" data-to="1500000">1,500,000</b> 종</span></a></li>
+        <li style="--r: var(--r3); --w: .77; --i: 2"><a href="#rk-phylum"><span class="fn-rank"><b>III</b>Phylum <small>문</small></span><span class="fn-bar"><i></i></span><span class="fn-taxon">Chordata</span><span class="fn-n">약 <b class="count" data-to="70000">70,000</b> 종</span></a></li>
+        <li style="--r: var(--r4); --w: .6; --i: 3"><a href="#rk-class"><span class="fn-rank"><b>IV</b>Class <small>강</small></span><span class="fn-bar"><i></i></span><span class="fn-taxon">Mammalia</span><span class="fn-n">약 <b class="count" data-to="6500">6,500</b> 종</span></a></li>
+        <li style="--r: var(--r5); --w: .43; --i: 4"><a href="#rk-order"><span class="fn-rank"><b>V</b>Order <small>목</small></span><span class="fn-bar"><i></i></span><span class="fn-taxon">Primates</span><span class="fn-n">약 <b class="count" data-to="500">500</b> 종</span></a></li>
+        <li style="--r: var(--r6); --w: .14; --i: 5"><a href="#rk-family"><span class="fn-rank"><b>VI</b>Family <small>과</small></span><span class="fn-bar"><i></i></span><span class="fn-taxon">Hominidae</span><span class="fn-n"><b class="count" data-to="8">8</b> 종</span></a></li>
+        <li style="--r: var(--r7); --w: .04; --i: 6"><a href="#rk-genus"><span class="fn-rank"><b>VII</b>Genus <small>속</small></span><span class="fn-bar"><i></i></span><span class="fn-taxon sci">Homo</span><span class="fn-n"><b>1</b> 종 (현생)</span></a></li>
+        <li style="--r: var(--r8); --w: .04; --i: 7"><a href="#rk-species"><span class="fn-rank"><b>VIII</b>Species <small>종</small></span><span class="fn-bar"><i></i></span><span class="fn-taxon sci">Homo sapiens</span><span class="fn-n"><b>1</b> 종 — 우리</span></a></li>
+      </ol>
+      <p class="fn-note">막대는 각 계급에 속한 기재된 종 수(추정치, 로그 눈금). 아래로 내려갈수록 상자가 작아지고, 마지막엔 한 종만 남습니다.</p>
+    </figure>
+  </div>
+</header>
+
+<main>
+
+  <!-- ═════════════ CHAPTER I · LADDER ═════════════ -->
+  <section class="chapter" id="ch1" data-era="1">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">I</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Chapter I · Interactive</p>
+        <h2 class="ch-title reveal" style="--d:.08s">분류 사다리</h2>
+        <p class="ch-en reveal" style="--d:.16s">The Taxonomic Ladder</p>
+        <p class="ch-summary reveal" style="--d:.24s">생물 하나를 고르면 여덟 칸이 채워집니다. 두 생물을 나란히 놓으면 어디까지 같은 상자에 들어 있다가 어느 계급에서 갈라지는지 보입니다 — 사자와 호랑이는 마지막 칸에서, 사람과 참나무는 두 번째 칸에서 갈라집니다.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>15 Organisms</span><span>3 Domains</span><span>Compare mode</span></div>
+      </div>
+    </div>
+    <div class="chapter-body">
+      <div class="ladder-wrap" id="ladder">
+        <div class="lad-head reveal">
+          <div>
+            <h3>생물을 골라 주소를 읽어 보세요</h3>
+            <p>칩을 누르면 사다리가 채워집니다. ‘두 생물 비교’를 켜면 두 번째 생물을 고를 수 있고, 같은 계급은 색으로, 갈라지는 계급은 빨간 테두리로 표시됩니다.</p>
+          </div>
+          <label class="cmp-toggle"><input type="checkbox" id="cmp"> 두 생물 비교</label>
+        </div>
+        <div class="org-block a reveal" style="--d:.06s">
+          <p class="org-k"><b>A</b>첫 번째 생물</p>
+          <div class="org-list" id="org-a" role="group" aria-label="첫 번째 생물"></div>
+        </div>
+        <div class="org-block b reveal" id="org-b-block" hidden>
+          <p class="org-k"><b>B</b>두 번째 생물</p>
+          <div class="org-list" id="org-b" role="group" aria-label="두 번째 생물"></div>
+        </div>
+        <div class="lad reveal" id="lad" style="--d:.12s" aria-live="polite"></div>
+        <p class="lad-msg" id="lad-msg"></p>
+        <p class="lad-note">분류는 체계와 연구에 따라 조금씩 다릅니다. 여기서는 널리 쓰이는 교과서식 분류를 따랐고, 논쟁이 있는 칸은 사다리 아래에 표시했습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ CHAPTER II · EIGHT RANKS ═════════════ -->
+  <section class="chapter" id="ch2" data-era="2">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">II</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Chapter II · The Eight Ranks</p>
+        <h2 class="ch-title reveal" style="--d:.08s">여덟 계급</h2>
+        <p class="ch-en reveal" style="--d:.16s">Domain · Kingdom · Phylum · Class · Order · Family · Genus · Species</p>
+        <p class="ch-summary reveal" style="--d:.24s">넓은 것에서 좁은 것으로. 각 계급은 바로 위 계급의 상자 안에 들어 있는 더 작은 상자입니다. 계급마다 이름의 뜻, 대표 예, 그리고 이름만 보고 계급을 알아맞히는 접미사 단서를 정리했습니다.</p>
+        <p class="ch-note reveal" style="--d:.28s"><b>RANK = 계급 · TAXON = 분류군</b>‘Family’는 계급(rank)의 이름이고, ‘Hominidae’는 그 계급에 놓인 실제 무리, 즉 분류군(taxon, 복수 taxa)입니다. 분류군은 라틴어식 고유명사라 첫 글자를 대문자로 씁니다.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>08 Ranks</span><span>Broad → Narrow</span><span>域 界 門 綱 目 科 屬 種</span></div>
+      </div>
+    </div>
+    <div class="chapter-body">
+      <div class="timeline">
+        <div class="spine" aria-hidden="true"><i></i></div>
+        <ol class="events">
+
+          <li class="event" id="rk-domain" data-rank="1" data-label="I · Domain" style="--rc: var(--r1)">
+            <div class="when reveal">
+              <div class="rank-en">Domain</div>
+              <div class="rank-ko">역<small>域 · 지경 역</small></div>
+              <span class="when-tag">I / VIII · 가장 넓은 계급</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title"><span class="pnum">01</span>역 — 생명의 세 갈래</h3>
+              <p class="card-en">Domain · 어원: 라틴어 <i>dominium</i>(영지, 지배 영역)</p>
+              <ul class="points">
+                <li>세포의 기본 구조로 나눈 가장 큰 세 상자 — <span class="kw">Bacteria</span>(세균) · <span class="kw">Archaea</span>(고세균) · <span class="kw">Eukarya</span>(진핵생물)</li>
+                <li>Eukarya = 핵이 있는 세포 — 동물 · 식물 · 균류 · 원생생물이 모두 여기에</li>
+                <li class="sub">1990년 칼 우즈가 rRNA 비교로 제안 — 가장 젊은 계급</li>
+              </ul>
+              <div class="taxa"><span class="hi">Eukarya<b>사람</b></span><span>Bacteria<b>대장균</b></span><span>Archaea<b>고세균</b></span></div>
+              <p class="note"><b>NOTE</b>옛 5계 체계(1969)에는 역이 없었다. 영어 암기 문장이 “King Philip…”으로 시작하면 7계급, “Dear King Philip…”으로 시작하면 역을 포함한 8계급이다.</p>
+            </article>
+          </li>
+
+          <li class="event" id="rk-kingdom" data-rank="2" data-label="II · Kingdom" style="--rc: var(--r2)">
+            <div class="when reveal">
+              <div class="rank-en">Kingdom</div>
+              <div class="rank-ko">계<small>界 · 지경 계</small></div>
+              <span class="when-tag">II / VIII</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title"><span class="pnum">02</span>계 — 동물 · 식물 · 균류</h3>
+              <p class="card-en">Kingdom · 어원: 고대 영어 <i>cyningdōm</i>(왕의 영역)</p>
+              <ul class="points">
+                <li>진핵생물의 네 계 — <span class="kw">Animalia</span>(동물) · <span class="kw">Plantae</span>(식물) · <span class="kw">Fungi</span>(균류) · Protista(원생생물)</li>
+                <li>6계 체계에서는 Bacteria · Archaea를 더해 여섯</li>
+                <li class="sub">린네(1735)는 동물계 · 식물계 · 광물계의 ‘자연의 세 왕국’으로 시작했다</li>
+              </ul>
+              <div class="taxa"><span class="hi">Animalia<b>사람</b></span><span>Plantae<b>참나무</b></span><span>Fungi<b>효모</b></span><span>Protista<b>아메바</b></span></div>
+              <p class="note"><b>NOTE</b>버섯은 식물이 아니라 균류(Fungi)다. 광합성을 하지 않고 바깥에서 소화해 흡수하며, 세포벽이 키틴이라는 점에서 오히려 동물에 가깝다.</p>
+            </article>
+          </li>
+
+          <li class="event" id="rk-phylum" data-rank="3" data-label="III · Phylum" style="--rc: var(--r3)">
+            <div class="when reveal">
+              <div class="rank-en">Phylum</div>
+              <div class="rank-ko">문<small>門 · 문 문</small></div>
+              <span class="when-tag">III / VIII · 복수 phyla</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title"><span class="pnum">03</span>문 — 몸의 기본 설계</h3>
+              <p class="card-en">Phylum (pl. <i>phyla</i>) · 어원: 그리스어 <i>phȳlon</i>(부족, 종족)</p>
+              <ul class="points">
+                <li>몸의 기본 체제(body plan)로 나눈다 — 동물문은 약 35개</li>
+                <li><span class="kw">Chordata</span>(척삭동물) — 등쪽에 척삭이 있는 무리, 척추동물은 그 안의 아문</li>
+                <li><span class="kw">Arthropoda</span>(절지동물) — 종 수가 가장 많은 문 (100만 종 이상, 대부분 곤충)</li>
+                <li>식물 · 균류에서는 전통적으로 <span class="kw">Division</span>(문)이라고 불렀다 — 지금은 둘 다 허용</li>
+              </ul>
+              <div class="taxa"><span class="hi">Chordata<b>사람 · 닭</b></span><span>Arthropoda<b>꿀벌</b></span><span>Mollusca<b>문어</b></span><span>Cnidaria<b>해파리</b></span><span>Magnoliophyta<b>벼 · 참나무</b></span><span>Ascomycota<b>효모</b></span></div>
+              <p class="sfx-line"><b>SUFFIX</b>식물의 문은 <code>-phyta</code>, 균류의 문은 <code>-mycota</code>, 세균의 문은 <code>-ota</code></p>
+              <p class="note"><b>NOTE</b>‘phylum’은 1866년 헤켈이 만든 말이다. 그는 ‘phylogeny’(계통발생)와 ‘ecology’(생태학)도 함께 만들었다.</p>
+            </article>
+          </li>
+
+          <li class="event" id="rk-class" data-rank="4" data-label="IV · Class" style="--rc: var(--r4)">
+            <div class="when reveal">
+              <div class="rank-en">Class</div>
+              <div class="rank-ko">강<small>綱 · 벼리 강</small></div>
+              <span class="when-tag">IV / VIII</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title"><span class="pnum">04</span>강 — 포유류, 조류, 곤충</h3>
+              <p class="card-en">Class · 어원: 라틴어 <i>classis</i>(시민의 등급, 함대)</p>
+              <ul class="points">
+                <li>척삭동물문 안의 강 — <span class="kw">Mammalia</span>(포유강) · Aves(조강) · Reptilia(파충강) · Amphibia(양서강) · Actinopterygii(조기어강)</li>
+                <li>Mammalia의 기준 — 털, 젖, 세 개의 귓속뼈</li>
+                <li>절지동물문 안의 강 — <span class="kw">Insecta</span>(곤충강) · Arachnida(거미강) · Malacostraca(연갑강: 게 · 새우)</li>
+              </ul>
+              <div class="taxa"><span class="hi">Mammalia<b>사람 · 개 · 생쥐</b></span><span>Aves<b>닭</b></span><span>Insecta<b>꿀벌 · 초파리</b></span><span>Magnoliopsida<b>참나무</b></span></div>
+              <p class="sfx-line"><b>SUFFIX</b>식물의 강은 <code>-opsida</code>, 균류의 강은 <code>-mycetes</code>, 조류(藻類)의 강은 <code>-phyceae</code></p>
+              <p class="note"><b>NOTE</b>한자 綱(벼리)은 그물의 굵은 줄이다. 벼리를 당기면 그물 전체가 따라오듯, 강은 문 안의 큰 줄기를 뜻한다. ‘강령(綱領)’의 그 강이다.</p>
+            </article>
+          </li>
+
+          <li class="event" id="rk-order" data-rank="5" data-label="V · Order" style="--rc: var(--r5)">
+            <div class="when reveal">
+              <div class="rank-en">Order</div>
+              <div class="rank-ko">목<small>目 · 눈 목</small></div>
+              <span class="when-tag">V / VIII</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title"><span class="pnum">05</span>목 — 영장류, 식육류, 설치류</h3>
+              <p class="card-en">Order · 어원: 라틴어 <i>ordo</i>(줄, 서열)</p>
+              <ul class="points">
+                <li>포유강 안의 목 — <span class="kw">Primates</span>(영장목) · <span class="kw">Carnivora</span>(식육목) · <span class="kw">Rodentia</span>(설치목, 포유류의 약 40%) · Chiroptera(박쥐목)</li>
+                <li>곤충강 안의 목 — <span class="kw">Coleoptera</span>(딱정벌레목, 약 40만 종으로 동물계 최대) · Lepidoptera(나비목) · Diptera(파리목) · Hymenoptera(벌목)</li>
+              </ul>
+              <div class="taxa"><span class="hi">Primates<b>사람 · 침팬지</b></span><span>Carnivora<b>개 · 고양이 · 사자</b></span><span>Rodentia<b>생쥐</b></span><span>Galliformes<b>닭</b></span><span>Hymenoptera<b>꿀벌</b></span><span>Poales<b>벼</b></span></div>
+              <p class="sfx-line"><b>SUFFIX</b>새 · 물고기의 목은 <code>-formes</code>(Passeriformes), 곤충의 목은 흔히 <code>-ptera</code>(‘날개’: Lepidoptera = 비늘 날개), 식물 · 균류 · 세균의 목은 <code>-ales</code>(Rosales)</p>
+              <p class="note"><b>NOTE</b>目은 ‘눈’이지만 ‘항목 · 조목’의 뜻도 있다. 목차(目次) · 항목(項目)의 목 — 강을 다시 항목별로 나눈 것.</p>
+            </article>
+          </li>
+
+          <li class="event" id="rk-family" data-rank="6" data-label="VI · Family" style="--rc: var(--r6)">
+            <div class="when reveal">
+              <div class="rank-en">Family</div>
+              <div class="rank-ko">과<small>科 · 과목 과</small></div>
+              <span class="when-tag">VI / VIII</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title"><span class="pnum">06</span>과 — 이름만 봐도 아는 계급</h3>
+              <p class="card-en">Family · 어원: 라틴어 <i>familia</i>(한 집안)</p>
+              <ul class="points">
+                <li><span class="kw">Hominidae</span>(사람과) — 사람 · 침팬지 · 보노보 · 고릴라 · 오랑우탄, 현생 8종</li>
+                <li><span class="kw">Felidae</span>(고양이과) · <span class="kw">Canidae</span>(개과) · Ursidae(곰과) — 식육목 안의 과들</li>
+                <li>식물 — <span class="kw">Rosaceae</span>(장미과: 사과 · 벚나무) · <span class="kw">Poaceae</span>(벼과: 벼 · 밀 · 옥수수) · Fabaceae(콩과)</li>
+              </ul>
+              <div class="taxa"><span class="hi">Hominidae<b>사람</b></span><span>Canidae<b>개 · 늑대 · 여우</b></span><span>Felidae<b>고양이 · 사자</b></span><span>Apidae<b>꿀벌</b></span><span>Poaceae<b>벼</b></span><span>Fagaceae<b>참나무</b></span></div>
+              <p class="sfx-line"><b>SUFFIX</b>동물의 과는 반드시 <code>-idae</code>, 식물 · 균류 · 세균의 과는 반드시 <code>-aceae</code> — 지문에서 <i>-idae</i>를 보면 ‘동물의 과’, <i>-aceae</i>를 보면 ‘식물의 과’</p>
+              <p class="note"><b>NOTE</b>과(科)는 린네의 원래 체계에 없던 계급이다. 1689년 식물학자 마뇰이 처음 썼고, 18세기 말 식물학에서 널리 쓰이다 동물 분류로 퍼졌다.</p>
+            </article>
+          </li>
+
+          <li class="event" id="rk-genus" data-rank="7" data-label="VII · Genus" style="--rc: var(--r7)">
+            <div class="when reveal">
+              <div class="rank-en">Genus</div>
+              <div class="rank-ko">속<small>屬 · 무리 속</small></div>
+              <span class="when-tag">VII / VIII · 복수 genera</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title"><span class="pnum">07</span>속 — 학명의 첫 단어</h3>
+              <p class="card-en">Genus (pl. <i>genera</i>) · 어원: 라틴어 <i>genus</i>(태생, 종류) — <i>general</i> · <i>generate</i>와 같은 뿌리</p>
+              <ul class="points">
+                <li>학명의 <span class="kw">첫 단어</span> — 대문자로 시작, 이탤릭: <span class="sci">Homo</span>, <span class="sci">Canis</span>, <span class="sci">Panthera</span>, <span class="sci">Quercus</span></li>
+                <li>같은 속 = 가까운 친척 — 사자(<span class="sci">Panthera leo</span>)와 호랑이(<span class="sci">Panthera tigris</span>), 늑대(<span class="sci">Canis lupus</span>)와 개(<span class="sci">Canis familiaris</span>)</li>
+                <li>속명만 알아도 어느 무리인지 안다 — <span class="sci">Homo</span>라면 사람속의 어떤 종</li>
+              </ul>
+              <div class="taxa"><span class="hi sci">Homo<b>사람</b></span><span class="sci">Pan<b>침팬지</b></span><span class="sci">Canis<b>개 · 늑대</b></span><span class="sci">Panthera<b>사자 · 호랑이</b></span><span class="sci">Felis<b>고양이</b></span><span class="sci">Quercus<b>참나무</b></span></div>
+              <p class="note"><b>NOTE</b>속명은 한 번 쓴 뒤에는 첫 글자만 남겨 줄인다 — <span class="sci">H. sapiens</span>, <span class="sci">E. coli</span>. 복수형 genera는 GRE 어휘로도 자주 나온다.</p>
+            </article>
+          </li>
+
+          <li class="event" id="rk-species" data-rank="8" data-label="VIII · Species" style="--rc: var(--r8)">
+            <div class="when reveal">
+              <div class="rank-en">Species</div>
+              <div class="rank-ko">종<small>種 · 씨 종</small></div>
+              <span class="when-tag">VIII / VIII · 가장 좁은 계급</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title"><span class="pnum">08</span>종 — 분류의 기본 단위</h3>
+              <p class="card-en">Species (단수 · 복수 같음) · 어원: 라틴어 <i>species</i>(모습, 종류) — <i>special</i> · <i>specific</i>과 같은 뿌리</p>
+              <ul class="points">
+                <li><span class="kw">생물학적 종 개념</span>(마이어, 1942) — 자연에서 서로 교배해 번식 가능한 자손을 낳는 무리</li>
+                <li>학명의 <span class="kw">둘째 단어</span>(종소명)는 소문자 — <span class="sci">Homo <b>sapiens</b></span>, 종소명만으로는 이름이 되지 않는다</li>
+                <li>종 아래로 <span class="kw">아종</span>(subspecies)이 올 수 있다 — <span class="sci">Canis lupus familiaris</span>(개), <span class="sci">Homo sapiens sapiens</span></li>
+                <li>기재된 종 약 210만 · 추정되는 진핵생물 종 약 870만 (2011) — 아직 대부분이 이름 없이 남아 있다</li>
+              </ul>
+              <div class="taxa"><span class="hi sci">Homo sapiens<b>사람</b></span><span class="sci">Pan troglodytes<b>침팬지</b></span><span class="sci">Felis catus<b>집고양이</b></span><span class="sci">Apis mellifera<b>꿀벌</b></span><span class="sci">Oryza sativa<b>벼</b></span><span class="sci">Escherichia coli<b>대장균</b></span></div>
+              <div class="nest" style="--bc: var(--r8)">
+                <p class="nest-k">NESTED BOXES · 상자 속의 상자</p>
+                <div class="nest-box" style="--bc: var(--r1)"><b>Eukarya<i>역</i></b>
+                  <div class="nest-box" style="--bc: var(--r2)"><b>Animalia<i>계</i></b>
+                    <div class="nest-box" style="--bc: var(--r3)"><b>Chordata<i>문</i></b>
+                      <div class="nest-box" style="--bc: var(--r4)"><b>Mammalia<i>강</i></b>
+                        <div class="nest-box" style="--bc: var(--r5)"><b>Primates<i>목</i></b>
+                          <div class="nest-box" style="--bc: var(--r6)"><b>Hominidae<i>과</i></b>
+                            <div class="nest-box" style="--bc: var(--r7)"><b><span class="sci">Homo</span><i>속</i></b>
+                              <div class="nest-box leaf" style="--bc: var(--r8)"><b><span class="sci">Homo sapiens</span><i>종</i></b></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="note"><b>NOTE</b>‘species’는 단수와 복수가 같다 (a species, two species). 단수를 ‘specie’라고 쓰면 틀린다 — specie는 ‘정화(正貨), 주화’라는 전혀 다른 단어다.</p>
+            </article>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ CHAPTER III · NAMING ═════════════ -->
+  <section class="chapter" id="ch3" data-era="3">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">III</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Chapter III · Nomenclature</p>
+        <h2 class="ch-title reveal" style="--d:.08s">학명 쓰는 법</h2>
+        <p class="ch-en reveal" style="--d:.16s">Binomial Nomenclature</p>
+        <p class="ch-summary reveal" style="--d:.24s">린네가 정착시킨 두 단어 이름. 속명 + 종소명으로 세계 어디서나 같은 생물을 가리킵니다. 쓰는 규칙은 네 가지뿐이고, 접미사만 알면 이름을 처음 봐도 계급을 짐작할 수 있습니다.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>2 Words</span><span>Latin</span><span>Italic</span></div>
+      </div>
+    </div>
+    <div class="chapter-body">
+      <div class="timeline">
+        <div class="spine" aria-hidden="true"><i></i></div>
+        <ol class="events">
+
+          <li class="event" id="nm-binomial" data-label="이명법 · 1758">
+            <div class="when reveal">
+              <div class="when-year">1758</div>
+              <div class="when-range">Systema Naturae 10판</div>
+              <span class="when-tag">이명법의 출발점</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">이명법 — 두 단어로 된 이름</h3>
+              <p class="card-en">Binomial nomenclature · <i>bi</i>(둘) + <i>nomen</i>(이름)</p>
+              <div class="name-demo" aria-label="학명의 구조">
+                <p class="nd-line"><span class="nd-part g" data-l="GENUS · 속명">Homo</span><span class="nd-part s" data-l="EPITHET · 종소명">sapiens</span><span class="nd-part a" data-l="AUTHOR · 저자, 연도">Linnaeus, 1758</span></p>
+              </div>
+              <ol class="rules">
+                <li><b>속명은 대문자</b>로 시작하고 <b>종소명은 소문자</b> — <code class="sci">Homo sapiens</code>, 사람 이름에서 왔어도 소문자(<code class="sci">Rhea darwinii</code>)</li>
+                <li>두 단어 모두 <b>이탤릭</b>(손글씨면 밑줄) — 둘러싼 글과 구별하기 위해. 저자 · 연도는 정체</li>
+                <li>한 번 쓴 뒤에는 속명을 <b>첫 글자로 줄인다</b> — <code class="sci">H. sapiens</code>, <code class="sci">E. coli</code>. 종소명은 절대 혼자 쓰지 않는다 (sapiens만으로는 뜻이 없다)</li>
+                <li><b>라틴어</b>이거나 라틴어처럼 만든 말 — 어떤 언어에서 왔든 라틴어 문법에 맞춘다 (<code class="sci">Gorilla gorilla</code>처럼 같은 말을 반복해도 된다 — 동물에서만)</li>
+              </ol>
+              <div class="ok-bad">
+                <div class="ok"><span class="sci">Panthera leo</span><small>속명 대문자 · 종소명 소문자 · 이탤릭</small></div>
+                <div class="bad">Panthera Leo<small>종소명을 대문자로 썼다</small></div>
+                <div class="ok"><span class="sci">P. leo</span><small>두 번째부터는 속명을 줄여도 된다</small></div>
+                <div class="bad">leo<small>종소명만 따로 쓸 수 없다</small></div>
+              </div>
+              <p class="ledger-h">Abbreviations · 자주 보는 약어</p>
+              <dl class="ledger">
+                <div><dt>sp. / spp.</dt><dd>종(단수) / 종들(복수) — 속은 알지만 종을 특정하지 않을 때: <span class="sci">Quercus</span> sp.</dd></div>
+                <div><dt>subsp. · ssp.</dt><dd>아종 — <span class="sci">Homo sapiens</span> subsp. <span class="sci">sapiens</span>. 세 단어로 쓰면 삼명법(trinomial)</dd></div>
+                <div><dt>var.</dt><dd>변종(식물) — <span class="sci">Brassica oleracea</span> var. <span class="sci">italica</span>(브로콜리)</dd></div>
+                <div><dt>cf. · aff.</dt><dd>‘~와 비교하라’ · ‘~와 유연관계’ — 동정이 확실하지 않을 때</dd></div>
+                <div><dt>×</dt><dd>잡종 — <span class="sci">Citrus</span> × <span class="sci">sinensis</span>(오렌지)</dd></div>
+                <div><dt>syn.</dt><dd>이명(異名) — 같은 생물의 옛 이름. 먼저 발표된 이름이 우선권을 가진다</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b>동물 이름은 1758년(린네 『자연의 체계』 10판), 식물 이름은 1753년(『식물의 종』)을 출발점으로 삼는다. 그 이전의 이름은 무효다.</p>
+            </article>
+          </li>
+
+          <li class="event" id="nm-suffix" data-label="접미사 단서">
+            <div class="when reveal">
+              <div class="when-year">-idae</div>
+              <div class="when-range">-aceae · -ales · -formes</div>
+              <span class="when-tag">이름으로 계급 읽기</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">접미사 단서 — 처음 보는 이름의 계급 맞히기</h3>
+              <p class="card-en">Rank-group suffixes · 지문에서 바로 쓰는 추론 규칙</p>
+              <div class="sfx-wrap"><table class="sfx">
+                <thead><tr><th>계급</th><th>동물</th><th>식물 · 균류</th><th>세균</th><th>예</th></tr></thead>
+                <tbody>
+                  <tr><td>문 Phylum</td><td><small>규칙 없음</small></td><td><code>-phyta</code> · <code>-mycota</code></td><td><code>-ota</code></td><td>Magnoliophyta · Ascomycota · Pseudomonadota</td></tr>
+                  <tr><td>강 Class</td><td><small>규칙 없음</small></td><td><code>-opsida</code> · <code>-mycetes</code></td><td><code>-ia</code></td><td>Magnoliopsida · Saccharomycetes</td></tr>
+                  <tr><td>목 Order</td><td><code>-formes</code> <small>(새 · 물고기)</small> · <code>-ptera</code> <small>(곤충, 관례)</small></td><td><code>-ales</code></td><td><code>-ales</code></td><td>Galliformes · Lepidoptera · Rosales · Enterobacterales</td></tr>
+                  <tr><td>상과 Superfamily</td><td><code>-oidea</code></td><td><code>-acea</code></td><td>—</td><td>Hominoidea</td></tr>
+                  <tr><td>과 Family</td><td><code>-idae</code></td><td><code>-aceae</code></td><td><code>-aceae</code></td><td>Hominidae · Felidae · Rosaceae · Enterobacteriaceae</td></tr>
+                  <tr><td>아과 Subfamily</td><td><code>-inae</code></td><td><code>-oideae</code></td><td><code>-oideae</code></td><td>Homininae · Pantherinae</td></tr>
+                  <tr><td>족 Tribe</td><td><code>-ini</code></td><td><code>-eae</code></td><td><code>-eae</code></td><td>Hominini</td></tr>
+                </tbody>
+              </table></div>
+              <p class="sfx-hint">표는 옆으로 밀어서 볼 수 있습니다 →</p>
+              <p class="sfx-line"><b>READ</b><code>Hominidae</code>는 동물의 과(科), <code>Rosaceae</code>는 식물의 과, <code>Passeriformes</code>는 새의 목(目), <code>Hominoidea</code>는 상과 — 접미사만으로 읽힌다</p>
+              <p class="ledger-h">Between the ranks · 사람의 중간 계급</p>
+              <div class="sub-ranks">
+                <span class="main"><b>문</b>Chordata</span><i>›</i><span><b>아문</b>Vertebrata</span><i>›</i>
+                <span class="main"><b>강</b>Mammalia</span><i>›</i>
+                <span class="main"><b>목</b>Primates</span><i>›</i><span><b>아목</b>Haplorhini</span><i>›</i><span><b>하목</b>Simiiformes</span><i>›</i><span><b>상과</b>Hominoidea</span><i>›</i>
+                <span class="main"><b>과</b>Hominidae</span><i>›</i><span><b>아과</b>Homininae</span><i>›</i><span><b>족</b>Hominini</span><i>›</i>
+                <span class="main"><b>속</b><span class="sci">Homo</span></span>
+              </div>
+              <p class="note"><b>NOTE</b>여덟 계급 사이에는 super-(상) · sub-(아) · infra-(하)를 붙인 중간 계급과 족(tribe)이 끼어들 수 있다. 접두사만 보면 위치를 안다 — super는 위, sub는 아래, infra는 sub보다 더 아래.</p>
+            </article>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ CHAPTER IV · HISTORY ═════════════ -->
+  <section class="chapter" id="ch4" data-era="4">
+    <div class="chapter-open">
+      <div class="big-num" aria-hidden="true">IV</div>
+      <div class="open-inner">
+        <p class="ch-kicker reveal">Chapter IV · A Short History</p>
+        <h2 class="ch-title reveal" style="--d:.08s">분류학의 역사</h2>
+        <p class="ch-en reveal" style="--d:.16s">From Aristotle to DNA</p>
+        <p class="ch-summary reveal" style="--d:.24s">모습이 닮은 것끼리 묶던 분류가, 다윈 이후에는 ‘누가 누구와 더 가까운 친척인가’를 묻는 계통의 지도가 되었다. 계급의 수도 셋에서 여덟으로 늘었다.</p>
+        <div class="ch-meta reveal" style="--d:.32s"><span>c. 350 BCE — 2016</span><span>04 Milestones</span><span>Linnaeus → Woese</span></div>
+      </div>
+    </div>
+    <div class="chapter-body">
+      <div class="timeline">
+        <div class="spine" aria-hidden="true"><i></i></div>
+        <ol class="events">
+
+          <li class="event" id="hs-linnaeus" data-label="린네 · 1735">
+            <div class="when reveal">
+              <div class="when-year">1735</div>
+              <div class="when-range">c. 350 BCE — 1758</div>
+              <span class="when-tag">계급과 이명법</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">린네 — 체계를 세우다</h3>
+              <p class="card-en">Carl Linnaeus · <i>Systema Naturae</i></p>
+              <ul class="points">
+                <li>계 · 강 · 목 · 속 · 종의 <span class="kw">계층 분류</span>와 <span class="kw">이명법</span>을 정착시킴 — ‘분류학의 아버지’</li>
+                <li>기준은 겉모습 — 식물은 수술 · 암술의 수로 나누는 ‘성(性) 체계’</li>
+                <li class="sub">사람에게 <span class="sci">Homo sapiens</span>(지혜로운 사람)라는 이름을 붙인 것도 린네</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>c. 350 BCE</dt><dd>아리스토텔레스 『동물지』 — 피가 있는 동물 / 없는 동물로 묶은 최초의 체계적 분류</dd></div>
+                <div><dt>1735</dt><dd>린네 『자연의 체계』 초판 — 동물 · 식물 · 광물의 세 왕국</dd></div>
+                <div><dt>1753</dt><dd>『식물의 종』 — 식물 학명의 출발점</dd></div>
+                <div><dt>1758</dt><dd>『자연의 체계』 10판 — 동물 학명의 출발점, 사람을 영장목에 넣음</dd></div>
+              </dl>
+            </article>
+          </li>
+
+          <li class="event" id="hs-darwin" data-label="다윈 · 1859">
+            <div class="when reveal">
+              <div class="when-year">1859</div>
+              <div class="when-range">1859 — 1866</div>
+              <span class="when-tag">계통수</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">다윈과 헤켈 — 분류가 족보가 되다</h3>
+              <p class="card-en">Descent with modification · The Tree of Life</p>
+              <ul class="points">
+                <li>다윈 『종의 기원』 — 생물이 닮은 이유는 <span class="kw">공통 조상</span>에서 갈라졌기 때문. 분류 체계는 곧 <span class="kw">계보</span>(genealogy)</li>
+                <li>헤켈 — 생명의 나무를 그리고 <span class="kw">phylum</span> · <span class="kw">phylogeny</span>(계통발생) · ecology라는 말을 만듦, 원생생물계(Protista) 제안</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1859</dt><dd>다윈 『종의 기원』 — 책 속 유일한 그림이 가지 치는 계통도</dd></div>
+                <div><dt>1866</dt><dd>헤켈 『일반 형태학』 — 세 계(식물 · 동물 · 원생생물)와 계통수</dd></div>
+              </dl>
+            </article>
+          </li>
+
+          <li class="event" id="hs-hennig" data-label="헤니히 · 1950">
+            <div class="when reveal">
+              <div class="when-year">1950</div>
+              <div class="when-range">1950 — 1969</div>
+              <span class="when-tag">분기학 · 5계</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">헤니히와 휘태커 — 가지로 묶고, 다섯 계로 나누다</h3>
+              <p class="card-en">Cladistics · Five Kingdoms</p>
+              <ul class="points">
+                <li>헤니히의 <span class="kw">분기학</span>(cladistics) — 공통 조상의 모든 후손을 하나의 분기군(<span class="kw">clade</span>)으로. ‘파충류’처럼 새를 뺀 묶음은 자연 분류군이 아님</li>
+                <li>휘태커의 <span class="kw">5계</span> — Monera · Protista · Fungi · Plantae · Animalia. 균류가 식물에서 독립</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1942</dt><dd>마이어 — 생물학적 종 개념</dd></div>
+                <div><dt>1950 / 1966</dt><dd>헤니히 『계통 체계학의 기초』 (영어판 1966)</dd></div>
+                <div><dt>1969</dt><dd>휘태커 — 다섯 계 체계</dd></div>
+              </dl>
+              <p class="note"><b>NOTE</b>GRE 지문의 단골 어휘 <i>clade</i>, <i>cladistics</i>, <i>monophyletic</i>(단계통)은 모두 여기서 나온다. 분기군 = 한 조상과 그 후손 전부.</p>
+            </article>
+          </li>
+
+          <li class="event" id="hs-woese" data-label="우즈 · 1990">
+            <div class="when reveal">
+              <div class="when-year">1990</div>
+              <div class="when-range">1977 — 2016</div>
+              <span class="when-tag">세 역 · DNA</span>
+            </div>
+            <span class="node" aria-hidden="true"></span>
+            <article class="card reveal" style="--d:.1s">
+              <h3 class="card-title">우즈 — 분자로 다시 그린 생명의 나무</h3>
+              <p class="card-en">Three Domains · Molecular Phylogenetics</p>
+              <ul class="points">
+                <li>칼 우즈 — rRNA 염기서열을 비교해 고세균(<span class="kw">Archaea</span>)이 세균과 전혀 다른 갈래임을 발견 → 계 위에 <span class="kw">역</span>(Domain)이라는 새 계급</li>
+                <li>DNA 비교가 분류의 기준이 됨 — 식물 분류는 APG 체계로 전면 개편, 고래가 우제목 안으로 들어가는 식의 재배치</li>
+              </ul>
+              <p class="ledger-h">Key Dates</p>
+              <dl class="ledger">
+                <div><dt>1977</dt><dd>우즈 · 폭스 — 고세균을 별개의 갈래로 보고</dd></div>
+                <div><dt>1990</dt><dd>우즈 · 칸들러 · 휠리스 — 세 역(Bacteria · Archaea · Eukarya) 제안</dd></div>
+                <div><dt>1998 / 2016</dt><dd>APG I ~ IV — DNA에 기초한 속씨식물 분류</dd></div>
+              </dl>
+            </article>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ STUDIO ═════════════ -->
+  <section class="studio" id="studio">
+    <div class="studio-inner">
+      <header class="reveal">
+        <p class="sec-kicker">Memorize · 암기 스튜디오</p>
+        <h2 class="sec-title">외워서 확인하기</h2>
+        <p class="sec-desc">여덟 계급의 순서를 리듬과 이야기로 익히고, 표를 가려 떠올려 본 뒤, 순서 게임과 퀴즈로 확인하세요.</p>
+      </header>
+
+      <div class="mnemo-grid">
+        <div class="m-card reveal">
+          <p class="m-k">CHANT · 한 글자씩 여덟 번</p>
+          <p class="chant" id="chant-ko" data-say="역, 계, 문, 강. 목, 과, 속, 종." aria-label="역 계 문 강, 목 과 속 종">
+            <span class="g g-ko"><i>역</i><i>계</i><i>문</i><i>강</i></span>
+            <span class="g g-ko"><i>목</i><i>과</i><i>속</i><i>종</i></span>
+          </p>
+          <div class="m-btns">
+            <button class="pill-btn play-chant" type="button" data-chant="ko">▶ 리듬으로 읽기</button>
+            <button class="pill-btn speak-chant" type="button" data-chant="ko">소리로 듣기</button>
+          </div>
+          <p>넷씩 끊어 두 번 — ‘역계문강 · 목과속종’. 앞 넷은 큰 상자, 뒤 넷은 작은 상자.</p>
+        </div>
+
+        <div class="m-card reveal" style="--d:.06s">
+          <p class="m-k">ENGLISH · 첫 글자 문장</p>
+          <p class="chant" id="chant-en" data-say="Dear King Philip Came Over For Good Soup." aria-label="Dear King Philip Came Over For Good Soup">
+            <span class="g g-ko"><i>D</i><i>K</i><i>P</i><i>C</i></span>
+            <span class="g g-ko"><i>O</i><i>F</i><i>G</i><i>S</i></span>
+          </p>
+          <div class="m-btns">
+            <button class="pill-btn play-chant" type="button" data-chant="en">▶ 리듬으로 읽기</button>
+            <button class="pill-btn speak-chant" type="button" data-chant="en" data-lang="en-US">소리로 듣기</button>
+          </div>
+          <p class="en-mnemo"><span class="g-ko"><b>D</b>ear <b>K</b>ing <b>P</b>hilip <b>C</b>ame <b>O</b>ver <b>F</b>or <b>G</b>ood <b>S</b>oup</span></p>
+          <p>Domain · Kingdom · Phylum · Class · Order · Family · Genus · Species. 다른 판본: “Dear King Philip Came Over For Great Spaghetti”, “Do Kings Play Chess On Fine Green Silk?” — 자기만의 문장을 만들어도 좋다.</p>
+        </div>
+
+        <div class="m-card reveal" style="--d:.12s">
+          <p class="m-k">HANJA · 한자 뜻으로 잇는 이야기</p>
+          <ul class="hanja">
+            <li style="--rc: var(--r1)"><b>域</b><span>지경 역</span><small>구역</small></li>
+            <li style="--rc: var(--r2)"><b>界</b><span>지경 계</span><small>경계</small></li>
+            <li style="--rc: var(--r3)"><b>門</b><span>문 문</span><small>문</small></li>
+            <li style="--rc: var(--r4)"><b>綱</b><span>벼리 강</span><small>그물의 굵은 줄</small></li>
+            <li style="--rc: var(--r5)"><b>目</b><span>눈 목</span><small>항목</small></li>
+            <li style="--rc: var(--r6)"><b>科</b><span>과목 과</span><small>과목</small></li>
+            <li style="--rc: var(--r7)"><b>屬</b><span>무리 속</span><small>무리</small></li>
+            <li style="--rc: var(--r8)"><b>種</b><span>씨 종</span><small>씨</small></li>
+          </ul>
+          <p class="story">넓은 <b>구역(域)</b>의 <b>경계(界)</b> 안으로 들어가 <b>문(門)</b>을 지나면, 그물의 <b>벼리(綱)</b>를 잡고 <b>항목(目)</b>별로 나눈 뒤, <b>과목(科)</b>마다 <b>무리(屬)</b>를 지어 마침내 <b>씨(種)</b> 하나에 이른다.</p>
+        </div>
+
+        <div class="m-card reveal" style="--d:.18s">
+          <p class="m-k">ADDRESS · 주소처럼 읽기</p>
+          <p>넓은 데서 좁은 데로 적는 주소와 같다. 사람의 주소를 나란히 놓으면 —</p>
+          <ul class="addr">
+            <li style="--rc: var(--r1)"><b>Domain</b><span>대륙</span><i>Eukarya</i></li>
+            <li style="--rc: var(--r2)"><b>Kingdom</b><span>나라</span><i>Animalia</i></li>
+            <li style="--rc: var(--r3)"><b>Phylum</b><span>도</span><i>Chordata</i></li>
+            <li style="--rc: var(--r4)"><b>Class</b><span>시</span><i>Mammalia</i></li>
+            <li style="--rc: var(--r5)"><b>Order</b><span>구</span><i>Primates</i></li>
+            <li style="--rc: var(--r6)"><b>Family</b><span>동</span><i>Hominidae</i></li>
+            <li style="--rc: var(--r7)"><b>Genus</b><span>번지</span><i class="sci">Homo</i></li>
+            <li style="--rc: var(--r8)"><b>Species</b><span>호수</span><i class="sci">Homo sapiens</i></li>
+          </ul>
+        </div>
+
+        <div class="m-card reveal" style="--d:.24s">
+          <p class="m-k">COUNT · 숫자로</p>
+          <p class="m-big"><span style="color:var(--c2)">8</span><i>·</i><span style="color:var(--c1)">3</span><i>·</i><span style="color:var(--c3)">2</span></p>
+          <p>계급 8개 · 역 3개(Bacteria · Archaea · Eukarya — 첫 글자 <b>B-A-E</b>) · 학명은 단어 2개. 린네의 원래 계급은 5개(계 · 강 · 목 · 속 · 종)였고, 과와 문, 역이 뒤에 더해져 8이 되었다.</p>
+        </div>
+
+        <div class="m-card reveal" style="--d:.3s">
+          <p class="m-k">GRE WORDS · 분류학에서 온 어휘</p>
+          <ul class="gloss">
+            <li><b>taxonomy<small>taxon · taxa</small></b><span>분류(학). <i>taxis</i>(배열) + <i>nomos</i>(법). taxon은 분류군 하나, 복수는 taxa</span></li>
+            <li><b>nomenclature</b><span>명명법 — 이름 붙이는 체계. binomial nomenclature = 이명법</span></li>
+            <li><b>hierarchy<small>hierarchical</small></b><span>위계, 계층 — 계급이 위아래로 포개진 구조</span></li>
+            <li><b>phylogeny<small>phylogenetic</small></b><span>계통발생 — 생물 무리의 진화적 가계도. phylogenetic tree = 계통수</span></li>
+            <li><b>clade<small>cladistics</small></b><span>분기군 — 한 조상과 그 후손 전부. monophyletic(단계통)과 같은 뜻</span></li>
+            <li><b>lineage</b><span>계통, 혈통 — 조상에서 후손으로 이어지는 한 줄기</span></li>
+            <li><b>extant<small>↔ extinct</small></b><span>현존하는 ↔ 멸종한. extant species = 지금 살아 있는 종</span></li>
+            <li><b>speciation</b><span>종 분화 — 한 종이 둘 이상의 종으로 갈라지는 과정</span></li>
+            <li><b>morphology<small>morphological</small></b><span>형태(학) — 린네 분류의 기준. 지금은 분자 자료와 함께 쓴다</span></li>
+            <li><b>homologous<small>↔ analogous</small></b><span>상동의(공통 조상에서 온 닮음) ↔ 상사의(기능이 같아 닮음, convergent evolution)</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ov-grid">
+        <div>
+          <div class="reveal">
+            <p class="sec-kicker">The Table · 가리고 떠올리기</p>
+            <div class="ov-ctrl" role="group" aria-label="가리기">
+              <button class="pill-btn" type="button" data-mask="ko" aria-pressed="false">한글 가리기</button>
+              <button class="pill-btn" type="button" data-mask="en" aria-pressed="false">영어 가리기</button>
+              <button class="pill-btn" type="button" data-mask="ex" aria-pressed="false">사람 예시 가리기</button>
+              <button class="pill-btn" type="button" data-unpeek>다시 가리기</button>
+            </div>
+          </div>
+          <div class="rtable reveal" id="rtable" style="--d:.06s" aria-label="여덟 계급 표">
+            <div class="h">#</div><div class="h">한글 · 한자</div><div class="h">English</div><div class="h ex">사람의 경우</div>
+            <div class="n" style="--rc: var(--r1)">I</div><div><button class="p-ko" type="button">역<small>域</small></button></div><div><button class="p-en" type="button">Domain</button></div><div class="ex"><button class="p-ex" type="button">Eukarya</button></div>
+            <div class="n" style="--rc: var(--r2)">II</div><div><button class="p-ko" type="button">계<small>界</small></button></div><div><button class="p-en" type="button">Kingdom</button></div><div class="ex"><button class="p-ex" type="button">Animalia</button></div>
+            <div class="n" style="--rc: var(--r3)">III</div><div><button class="p-ko" type="button">문<small>門</small></button></div><div><button class="p-en" type="button">Phylum</button></div><div class="ex"><button class="p-ex" type="button">Chordata</button></div>
+            <div class="n" style="--rc: var(--r4)">IV</div><div><button class="p-ko" type="button">강<small>綱</small></button></div><div><button class="p-en" type="button">Class</button></div><div class="ex"><button class="p-ex" type="button">Mammalia</button></div>
+            <div class="n" style="--rc: var(--r5)">V</div><div><button class="p-ko" type="button">목<small>目</small></button></div><div><button class="p-en" type="button">Order</button></div><div class="ex"><button class="p-ex" type="button">Primates</button></div>
+            <div class="n" style="--rc: var(--r6)">VI</div><div><button class="p-ko" type="button">과<small>科</small></button></div><div><button class="p-en" type="button">Family</button></div><div class="ex"><button class="p-ex" type="button">Hominidae</button></div>
+            <div class="n" style="--rc: var(--r7)">VII</div><div><button class="p-ko" type="button">속<small>屬</small></button></div><div><button class="p-en" type="button">Genus</button></div><div class="ex"><button class="p-ex sci" type="button">Homo</button></div>
+            <div class="n" style="--rc: var(--r8)">VIII</div><div><button class="p-ko" type="button">종<small>種</small></button></div><div><button class="p-en" type="button">Species</button></div><div class="ex"><button class="p-ex sci" type="button">Homo sapiens</button></div>
+          </div>
+          <p class="ov-note">가린 칸을 누르면 정답이 보입니다. ‘다시 가리기’로 되돌릴 수 있습니다.</p>
+        </div>
+
+        <div class="studio-grid" style="grid-template-columns: minmax(0, 1fr); margin-top: 0">
+          <article class="game reveal" id="order-game">
+            <h3>순서 맞히기</h3>
+            <p class="game-sub g-sub">가장 넓은 계급부터 차례로 누르세요.</p>
+            <div class="g-bar">
+              <span class="g-time">0.0초</span><span class="g-miss">실수 0</span><span class="g-best">최고 기록 —</span>
+              <span class="g-modes" role="group" aria-label="모드"><button class="pill-btn sm" type="button" data-mode="ko" aria-pressed="true">한글</button><button class="pill-btn sm" type="button" data-mode="en" aria-pressed="false">English</button><button class="pill-btn sm" type="button" data-mode="hanja" aria-pressed="false">漢字</button></span>
+              <button class="pill-btn g-reset" type="button">다시</button>
+            </div>
+            <ol class="g-slots" aria-label="맞힌 순서" style="--cols: 4"></ol>
+            <div class="g-tiles"></div>
+            <p class="g-msg" aria-live="polite"></p>
+          </article>
+          <article class="quiz reveal" id="quiz" style="--d:.1s">
+            <h3>퀴즈 10문항</h3>
+            <p class="game-sub">순서 · 영어 ↔ 한글 · 접미사 · 분류군의 계급 · 학명 쓰기 · 갈라지는 계급</p>
+            <div class="q-body"></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <p class="motto reveal"><span>Domain</span><i>·</i><span>Kingdom</span><i>·</i><span>Phylum</span><i>·</i><span>Class</span><i>·</i><span>Order</span><i>·</i><span>Family</span><i>·</i><span>Genus</span><i>·</i><span>Species</span></p>
+  <div class="colophon-meta">
+    <span>Taxonomy · 생물 분류 개관</span>
+    <span>분류는 교과서식 통설을 따랐으며, 종 수는 기재된 종의 추정치입니다.</span>
+    <span><kbd>←</kbd> <kbd>→</kbd> 카드 이동</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+  const doc = document.documentElement;
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nf = new Intl.NumberFormat('ko-KR');
+  const store = {
+    get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} },
+  };
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const sci = s => `<span class="sci">${esc(s)}</span>`;
+
+  /* ── Data ── */
+  const R = [
+    { n: 1, en: 'Domain',  ko: '역', hanja: '域', pl: 'domains', ex: 'Eukarya',      roman: 'I' },
+    { n: 2, en: 'Kingdom', ko: '계', hanja: '界', pl: 'kingdoms', ex: 'Animalia',    roman: 'II' },
+    { n: 3, en: 'Phylum',  ko: '문', hanja: '門', pl: 'phyla', ex: 'Chordata',       roman: 'III' },
+    { n: 4, en: 'Class',   ko: '강', hanja: '綱', pl: 'classes', ex: 'Mammalia',     roman: 'IV' },
+    { n: 5, en: 'Order',   ko: '목', hanja: '目', pl: 'orders', ex: 'Primates',      roman: 'V' },
+    { n: 6, en: 'Family',  ko: '과', hanja: '科', pl: 'families', ex: 'Hominidae',   roman: 'VI' },
+    { n: 7, en: 'Genus',   ko: '속', hanja: '屬', pl: 'genera', ex: 'Homo',          roman: 'VII', italic: 1 },
+    { n: 8, en: 'Species', ko: '종', hanja: '種', pl: 'species', ex: 'Homo sapiens', roman: 'VIII', italic: 1 },
+  ];
+  const KO = { Eukarya: '진핵생물', Bacteria: '세균', Animalia: '동물계', Plantae: '식물계', Fungi: '균류계',
+    Chordata: '척삭동물문', Arthropoda: '절지동물문', Magnoliophyta: '속씨식물문', Ascomycota: '자낭균문', Pseudomonadota: '프로테오박테리아문',
+    Mammalia: '포유강', Aves: '조강', Insecta: '곤충강', Liliopsida: '외떡잎식물강', Magnoliopsida: '쌍떡잎식물강', Saccharomycetes: '사카로미세스강', Gammaproteobacteria: '감마프로테오박테리아강',
+    Primates: '영장목', Carnivora: '식육목', Rodentia: '설치목', Galliformes: '닭목', Hymenoptera: '벌목', Diptera: '파리목', Poales: '벼목', Fagales: '참나무목', Saccharomycetales: '사카로미세스목', Enterobacterales: '장내세균목',
+    Hominidae: '사람과', Canidae: '개과', Felidae: '고양이과', Muridae: '쥐과', Phasianidae: '꿩과', Apidae: '꿀벌과', Drosophilidae: '초파리과', Poaceae: '벼과', Fagaceae: '참나무과', Saccharomycetaceae: '사카로미세스과', Enterobacteriaceae: '장내세균과',
+    Homo: '사람속', Pan: '침팬지속', Canis: '개속', Vulpes: '여우속', Felis: '고양이속', Panthera: '표범속', Mus: '생쥐속', Gallus: '닭속', Apis: '꿀벌속', Drosophila: '초파리속', Oryza: '벼속', Quercus: '참나무속', Saccharomyces: '효모속', Escherichia: '에셰리키아속' };
+  const ORG = [
+    { id: 'human',  e: '🧑', ko: '사람',     t: ['Eukarya', 'Animalia', 'Chordata', 'Mammalia', 'Primates', 'Hominidae', 'Homo', 'Homo sapiens'] },
+    { id: 'chimp',  e: '🐒', ko: '침팬지',   t: ['Eukarya', 'Animalia', 'Chordata', 'Mammalia', 'Primates', 'Hominidae', 'Pan', 'Pan troglodytes'] },
+    { id: 'dog',    e: '🐕', ko: '개',       t: ['Eukarya', 'Animalia', 'Chordata', 'Mammalia', 'Carnivora', 'Canidae', 'Canis', 'Canis familiaris'], note: '개를 늑대의 아종 Canis lupus familiaris로 보기도 한다.' },
+    { id: 'wolf',   e: '🐺', ko: '회색늑대', t: ['Eukarya', 'Animalia', 'Chordata', 'Mammalia', 'Carnivora', 'Canidae', 'Canis', 'Canis lupus'] },
+    { id: 'fox',    e: '🦊', ko: '붉은여우', t: ['Eukarya', 'Animalia', 'Chordata', 'Mammalia', 'Carnivora', 'Canidae', 'Vulpes', 'Vulpes vulpes'] },
+    { id: 'cat',    e: '🐈', ko: '집고양이', t: ['Eukarya', 'Animalia', 'Chordata', 'Mammalia', 'Carnivora', 'Felidae', 'Felis', 'Felis catus'] },
+    { id: 'lion',   e: '🦁', ko: '사자',     t: ['Eukarya', 'Animalia', 'Chordata', 'Mammalia', 'Carnivora', 'Felidae', 'Panthera', 'Panthera leo'] },
+    { id: 'tiger',  e: '🐯', ko: '호랑이',   t: ['Eukarya', 'Animalia', 'Chordata', 'Mammalia', 'Carnivora', 'Felidae', 'Panthera', 'Panthera tigris'] },
+    { id: 'mouse',  e: '🐭', ko: '생쥐',     t: ['Eukarya', 'Animalia', 'Chordata', 'Mammalia', 'Rodentia', 'Muridae', 'Mus', 'Mus musculus'] },
+    { id: 'hen',    e: '🐔', ko: '닭',       t: ['Eukarya', 'Animalia', 'Chordata', 'Aves', 'Galliformes', 'Phasianidae', 'Gallus', 'Gallus gallus'], note: '집닭은 아종 Gallus gallus domesticus.' },
+    { id: 'bee',    e: '🐝', ko: '꿀벌',     t: ['Eukarya', 'Animalia', 'Arthropoda', 'Insecta', 'Hymenoptera', 'Apidae', 'Apis', 'Apis mellifera'] },
+    { id: 'fly',    e: '🪰', ko: '초파리',   t: ['Eukarya', 'Animalia', 'Arthropoda', 'Insecta', 'Diptera', 'Drosophilidae', 'Drosophila', 'Drosophila melanogaster'] },
+    { id: 'rice',   e: '🌾', ko: '벼',       t: ['Eukarya', 'Plantae', 'Magnoliophyta', 'Liliopsida', 'Poales', 'Poaceae', 'Oryza', 'Oryza sativa'], note: '식물의 문은 Division이라고도 부르며, 최신 APG 체계는 강(綱) 대신 분기군(외떡잎식물군)을 쓴다.' },
+    { id: 'oak',    e: '🌳', ko: '참나무',   t: ['Eukarya', 'Plantae', 'Magnoliophyta', 'Magnoliopsida', 'Fagales', 'Fagaceae', 'Quercus', 'Quercus alba'], note: '참나무속(Quercus)에는 약 500종이 있다 — 여기서는 북미의 흰참나무(white oak).' },
+    { id: 'yeast',  e: '🍞', ko: '효모',     t: ['Eukarya', 'Fungi', 'Ascomycota', 'Saccharomycetes', 'Saccharomycetales', 'Saccharomycetaceae', 'Saccharomyces', 'Saccharomyces cerevisiae'] },
+    { id: 'ecoli',  e: '🦠', ko: '대장균',   t: ['Bacteria', 'Bacteria', 'Pseudomonadota', 'Gammaproteobacteria', 'Enterobacterales', 'Enterobacteriaceae', 'Escherichia', 'Escherichia coli'], note: '원핵생물의 계(界)는 체계마다 달라 역과 같은 이름을 적었다. 문 Pseudomonadota는 2021년까지 Proteobacteria로 불렸다.' },
+  ];
+  const byId = id => ORG.find(o => o.id === id);
+
+  const chapters = $$('.chapter');
+  const events = $$('.event');
+  const anchors = $$('.event, #ladder, #studio');
+
+  const goTo = el => {
+    let shift = 0;
+    try { shift = new DOMMatrixReadOnly(getComputedStyle(el).transform).m42 || 0; } catch (e) {}
+    const top = el.getBoundingClientRect().top - shift + window.scrollY - window.innerHeight * 0.26;
+    window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+  };
+  const goHash = (e, hash) => { const t = $(hash); if (t) { e.preventDefault(); goTo(t); } };
+
+  /* ── Theme ── */
+  const themeBtn = $('.theme-btn');
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => (doc.dataset.theme ? doc.dataset.theme === 'dark' : mq.matches);
+  const syncTheme = () => themeBtn.setAttribute('aria-label', isDark() ? '밝은 테마로 전환' : '어두운 테마로 전환');
+  themeBtn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    doc.dataset.theme = next;
+    store.set('history-theme', next);
+    syncTheme();
+  });
+  if (mq.addEventListener) mq.addEventListener('change', syncTheme);
+  syncTheme();
+
+  $$('.fn-rows a').forEach(a => a.addEventListener('click', e => goHash(e, a.getAttribute('href'))));
+
+  /* ── Counters ── */
+  const runCount = el => {
+    const to = Number(el.dataset.to), dec = Number(el.dataset.dec || 0);
+    const fmt = v => (dec ? v.toFixed(dec) : nf.format(Math.round(v)));
+    if (reduce) { el.textContent = fmt(to); return; }
+    const from = Number(el.dataset.from || 0), dur = 1800, t0 = performance.now();
+    const tick = t => {
+      const k = clamp((t - t0) / dur, 0, 1), e = 1 - Math.pow(1 - k, 4);
+      el.textContent = fmt(from + (to - from) * e);
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const counters = $$('.count');
+  if (!reduce) counters.forEach(el => { el.textContent = el.dataset.dec ? '0' : nf.format(Number(el.dataset.from || 0)); });
+
+  /* ── Reveal ── */
+  const reveals = $$('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        $$('.count', en.target).forEach(runCount);
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+    counters.forEach(runCount);
+  }
+
+  /* ── Rank readout in the top bar ── */
+  const yd = $('.yd'), ydNum = $('.yd-num');
+  const ydDefault = ydNum.textContent;
+  let shownLabel = null;
+  const showRank = el => {
+    const label = el ? (el.dataset.label || null) : null;
+    if (label === shownLabel) return;
+    shownLabel = label;
+    if (!label) { ydNum.textContent = ydDefault; yd.classList.remove('on'); return; }
+    yd.classList.add('on');
+    ydNum.textContent = label;
+  };
+
+  /* ── Scroll-driven state ── */
+  const bar = $('.progress span'), topbar = $('.topbar');
+  const segs = $$('.seg');
+  const opens = chapters.map(ch => $('.chapter-open', ch));
+  const bigNums = chapters.map(ch => $('.big-num', ch));
+  const timelines = chapters.map(ch => $('.timeline', ch));
+  const spines = chapters.map(ch => $('.spine i', ch));
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const vh = window.innerHeight, mid = vh * 0.55;
+    const maxScroll = doc.scrollHeight - vh;
+    bar.style.transform = `scaleX(${maxScroll > 0 ? clamp(window.scrollY / maxScroll, 0, 1) : 0})`;
+    topbar.classList.toggle('scrolled', window.scrollY > 24);
+    let active = '0';
+    chapters.forEach((ch, i) => {
+      const r = ch.getBoundingClientRect();
+      segs[i].style.setProperty('--p', clamp((mid - r.top) / r.height, 0, 1).toFixed(4));
+      const inside = r.top <= mid && r.bottom > mid;
+      segs[i].classList.toggle('active', inside);
+      if (inside) active = ch.dataset.era;
+      const ro = opens[i].getBoundingClientRect();
+      if (ro.bottom > 0 && ro.top < vh) {
+        opens[i].style.setProperty('--open-p', clamp((vh - ro.top) / (vh + ro.height * 0.5), 0, 1).toFixed(4));
+        if (!reduce) bigNums[i].style.setProperty('--py', (ro.top * -0.22).toFixed(1) + 'px');
+      }
+      if (timelines[i] && spines[i]) {
+        const rt = timelines[i].getBoundingClientRect();
+        spines[i].style.transform = `scaleY(${clamp((mid - rt.top) / rt.height, 0, 1).toFixed(4)})`;
+      }
+    });
+    doc.dataset.active = active;
+    let current = null;
+    events.forEach(ev => {
+      const on = ev.getBoundingClientRect().top < mid;
+      ev.classList.toggle('active', on);
+      if (on) current = ev;
+    });
+    events.forEach(ev => ev.classList.toggle('current', ev === current));
+    showRank(current);
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+
+  /* ── Keyboard: ← → (j / k) ── */
+  window.addEventListener('keydown', e => {
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '')) return;
+    const fwd = e.key === 'ArrowRight' || e.key === 'j';
+    const back = e.key === 'ArrowLeft' || e.key === 'k';
+    if (!fwd && !back) return;
+    const line = window.innerHeight * 0.26;
+    const next = fwd
+      ? anchors.find(a => a.getBoundingClientRect().top > line + 8)
+      : anchors.slice().reverse().find(a => a.getBoundingClientRect().top < line - 8);
+    e.preventDefault();
+    if (next) goTo(next);
+    else if (back) window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+
+  /* ── Ladder ── */
+  const lad = $('#lad'), ladMsg = $('#lad-msg'), cmpBox = $('#cmp'), orgA = $('#org-a'), orgB = $('#org-b'), orgBBlock = $('#org-b-block');
+  if (lad) {
+    let a = 'human', b = 'chimp';
+    const chips = (box, cur, onPick) => {
+      box.innerHTML = '';
+      ORG.forEach(o => {
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'org'; btn.dataset.id = o.id;
+        btn.setAttribute('aria-pressed', String(o.id === cur));
+        btn.innerHTML = `<em aria-hidden="true">${o.e}</em>${esc(o.ko)}`;
+        btn.addEventListener('click', () => onPick(o.id));
+        box.appendChild(btn);
+      });
+    };
+    const press = (box, id) => $$('.org', box).forEach(x => x.setAttribute('aria-pressed', String(x.dataset.id === id)));
+    const val = (name, i) => {
+      const italic = i >= 6;
+      const k = i === 7 ? `${KO[name.split(' ')[0]] ? '' : ''}` : (KO[name] || '');
+      return `<div class="lad-val"><span class="v${italic ? ' sci' : ''}">${esc(name)}</span><span class="k">${i === 7 ? '종' : esc(k)}</span></div>`;
+    };
+    const render = () => {
+      const A = byId(a), B = byId(b), cmp = cmpBox.checked;
+      lad.classList.toggle('cmp', cmp);
+      let split = -1;
+      if (cmp) split = R.findIndex((_, i) => A.t[i] !== B.t[i]);
+      lad.innerHTML = R.map((r, i) => {
+        let cls = 'lad-row';
+        if (cmp) cls += (split === -1 || i < split) ? ' same' : ' diff';
+        if (cmp && i === split) cls += ' split';
+        return `<div class="${cls}" style="--rc: var(--r${r.n})">
+          <div class="lad-rank"><b>${r.roman}</b><span>${esc(r.en)}</span><small>${r.ko}(${r.hanja})</small></div>
+          ${val(A.t[i], i)}${cmp ? val(B.t[i], i) : ''}
+          ${cmp && i === split ? `<span class="split-badge">여기서 갈라짐 · ${esc(r.en)}</span>` : ''}
+        </div>`;
+      }).join('');
+      const notes = [A, cmp ? B : null].filter(o => o && o.note).map(o => `${o.ko}: ${o.note}`);
+      if (!cmp) {
+        ladMsg.innerHTML = `<b>${A.e} ${esc(A.ko)}</b>의 주소 — ${A.t.map((t, i) => `<span class="pill" style="background: var(--r${i + 1})">${esc(t)}</span>`).join('')}<br>` + (notes.length ? `<small>${esc(notes.join(' · '))}</small>` : '');
+      } else if (split === -1) {
+        ladMsg.innerHTML = `<b>${A.e} ${esc(A.ko)}</b>과(와) <b>${B.e} ${esc(B.ko)}</b>는 같은 종입니다 — 여덟 칸이 모두 같습니다.`;
+      } else {
+        const r = R[split];
+        const sharedTo = split > 0 ? R[split - 1] : null;
+        ladMsg.innerHTML = `<b>${A.e} ${esc(A.ko)}</b>과(와) <b>${B.e} ${esc(B.ko)}</b>는 ` +
+          (sharedTo ? `<span class="pill" style="background: var(--r${sharedTo.n})">${esc(sharedTo.en)} · ${sharedTo.ko}</span>까지 같은 상자에 있다가 ` : '') +
+          `<span class="pill x">${esc(r.en)} · ${r.ko}</span>에서 갈라집니다 — 공통 계급 <b>${split}개</b>${split >= 6 ? ' · 같은 속의 가까운 친척' : split >= 4 ? ' · 같은 목 안의 먼 친척' : split >= 2 ? ' · 같은 계 안의 아주 먼 친척' : split === 1 ? ' · 진핵생물이라는 점만 같음' : ' · 세포 구조부터 다른 생명의 다른 갈래'}.` +
+          (notes.length ? `<br><small>${esc(notes.join(' · '))}</small>` : '');
+      }
+    };
+    chips(orgA, a, id => { a = id; press(orgA, a); render(); });
+    chips(orgB, b, id => { b = id; press(orgB, b); render(); });
+    cmpBox.addEventListener('change', () => { orgBBlock.hidden = !cmpBox.checked; render(); });
+    render();
+  }
+
+  /* ── Rank table: hide & peek ── */
+  const rtable = $('#rtable');
+  if (rtable) {
+    $$('.ov-ctrl [data-mask]').forEach(btn => btn.addEventListener('click', () => {
+      const on = btn.getAttribute('aria-pressed') !== 'true';
+      btn.setAttribute('aria-pressed', String(on));
+      rtable.classList.toggle('mask-' + btn.dataset.mask, on);
+    }));
+    const unpeek = $('.ov-ctrl [data-unpeek]');
+    if (unpeek) unpeek.addEventListener('click', () => $$('.peek', rtable).forEach(b => b.classList.remove('peek')));
+    rtable.addEventListener('click', e => {
+      const b = e.target.closest('.p-ko, .p-en, .p-ex');
+      if (!b) return;
+      const kind = b.classList.contains('p-ko') ? 'ko' : b.classList.contains('p-en') ? 'en' : 'ex';
+      if (rtable.classList.contains('mask-' + kind)) b.classList.toggle('peek');
+    });
+  }
+
+  /* ── Chants ── */
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  $$('.play-chant').forEach(btn => btn.addEventListener('click', async () => {
+    const box = $('#chant-' + btn.dataset.chant);
+    const syl = $$('i', box);
+    const ends = new Set($$('.g', box).map(g => g.lastElementChild));
+    btn.disabled = true;
+    for (const sy of syl) {
+      syl.forEach(x => x.classList.remove('lit'));
+      sy.classList.add('lit');
+      await wait(ends.has(sy) ? 760 : 420);
+    }
+    syl.forEach(x => x.classList.remove('lit'));
+    await wait(120);
+    syl.forEach(x => x.classList.add('lit'));
+    await wait(900);
+    syl.forEach(x => x.classList.remove('lit'));
+    btn.disabled = false;
+  }));
+  $$('.speak-chant').forEach(btn => {
+    if (!('speechSynthesis' in window)) { btn.hidden = true; return; }
+    btn.addEventListener('click', () => {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance($('#chant-' + btn.dataset.chant).dataset.say);
+      u.lang = btn.dataset.lang || 'ko-KR';
+      u.rate = 0.85;
+      window.speechSynthesis.speak(u);
+    });
+  });
+
+  /* ── Order game ── */
+  const game = $('#order-game');
+  if (game) {
+    const slots = $('.g-slots', game), tiles = $('.g-tiles', game), msg = $('.g-msg', game);
+    const tTime = $('.g-time', game), tMiss = $('.g-miss', game), tBest = $('.g-best', game);
+    const modeBtns = $$('[data-mode]', game);
+    let mode = 'ko';
+    let next = 0, miss = 0, t0 = 0, timer = 0, done = false;
+    const bestKey = () => 'taxo-order-best-' + mode;
+    const name = r => (mode === 'en' ? r.en : mode === 'hanja' ? r.hanja : r.ko);
+    const showBest = () => { const b = store.get(bestKey()); tBest.textContent = b ? `최고 기록 ${b}초` : '최고 기록 —'; };
+    const build = () => {
+      next = 0; miss = 0; t0 = 0; done = false; clearInterval(timer);
+      tTime.textContent = '0.0초'; tMiss.textContent = '실수 0';
+      msg.textContent = '가장 넓은 계급은 무엇일까요?';
+      slots.classList.remove('complete');
+      slots.innerHTML = R.map(r => `<li style="--e:var(--r${r.n})"><span>${String(r.n).padStart(2, '0')}</span></li>`).join('');
+      tiles.innerHTML = '';
+      shuffle(R.map((_, i) => i)).forEach(i => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'tile'; b.dataset.i = i; b.textContent = name(R[i]);
+        tiles.appendChild(b);
+      });
+      showBest();
+    };
+    tiles.addEventListener('click', e => {
+      const b = e.target.closest('.tile');
+      if (!b || done || b.disabled) return;
+      if (!t0) {
+        t0 = performance.now();
+        timer = setInterval(() => { tTime.textContent = ((performance.now() - t0) / 1000).toFixed(1) + '초'; }, 100);
+      }
+      const i = +b.dataset.i;
+      if (i === next) {
+        b.disabled = true; b.classList.add('ok');
+        const li = slots.children[i];
+        li.classList.add('filled');
+        li.innerHTML = `<span>${String(i + 1).padStart(2, '0')}</span>${name(R[i])}`;
+        next++;
+        if (next === R.length) {
+          done = true; clearInterval(timer);
+          const sec = ((performance.now() - t0) / 1000).toFixed(1);
+          tTime.textContent = sec + '초';
+          const best = parseFloat(store.get(bestKey()));
+          if (!best || +sec < best) store.set(bestKey(), sec);
+          showBest();
+          slots.classList.add('complete');
+          msg.textContent = miss === 0 ? `완벽해요! ${sec}초, 실수 없이 완성했습니다.` : `완성! ${sec}초 · 실수 ${miss}회 — 한 번 더 도전해 보세요.`;
+        } else {
+          msg.textContent = `${R[i].en}(${R[i].ko}) 다음은?`;
+        }
+      } else {
+        miss++;
+        tMiss.textContent = `실수 ${miss}`;
+        b.classList.remove('bad'); void b.offsetWidth; b.classList.add('bad');
+        msg.textContent = next === 0 ? '가장 넓은 계급부터 — 세 갈래로만 나뉘는 그 계급은?' : `${R[next - 1].en}(${R[next - 1].ko}) 바로 아래 계급을 찾아보세요.`;
+      }
+    });
+    modeBtns.forEach(btn => btn.addEventListener('click', () => {
+      mode = btn.dataset.mode;
+      modeBtns.forEach(x => x.setAttribute('aria-pressed', String(x === btn)));
+      build();
+    }));
+    $('.g-reset', game).addEventListener('click', build);
+    build();
+  }
+
+  /* ── Quiz ── */
+  const quiz = $('#quiz');
+  if (quiz) {
+    const body = $('.q-body', quiz);
+    const BEST = 'taxo-quiz-best';
+    const RANKS_KO = R.map(r => r.ko + '(' + r.hanja + ')');
+    const rankLabel = r => `${r.en} · ${r.ko}(${r.hanja})`;
+    const nearOpts = (ans, field) => {
+      const pool = shuffle(R.map((_, k) => k).filter(k => k !== ans)).sort((x, y) => Math.abs(x - ans) - Math.abs(y - ans));
+      return shuffle([ans, ...shuffle(pool.slice(0, 5)).slice(0, 3)]).map(k => field(R[k]));
+    };
+    const TAXA = [
+      ['Eukarya', 0], ['Animalia', 1], ['Plantae', 1], ['Chordata', 2], ['Arthropoda', 2], ['Mammalia', 3], ['Insecta', 3], ['Aves', 3],
+      ['Primates', 4], ['Carnivora', 4], ['Rodentia', 4], ['Hominidae', 5], ['Felidae', 5], ['Canidae', 5], ['Rosaceae', 5], ['Poaceae', 5],
+      ['Homo', 6], ['Panthera', 6], ['Canis', 6], ['Quercus', 6], ['Homo sapiens', 7], ['Felis catus', 7], ['Apis mellifera', 7],
+    ];
+    const SFX = [
+      ['Hominidae', 5, '-idae = 동물의 과'], ['Felidae', 5, '-idae = 동물의 과'], ['Rosaceae', 5, '-aceae = 식물의 과'], ['Fabaceae', 5, '-aceae = 식물의 과'],
+      ['Passeriformes', 4, '-formes = 새 · 물고기의 목'], ['Lepidoptera', 4, '-ptera = 곤충의 목(관례)'], ['Rosales', 4, '-ales = 식물 · 균류 · 세균의 목'], ['Enterobacterales', 4, '-ales = 세균의 목'],
+      ['Hominoidea', -1, '-oidea = 동물의 상과(superfamily)'], ['Homininae', -2, '-inae = 동물의 아과(subfamily)'], ['Magnoliophyta', 2, '-phyta = 식물의 문'], ['Ascomycota', 2, '-mycota = 균류의 문'],
+    ];
+    const PLURAL = [['genus', 'genera'], ['phylum', 'phyla'], ['species', 'species'], ['taxon', 'taxa']];
+    const PL_WRONG = { genus: ['genuses', 'geni', 'genii'], phylum: ['phylums', 'phyli', 'phylae'], species: ['specie', 'specieses', 'specii'], taxon: ['taxons', 'taxi', 'taxones'] };
+    const GEN = {
+      next() { const i = Math.floor(Math.random() * 7); return { q: `‘${rankLabel(R[i])}’ 바로 아래 계급은?`, ans: rankLabel(R[i + 1]), opts: nearOpts(i + 1, rankLabel).map(o => (o === rankLabel(R[i]) ? rankLabel(R[(i + 2) % 8]) : o)), why: `${R[i].en} → ${R[i + 1].en}` }; },
+      prev() { const i = 1 + Math.floor(Math.random() * 7); return { q: `‘${rankLabel(R[i])}’ 바로 위 계급은?`, ans: rankLabel(R[i - 1]), opts: nearOpts(i - 1, rankLabel).map(o => (o === rankLabel(R[i]) ? rankLabel(R[(i + 6) % 8]) : o)), why: `${R[i - 1].en} → ${R[i].en}` }; },
+      en() { const i = Math.floor(Math.random() * 8); return { q: `‘${R[i].ko}(${R[i].hanja})’의 영어 이름은?`, ans: R[i].en, opts: nearOpts(i, r => r.en), why: `${R[i].ko}(${R[i].hanja}) = ${R[i].en}, ${R[i].n}번째 계급` }; },
+      ko() { const i = Math.floor(Math.random() * 8); return { q: `‘${R[i].en}’를 우리말로 하면?`, ans: RANKS_KO[i], opts: nearOpts(i, r => r.ko + '(' + r.hanja + ')'), why: `${R[i].en} = ${RANKS_KO[i]}, ${R[i].n}번째 계급` }; },
+      taxon() { const [t, i] = TAXA[Math.floor(Math.random() * TAXA.length)]; return { q: `‘${t}’는 어느 계급의 분류군일까?`, ans: rankLabel(R[i]), opts: nearOpts(i, rankLabel), why: `${t} — ${rankLabel(R[i])}` }; },
+      suffix() {
+        const [t, i, why] = SFX[Math.floor(Math.random() * SFX.length)];
+        if (i >= 0) return { q: `접미사로 판단할 때 ‘${t}’는 어느 계급일까?`, ans: rankLabel(R[i]), opts: nearOpts(i, rankLabel), why };
+        const ans = i === -1 ? '상과 (superfamily)' : '아과 (subfamily)';
+        return { q: `접미사로 판단할 때 ‘${t}’는 어느 계급일까?`, ans, opts: shuffle(['상과 (superfamily)', '아과 (subfamily)', '과 (family)', '족 (tribe)']), why };
+      },
+      split() {
+        let A, B, s;
+        do { A = ORG[Math.floor(Math.random() * ORG.length)]; B = ORG[Math.floor(Math.random() * ORG.length)]; s = R.findIndex((_, k) => A.t[k] !== B.t[k]); } while (A === B || s < 1);
+        return { q: `${A.e} ${A.ko}과(와) ${B.e} ${B.ko}는 어느 계급에서 갈라질까?`, ans: rankLabel(R[s]), opts: nearOpts(s, rankLabel), why: `${A.ko}: ${A.t[s - 1]} → ${A.t[s]} / ${B.ko}: ${B.t[s - 1]} → ${B.t[s]} — ${R[s - 1].en}까지 같다` };
+      },
+      write() {
+        const pairs = [['Panthera leo', ['Panthera Leo', 'panthera leo', 'PANTHERA LEO']], ['Homo sapiens', ['Homo Sapiens', 'homo sapiens', 'Sapiens homo']], ['Felis catus', ['Felis Catus', 'felis catus', 'Catus felis']], ['Oryza sativa', ['Oryza Sativa', 'oryza sativa', 'ORYZA sativa']]];
+        const [ok, bad] = pairs[Math.floor(Math.random() * pairs.length)];
+        return { q: '학명을 바르게 쓴 것은?', ans: ok, opts: shuffle([ok, ...bad]), why: '속명은 대문자로 시작, 종소명은 소문자 — 둘 다 이탤릭', italic: true };
+      },
+      plural() { const [s, p] = PLURAL[Math.floor(Math.random() * PLURAL.length)]; return { q: `‘${s}’의 복수형은?`, ans: p, opts: shuffle([p, ...PL_WRONG[s]]), why: `${s} → ${p}${s === 'species' ? ' (단수 · 복수 같음)' : ''}` }; },
+      domain() { return { q: '다음 중 세 역(Domain)에 들지 않는 것은?', ans: 'Plantae', opts: shuffle(['Plantae', 'Bacteria', 'Archaea', 'Eukarya']), why: '세 역 = Bacteria · Archaea · Eukarya. Plantae는 계(Kingdom)' }; },
+      count() { return { q: '여덟 계급 중 린네의 원래 체계(1735)에 없던 것은?', ans: 'Domain · 역(域)', opts: shuffle(['Domain · 역(域)', 'Class · 강(綱)', 'Order · 목(目)', 'Genus · 속(屬)']), why: '린네: 계 · 강 · 목 · 속 · 종. 과(1689~), 문(1866), 역(1990)은 뒤에 더해졌다' }; },
+    };
+    const TYPES = ['next', 'prev', 'en', 'ko', 'taxon', 'taxon', 'suffix', 'suffix', 'split', 'split', 'write', 'plural', 'domain', 'count'];
+    let qs = [], qi = 0, score = 0;
+    const makeSet = () => {
+      const seen = new Set(), out = [];
+      let guard = 0;
+      while (out.length < 10 && guard++ < 400) {
+        const q = GEN[TYPES[Math.floor(Math.random() * TYPES.length)]]();
+        if (seen.has(q.q)) continue;
+        q.opts = shuffle(Array.from(new Set(q.opts)));
+        if (!q.opts.includes(q.ans) || q.opts.length < 4) continue;
+        seen.add(q.q); out.push(q);
+      }
+      return out;
+    };
+    const fmtOpt = (q, o) => (q.italic ? sci(o) : esc(o));
+    const render = () => {
+      const q = qs[qi];
+      body.innerHTML = `
+        <div class="q-bar"><span>${qi + 1} / ${qs.length}</span><span>점수 ${score}</span></div>
+        <div class="q-prog"><i style="--qp:${qi / qs.length}"></i></div>
+        <p class="q-text">${esc(q.q)}</p>
+        <div class="q-opts">${q.opts.map(o => `<button type="button" data-v="${esc(o)}">${fmtOpt(q, o)}</button>`).join('')}</div>
+        <p class="q-feedback" aria-live="polite"></p>
+        <div class="q-actions"></div>`;
+      $$('.q-opts button', body).forEach(b => b.addEventListener('click', () => answer(b, q)));
+    };
+    const answer = (btn, q) => {
+      $$('.q-opts button', body).forEach(b => { b.disabled = true; if (b.dataset.v === q.ans) b.classList.add('right'); });
+      const ok = btn.dataset.v === q.ans;
+      if (ok) score++; else btn.classList.add('wrong');
+      $('.q-feedback', body).innerHTML = (ok ? '<b class="ok">정답!</b> ' : `<b class="no">아쉬워요.</b> 정답은 ‘${fmtOpt(q, q.ans)}’. `) + esc(q.why);
+      const nextBtn = document.createElement('button');
+      nextBtn.type = 'button'; nextBtn.className = 'pill-btn';
+      nextBtn.textContent = qi + 1 < qs.length ? '다음 문제 →' : '결과 보기';
+      nextBtn.addEventListener('click', () => { qi++; qi < qs.length ? render() : finish(); });
+      $('.q-actions', body).appendChild(nextBtn);
+      nextBtn.focus({ preventScroll: true });
+    };
+    const finish = () => {
+      const best = Number(store.get(BEST) || 0);
+      if (score > best) store.set(BEST, String(score));
+      const line = score === 10 ? '완벽합니다! 여덟 계급을 모두 외웠네요.' : score >= 7 ? '거의 다 왔어요. 틀린 문제의 계급을 위 표에서 다시 확인해 보세요.' : '표를 가리고 한 번 더 연습해 보세요.';
+      body.innerHTML = `
+        <p class="q-result">${score}<small> / ${qs.length}</small></p>
+        <p class="q-feedback">${line} · 최고 점수 ${Math.max(score, best)} / 10</p>
+        <div class="q-actions"><button type="button" class="pill-btn q-again">새 문제로 다시</button></div>`;
+      $('.q-again', body).addEventListener('click', start);
+    };
+    const start = () => { qs = makeSet(); qi = 0; score = 0; render(); };
+    start();
+  }
+})();
+</script>
+</body>
+</html>
